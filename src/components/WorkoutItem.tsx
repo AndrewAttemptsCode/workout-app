@@ -1,9 +1,10 @@
-import { useState } from "react";
 import styled from "styled-components";
+import type { Workout } from "../pages/WorkoutPage";
 
 const Container = styled.div`
   border: 2px solid black;
   padding: 0.5rem;
+  margin-bottom: 0.5rem;
 `;
 
 const WorkoutTitle = styled.input`
@@ -11,13 +12,13 @@ const WorkoutTitle = styled.input`
   width: 100%;
 `;
 
-const WorkoutItem = () => {
-  const [workoutTitle, setWorkoutTitle] = useState("");
+type WorkoutItemProps = {
+  workout: Workout;
+  index: number;
+  updateWorkoutTitle: (index: number, newTitle: string) => void;
+}
 
-  const handleSetWorkoutTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWorkoutTitle(e.target.value);
-  };
-
+const WorkoutItem = ({ workout, index, updateWorkoutTitle }: WorkoutItemProps) => {
   return (
     <Container>
       <WorkoutTitle
@@ -25,8 +26,8 @@ const WorkoutItem = () => {
         name="workoutTitle"
         id="workoutTitle"
         placeholder="Workout Name..."
-        value={workoutTitle}
-        onChange={handleSetWorkoutTitle}
+        value={workout.workoutTitle}
+        onChange={(e) => updateWorkoutTitle(index, e.target.value)}
       />
     </Container>
   );
