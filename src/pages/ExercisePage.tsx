@@ -17,11 +17,22 @@ const ExercisePage = () => {
     ]);
   };
 
+  const updateExerciseTitle = (id: string, newTitle: string) => {
+    setExercises((prev) =>
+      prev.map((exercise) =>
+        exercise.id === id ? { ...exercise, title: newTitle } : exercise
+      )
+    );
+  };
+
   return (
     <div>
       <h1>Exercises</h1>
       <button onClick={addNewExercise}>Add new exercise</button>
-      <ExerciseList exercises={exercises} />
+      <ExerciseList
+        exercises={exercises}
+        updateExerciseTitle={updateExerciseTitle}
+      />
     </div>
   );
 };
