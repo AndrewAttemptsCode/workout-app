@@ -15,9 +15,10 @@ const ExerciseTitle = styled.input`
 type ExerciseItemProps = {
   exercise: Exercise;
   updateExerciseTitle: (id: string, newTitle: string ) => void;
+  removeExercise: (id: string) => void;
 }
 
-const ExerciseItem = ({ exercise, updateExerciseTitle }: ExerciseItemProps) => {
+const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise }: ExerciseItemProps) => {
   return (
     <Container>
       <ExerciseTitle 
@@ -28,6 +29,7 @@ const ExerciseItem = ({ exercise, updateExerciseTitle }: ExerciseItemProps) => {
         value={exercise.title}
         onChange={(e) => updateExerciseTitle(exercise.id, e.target.value)}
       />
+      <button onClick={() => removeExercise(exercise.id)}>Remove</button>
     </Container>
   );
 };
