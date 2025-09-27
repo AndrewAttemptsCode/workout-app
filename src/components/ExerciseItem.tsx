@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import type { Exercise } from "../pages/ExercisePage";
+import ExerciseSets from "./ExerciseSets";
 
 const Container = styled.div`
   border: 2px solid black;
@@ -16,9 +17,10 @@ type ExerciseItemProps = {
   exercise: Exercise;
   updateExerciseTitle: (id: string, newTitle: string ) => void;
   removeExercise: (id: string) => void;
+  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight", value: number) => void;
 }
 
-const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise }: ExerciseItemProps) => {
+const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSetField }: ExerciseItemProps) => {
   return (
     <Container>
       <ExerciseTitle 
@@ -30,6 +32,7 @@ const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise }: Exercis
         onChange={(e) => updateExerciseTitle(exercise.id, e.target.value)}
       />
       <button onClick={() => removeExercise(exercise.id)}>Remove</button>
+      <ExerciseSets exercise={exercise} updateSetField={updateSetField} />
     </Container>
   );
 };
