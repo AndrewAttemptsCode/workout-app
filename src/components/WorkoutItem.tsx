@@ -15,9 +15,10 @@ const WorkoutTitle = styled.input`
 type WorkoutItemProps = {
   workout: Workout;
   updateWorkoutTitle: (workoutId: string, newTitle: string) => void;
+  removeWorkoutItem: (workoutId: string) => void;
 }
 
-const WorkoutItem = ({ workout, updateWorkoutTitle }: WorkoutItemProps) => {
+const WorkoutItem = ({ workout, updateWorkoutTitle, removeWorkoutItem }: WorkoutItemProps) => {
   return (
     <Container>
       <WorkoutTitle
@@ -28,6 +29,7 @@ const WorkoutItem = ({ workout, updateWorkoutTitle }: WorkoutItemProps) => {
         value={workout.workoutTitle}
         onChange={(e) => updateWorkoutTitle(workout.id, e.target.value)}
       />
+      <button onClick={() => removeWorkoutItem(workout.id)}>Remove</button>
     </Container>
   );
 };
