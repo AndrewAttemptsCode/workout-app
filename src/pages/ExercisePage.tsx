@@ -25,6 +25,14 @@ const ExercisePage = () => {
     );
   };
 
+  const removeExercise = (id: string) => {
+    setExercises((prev) =>
+      prev.filter((exercise) =>
+        exercise.id !== id
+      )
+    );
+  };
+
   return (
     <div>
       <h1>Exercises</h1>
@@ -32,6 +40,7 @@ const ExercisePage = () => {
       <ExerciseList
         exercises={exercises}
         updateExerciseTitle={updateExerciseTitle}
+        removeExercise={removeExercise}
       />
     </div>
   );
