@@ -2,6 +2,7 @@ import { useState } from "react";
 import WorkoutList from "../components/WorkoutList";
 
 export type Workout = {
+  id: string;
   workoutTitle: string;
   exercises: string[];
 }
@@ -10,13 +11,13 @@ const WorkoutPage = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
 
   const addNewWorkout = () => {
-    setWorkouts((prev) => [...prev, { workoutTitle: "", exercises: [] }]);
+    setWorkouts((prev) => [...prev, { id: crypto.randomUUID(), workoutTitle: "", exercises: [] }]);
   };
 
-  const updateWorkoutTitle = (index: number, newTitle: string) => {
+  const updateWorkoutTitle = (workoutId: string, newTitle: string) => {
     setWorkouts((prev) =>
-      prev.map((workout, i) =>
-        i === index ? { ...workout, workoutTitle: newTitle } : workout
+      prev.map((workout) =>
+        workout.id === workoutId ? { ...workout, workoutTitle: newTitle } : workout
       )
     );
   };

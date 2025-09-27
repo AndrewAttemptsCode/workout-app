@@ -14,11 +14,10 @@ const WorkoutTitle = styled.input`
 
 type WorkoutItemProps = {
   workout: Workout;
-  index: number;
-  updateWorkoutTitle: (index: number, newTitle: string) => void;
+  updateWorkoutTitle: (workoutId: string, newTitle: string) => void;
 }
 
-const WorkoutItem = ({ workout, index, updateWorkoutTitle }: WorkoutItemProps) => {
+const WorkoutItem = ({ workout, updateWorkoutTitle }: WorkoutItemProps) => {
   return (
     <Container>
       <WorkoutTitle
@@ -27,7 +26,7 @@ const WorkoutItem = ({ workout, index, updateWorkoutTitle }: WorkoutItemProps) =
         id="workoutTitle"
         placeholder="Workout Name..."
         value={workout.workoutTitle}
-        onChange={(e) => updateWorkoutTitle(index, e.target.value)}
+        onChange={(e) => updateWorkoutTitle(workout.id, e.target.value)}
       />
     </Container>
   );
