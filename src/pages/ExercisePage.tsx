@@ -4,7 +4,7 @@ import ExerciseList from "../components/ExerciseList";
 export type Exercise = {
   id: string;
   title: string;
-  sets: { reps: number; weight: number }[];
+  sets: { id: string; reps: number; weight: number }[];
 };
 
 const ExercisePage = () => {
@@ -13,7 +13,7 @@ const ExercisePage = () => {
   const addNewExercise = () => {
     setExercises((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), title: "", sets: [{ reps: 0, weight: 0 }] },
+      { id: crypto.randomUUID(), title: "", sets: [{ id: crypto.randomUUID() ,reps: 5, weight: 5 }] },
     ]);
   };
 
@@ -33,6 +33,23 @@ const ExercisePage = () => {
     );
   };
 
+  const updateSetField = (exerciseId: string, setId: string, field: "reps" | "weight", value: number) => {
+    setExercises((prev) =>
+      prev.map((exercise) =>
+        exercise.id === exerciseId
+        ? {
+          ...exercise,
+          sets: exercise.sets.map((set) =>
+            set.id === setId
+            ? {...set, [field]: value}
+            : set
+          )
+        }
+        : exercise
+      )
+    );
+  };
+
   return (
     <div>
       <h1>Exercises</h1>
@@ -41,6 +58,7 @@ const ExercisePage = () => {
         exercises={exercises}
         updateExerciseTitle={updateExerciseTitle}
         removeExercise={removeExercise}
+        updateSetField={updateSetField}
       />
     </div>
   );
