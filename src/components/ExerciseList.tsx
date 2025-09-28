@@ -6,13 +6,14 @@ type ExerciseListProps = {
   updateExerciseTitle: (id: string, newTitle: string) => void;
   removeExercise: (id: string) => void;
   updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => void;
+  addSet: (exerciseId: string) => void;
 };
 
-const ExerciseList = ({ exercises, updateExerciseTitle, removeExercise, updateSetField }: ExerciseListProps) => {
+const ExerciseList = ({ exercises, updateExerciseTitle, removeExercise, updateSetField, addSet }: ExerciseListProps) => {
   return (
     <div>
       {exercises.map((exercise) => (
-        <ExerciseItem key={exercise.id} exercise={exercise} updateExerciseTitle={updateExerciseTitle} removeExercise={removeExercise} updateSetField={updateSetField} />
+        <ExerciseItem key={exercise.id} exercise={exercise} updateExerciseTitle={updateExerciseTitle} removeExercise={removeExercise} updateSetField={updateSetField} addSet={addSet} />
       ))}
     </div>
   );
