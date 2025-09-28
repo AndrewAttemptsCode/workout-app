@@ -3,9 +3,10 @@ import type { Exercise } from "../pages/ExercisePage";
 type ExerciseSetsProps = {
   exercise: Exercise;
   updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => void;
+  removeSet: (exerciseId: string, setId: string) => void;
 }
 
-const ExerciseSets = ({ exercise, updateSetField }: ExerciseSetsProps) => {
+const ExerciseSets = ({ exercise, updateSetField, removeSet }: ExerciseSetsProps) => {
   return (
     <div>
       {exercise.sets.map((set) => (
@@ -42,7 +43,9 @@ const ExerciseSets = ({ exercise, updateSetField }: ExerciseSetsProps) => {
             onChange={(e) => updateSetField(exercise.id, set.id, "rest", e.target.valueAsNumber)}
           />
           <label htmlFor={`rest-${set.id}`}>secs</label>
-          
+
+        <button disabled={exercise.sets.length <= 1} onClick={() => removeSet(exercise.id, set.id)}>Remove set</button>
+
         </div>
       ))}
     </div>
