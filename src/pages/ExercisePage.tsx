@@ -71,6 +71,21 @@ const ExercisePage = () => {
     );
   };
 
+  const removeSet= (exerciseId: string, setId: string) => {
+    setExercises((prev) =>
+      prev.map((exercise) => 
+        exercise.id === exerciseId
+        ? {
+          ...exercise,
+          sets: exercise.sets.filter((set) =>
+            set.id !== setId
+          )
+        }
+        : exercise
+      )
+    );
+  };
+
   return (
     <div>
       <h1>Exercises</h1>
@@ -81,6 +96,7 @@ const ExercisePage = () => {
         removeExercise={removeExercise}
         updateSetField={updateSetField}
         addSet={addSet}
+        removeSet={removeSet}
       />
     </div>
   );
