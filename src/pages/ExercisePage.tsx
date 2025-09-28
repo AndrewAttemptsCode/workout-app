@@ -50,6 +50,27 @@ const ExercisePage = () => {
     );
   };
 
+  const addSet = (exerciseId: string) => {
+    setExercises((prev) =>
+      prev.map((exercise) =>
+        exercise.id === exerciseId
+        ? {
+          ...exercise,
+          sets: [
+            ...exercise.sets,
+            {
+              id: crypto.randomUUID(),
+              reps: 5,
+              weight: 5,
+              rest: 30,
+            },
+          ],
+        }
+        : exercise
+      )
+    );
+  };
+
   return (
     <div>
       <h1>Exercises</h1>
@@ -59,6 +80,7 @@ const ExercisePage = () => {
         updateExerciseTitle={updateExerciseTitle}
         removeExercise={removeExercise}
         updateSetField={updateSetField}
+        addSet={addSet}
       />
     </div>
   );
