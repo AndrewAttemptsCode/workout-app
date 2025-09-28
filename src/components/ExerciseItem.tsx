@@ -17,7 +17,7 @@ type ExerciseItemProps = {
   exercise: Exercise;
   updateExerciseTitle: (id: string, newTitle: string ) => void;
   removeExercise: (id: string) => void;
-  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight", value: number) => void;
+  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => void;
 }
 
 const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSetField }: ExerciseItemProps) => {

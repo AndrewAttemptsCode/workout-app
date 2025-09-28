@@ -5,7 +5,7 @@ type ExerciseListProps = {
   exercises: Exercise[];
   updateExerciseTitle: (id: string, newTitle: string) => void;
   removeExercise: (id: string) => void;
-  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight", value: number) => void;
+  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => void;
 };
 
 const ExerciseList = ({ exercises, updateExerciseTitle, removeExercise, updateSetField }: ExerciseListProps) => {

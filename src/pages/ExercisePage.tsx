@@ -4,7 +4,7 @@ import ExerciseList from "../components/ExerciseList";
 export type Exercise = {
   id: string;
   title: string;
-  sets: { id: string; reps: number; weight: number }[];
+  sets: { id: string; reps: number; weight: number, rest: number }[];
 };
 
 const ExercisePage = () => {
@@ -13,7 +13,7 @@ const ExercisePage = () => {
   const addNewExercise = () => {
     setExercises((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), title: "", sets: [{ id: crypto.randomUUID() ,reps: 5, weight: 5 }] },
+      { id: crypto.randomUUID(), title: "", sets: [{ id: crypto.randomUUID() ,reps: 5, weight: 5, rest: 30 }] },
     ]);
   };
 
@@ -33,7 +33,7 @@ const ExercisePage = () => {
     );
   };
 
-  const updateSetField = (exerciseId: string, setId: string, field: "reps" | "weight", value: number) => {
+  const updateSetField = (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => {
     setExercises((prev) =>
       prev.map((exercise) =>
         exercise.id === exerciseId
