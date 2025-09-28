@@ -18,9 +18,10 @@ type ExerciseItemProps = {
   updateExerciseTitle: (id: string, newTitle: string ) => void;
   removeExercise: (id: string) => void;
   updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => void;
+  addSet: (exerciseId: string) => void;
 }
 
-const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSetField }: ExerciseItemProps) => {
+const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSetField, addSet }: ExerciseItemProps) => {
   return (
     <Container>
       <ExerciseTitle 
@@ -32,6 +33,7 @@ const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSet
         onChange={(e) => updateExerciseTitle(exercise.id, e.target.value)}
       />
       <button onClick={() => removeExercise(exercise.id)}>Remove</button>
+      <button onClick={() => addSet(exercise.id)}>Add new set</button>
       <ExerciseSets exercise={exercise} updateSetField={updateSetField} />
     </Container>
   );
