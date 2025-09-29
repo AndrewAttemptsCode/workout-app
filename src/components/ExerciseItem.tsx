@@ -24,6 +24,12 @@ const ExerciseDisplayTitle = styled.p`
   border: 2px solid transparent;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+`;
+
 type ExerciseItemProps = {
   exercise: Exercise;
   updateExerciseTitle: (id: string, newTitle: string) => void;
@@ -38,6 +44,19 @@ const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSet
 
   return (
     <Container>
+      <ButtonContainer>
+        {editMode && (
+          <>
+            <button onClick={() => addSet(exercise.id)}>Add new set</button>
+            <button onClick={() => removeExercise(exercise.id)}>Remove</button>
+          </>
+        )}
+
+        <button onClick={() => setEditMode((prev) => !prev)}>
+          {editMode ? "Lock" : "Unlock"}
+        </button>
+      </ButtonContainer>
+
       {editMode ? (
         <ExerciseTitle
           type="text"
@@ -49,17 +68,6 @@ const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSet
         />
       ) : (
         <ExerciseDisplayTitle>{exercise.title}</ExerciseDisplayTitle>
-      )}
-
-      <button onClick={() => setEditMode((prev) => !prev)}>
-        {editMode ? "Lock" : "Unlock"}
-      </button>
-
-      {editMode && (
-        <>
-          <button onClick={() => removeExercise(exercise.id)}>Remove</button>
-          <button onClick={() => addSet(exercise.id)}>Add new set</button>
-        </>
       )}
 
       <ExerciseSets
