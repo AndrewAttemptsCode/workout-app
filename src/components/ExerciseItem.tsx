@@ -66,6 +66,7 @@ const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSet
         exercise={exercise}
         updateSetField={updateSetField}
         removeSet={removeSet}
+        editMode={editMode}
       />
     </Container>
   );
