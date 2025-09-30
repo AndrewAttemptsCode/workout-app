@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import type { Workout } from "../pages/WorkoutPage";
+import { useWorkout, type Workout } from "../contexts/WorkoutContext";
 
 const Container = styled.div`
   border: 2px solid black;
@@ -14,11 +14,11 @@ const WorkoutTitle = styled.input`
 
 type WorkoutItemProps = {
   workout: Workout;
-  updateWorkoutTitle: (workoutId: string, newTitle: string) => void;
-  removeWorkoutItem: (workoutId: string) => void;
 }
 
-const WorkoutItem = ({ workout, updateWorkoutTitle, removeWorkoutItem }: WorkoutItemProps) => {
+const WorkoutItem = ({ workout }: WorkoutItemProps) => {
+  const { updateWorkoutTitle, removeWorkoutItem } = useWorkout();
+
   return (
     <Container>
       <WorkoutTitle

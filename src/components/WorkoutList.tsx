@@ -1,17 +1,13 @@
 import WorkoutItem from "./WorkoutItem";
-import type { Workout } from "../pages/WorkoutPage";
+import { useWorkout } from "../contexts/WorkoutContext";
 
-type WorkoutListProps = {
-  workouts: Workout[];
-  updateWorkoutTitle: (workoutId: string, newTitle: string) => void;
-  removeWorkoutItem: (workoutId: string) => void;
-}
-
-const WorkoutList = ({ workouts, updateWorkoutTitle, removeWorkoutItem }: WorkoutListProps) => {
+const WorkoutList = () => {
+  const { workouts } = useWorkout();
+  
   return (
     <div>
       {workouts.map((workout) => (
-        <WorkoutItem key={workout.id} workout={workout} updateWorkoutTitle={updateWorkoutTitle} removeWorkoutItem={removeWorkoutItem} />
+        <WorkoutItem key={workout.id} workout={workout} />
       ))}
     </div>
   );
