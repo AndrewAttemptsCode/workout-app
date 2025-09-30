@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export type Workout = {
   id: string;
@@ -33,9 +33,24 @@ type WorkoutProviderProps = {
 const WorkoutContext = createContext<WorkoutContextTypes | null>(null);
 
 export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
-  const [workouts, setWorkouts] = useState<Workout[]>([]);
-  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [workouts, setWorkouts] = useState<Workout[]>(() => {
+    const savedWorkouts = localStorage.getItem("workouts");
+    return savedWorkouts ? (JSON.parse(savedWorkouts) as Workout[]) : [];
+  });
+
+  const [exercises, setExercises] = useState<Exercise[]>(() => {
+    const savedExercises = localStorage.getItem("exercises");
+    return savedExercises ? (JSON.parse(savedExercises) as Exercise[]) : [];
+  });
   
+  useEffect(() => {
+    localStorage.setItem("workouts", JSON.stringify(workouts));
+  }, [workouts]);
+
+  useEffect(() => {
+    localStorage.setItem("exercises", JSON.stringify(exercises));
+  }, [exercises]);
+
   // Workouts
 
   const addNewWorkout = () => {
