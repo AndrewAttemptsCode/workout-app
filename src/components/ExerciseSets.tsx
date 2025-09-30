@@ -1,12 +1,5 @@
 import styled from "styled-components";
-import type { Exercise } from "../pages/ExercisePage";
-
-type ExerciseSetsProps = {
-  exercise: Exercise;
-  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => void;
-  removeSet: (exerciseId: string, setId: string) => void;
-  editMode: boolean;
-}
+import { useWorkout, type Exercise } from "../contexts/WorkoutContext";
 
 const Table = styled.table`
   width: 100%;
@@ -32,7 +25,14 @@ const Table = styled.table`
   }
 `;
 
-const ExerciseSets = ({ exercise, updateSetField, removeSet, editMode }: ExerciseSetsProps) => {
+type ExerciseSetsProps = {
+  exercise: Exercise;
+  editMode: boolean;
+}
+
+const ExerciseSets = ({ exercise, editMode }: ExerciseSetsProps) => {
+  const { updateSetField, removeSet } = useWorkout();
+
   return (
     <Table>
       <thead>

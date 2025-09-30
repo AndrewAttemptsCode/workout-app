@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import type { Exercise } from "../pages/ExercisePage";
 import ExerciseSets from "./ExerciseSets";
 import { useState } from "react";
+import { useWorkout, type Exercise } from "../contexts/WorkoutContext";
 
 const Container = styled.div`
   border: 2px solid black;
@@ -32,15 +32,11 @@ const ButtonContainer = styled.div`
 
 type ExerciseItemProps = {
   exercise: Exercise;
-  updateExerciseTitle: (id: string, newTitle: string) => void;
-  removeExercise: (id: string) => void;
-  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => void;
-  addSet: (exerciseId: string) => void;
-  removeSet: (exerciseId: string, setId: string) => void;
 };
 
-const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet }: ExerciseItemProps) => {
+const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
   const [editMode, setEditMode] = useState(true);
+  const { addSet, removeExercise, updateExerciseTitle } = useWorkout();
 
   return (
     <Container>
@@ -72,8 +68,6 @@ const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSet
 
       <ExerciseSets
         exercise={exercise}
-        updateSetField={updateSetField}
-        removeSet={removeSet}
         editMode={editMode}
       />
 

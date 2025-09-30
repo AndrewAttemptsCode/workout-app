@@ -6,11 +6,24 @@ export type Workout = {
   exercises: string[];
 };
 
+export type Exercise = {
+  id: string;
+  title: string;
+  sets: { id: string; reps: number; weight: number, rest: number }[];
+};
+
 type WorkoutContextTypes = {
   workouts: Workout[];
+  exercises: Exercise[];
   addNewWorkout: () => void;
   updateWorkoutTitle: (workoutId: string, newTitle: string) => void;
   removeWorkoutItem: (workoutId: string) => void;
+  addNewExercise: () => void;
+  updateExerciseTitle: (id: string, newTitle: string) => void;
+  removeExercise: (id: string) => void;
+  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => void;
+  addSet: (exerciseId: string) => void;
+  removeSet: (exerciseId: string, setId: string) => void;
 }
 
 type WorkoutProviderProps = {
@@ -21,7 +34,10 @@ const WorkoutContext = createContext<WorkoutContextTypes | null>(null);
 
 export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
   
+  // Workouts
+
   const addNewWorkout = () => {
     setWorkouts((prev) => [
       ...prev,
@@ -43,8 +59,86 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
     setWorkouts((prev) => prev.filter((workout) => workout.id !== workoutId));
   };
 
+  // Exercises
+
+  const addNewExercise = () => {
+    setExercises((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), title: "", sets: [{ id: crypto.randomUUID() ,reps: 5, weight: 5, rest: 30 }] },
+    ]);
+  };
+
+  const updateExerciseTitle = (id: string, newTitle: string) => {
+    setExercises((prev) =>
+      prev.map((exercise) =>
+        exercise.id === id ? { ...exercise, title: newTitle } : exercise
+      )
+    );
+  };
+
+  const removeExercise = (id: string) => {
+    setExercises((prev) =>
+      prev.filter((exercise) =>
+        exercise.id !== id
+      )
+    );
+  };
+
+  const updateSetField = (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => {
+    setExercises((prev) =>
+      prev.map((exercise) =>
+        exercise.id === exerciseId
+        ? {
+          ...exercise,
+          sets: exercise.sets.map((set) =>
+            set.id === setId
+            ? {...set, [field]: value}
+            : set
+          )
+        }
+        : exercise
+      )
+    );
+  };
+
+  const addSet = (exerciseId: string) => {
+    setExercises((prev) =>
+      prev.map((exercise) =>
+        exercise.id === exerciseId
+        ? {
+          ...exercise,
+          sets: [
+            ...exercise.sets,
+            {
+              id: crypto.randomUUID(),
+              reps: 5,
+              weight: 5,
+              rest: 30,
+            },
+          ],
+        }
+        : exercise
+      )
+    );
+  };
+
+  const removeSet= (exerciseId: string, setId: string) => {
+    setExercises((prev) =>
+      prev.map((exercise) => 
+        exercise.id === exerciseId
+        ? {
+          ...exercise,
+          sets: exercise.sets.filter((set) =>
+            set.id !== setId
+          )
+        }
+        : exercise
+      )
+    );
+  };
+
   return (
-    <WorkoutContext.Provider value={{ workouts, addNewWorkout, updateWorkoutTitle, removeWorkoutItem }}>
+    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet }}>
       {children}
     </WorkoutContext.Provider>
   );
