@@ -76,6 +76,8 @@ const ExerciseItem = ({ exercise, updateExerciseTitle, removeExercise, updateSet
         removeSet={removeSet}
         editMode={editMode}
       />
+
+      {editMode === false && <button>Add to workout</button>}
     </Container>
   );
 };
