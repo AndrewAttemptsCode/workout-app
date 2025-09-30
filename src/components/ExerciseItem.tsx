@@ -35,8 +35,8 @@ type ExerciseItemProps = {
 };
 
 const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
-  const [editMode, setEditMode] = useState(true);
-  const { addSet, removeExercise, updateExerciseTitle } = useWorkout();
+  const [editMode, setEditMode] = useState(exercise.editStatus);
+  const { addSet, removeExercise, updateExerciseTitle, updateExerciseEditMode } = useWorkout();
 
   return (
     <Container>
@@ -48,7 +48,10 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
           </>
         )}
 
-        <button onClick={() => setEditMode((prev) => !prev)}>
+        <button onClick={() => {
+          setEditMode((prev) => !prev);
+          updateExerciseEditMode(exercise.id, !editMode);
+        }}>
           {editMode ? "Lock" : "Unlock"}
         </button>
       </ButtonContainer>
