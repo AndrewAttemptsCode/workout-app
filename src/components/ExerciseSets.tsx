@@ -53,8 +53,8 @@ const ExerciseSets = ({ exercise, editMode }: ExerciseSetsProps) => {
                 name="reps"
                 id={`reps-${set.id}`}
                 min={0}
-                value={set.reps}
-                onChange={(e) => updateSetField(exercise.id, set.id, "reps", e.target.valueAsNumber)} 
+                value={set.reps ?? ""}
+                onChange={(e) => updateSetField(exercise.id, set.id, "reps", Number.isNaN(e.target.valueAsNumber) ? null : e.target.valueAsNumber)} 
               />
               ) : (
                 <span>{set.reps}</span>
@@ -68,8 +68,8 @@ const ExerciseSets = ({ exercise, editMode }: ExerciseSetsProps) => {
                   name="weight"
                   id={`weight-${set.id}`}
                   min={0}
-                  value={set.weight}
-                  onChange={(e) => updateSetField(exercise.id, set.id, "weight", e.target.valueAsNumber)} 
+                  value={set.weight ?? ""}
+                  onChange={(e) => updateSetField(exercise.id, set.id, "weight", Number.isNaN(e.target.valueAsNumber) ? null : e.target.valueAsNumber)} 
                 />
               ) : (
                 <span>{set.weight}</span>
@@ -83,8 +83,8 @@ const ExerciseSets = ({ exercise, editMode }: ExerciseSetsProps) => {
                   name="rest"
                   id={`rest-${set.id}`}
                   min={0}
-                  value={set.rest}
-                  onChange={(e) => updateSetField(exercise.id, set.id, "rest", e.target.valueAsNumber)}
+                  value={set.rest ?? ""}
+                  onChange={(e) => updateSetField(exercise.id, set.id, "rest", Number.isNaN(e.target.valueAsNumber) ? null : e.target.valueAsNumber)}
                 />
               ) : (
                 <span>{set.rest}</span>

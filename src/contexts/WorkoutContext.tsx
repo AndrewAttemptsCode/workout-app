@@ -9,7 +9,7 @@ export type Workout = {
 export type Exercise = {
   id: string;
   title: string;
-  sets: { id: string; reps: number; weight: number, rest: number }[];
+  sets: { id: string; reps: number | null; weight: number | null, rest: number | null }[];
   editStatus: boolean;
 };
 
@@ -22,7 +22,7 @@ type WorkoutContextTypes = {
   addNewExercise: () => void;
   updateExerciseTitle: (id: string, newTitle: string) => void;
   removeExercise: (id: string) => void;
-  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => void;
+  updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number | null) => void;
   addSet: (exerciseId: string) => void;
   removeSet: (exerciseId: string, setId: string) => void;
   updateExerciseEditMode: (exerciseId: string, editMode: boolean) => void;
@@ -111,7 +111,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
     );
   };
 
-  const updateSetField = (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number) => {
+  const updateSetField = (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number | null) => {
     setExercises((prev) =>
       prev.map((exercise) =>
         exercise.id === exerciseId
