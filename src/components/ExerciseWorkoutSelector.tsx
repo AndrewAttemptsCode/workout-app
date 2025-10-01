@@ -31,11 +31,19 @@ const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorPro
   return (
     <Container>
       <h2>Select Workout</h2>
+      
+      {workouts.length === 0 && ( 
+        <SelectItem>
+          No workouts available
+        </SelectItem>
+      )}
+
       {workouts.map((workout) => (
         <SelectItem key={workout.id} onClick={() => onSelectWorkout(workout.id)}>
           {workout.workoutTitle}
         </SelectItem>
       ))}
+
     </Container>
   );
 };
