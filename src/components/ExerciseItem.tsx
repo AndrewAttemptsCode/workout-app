@@ -2,12 +2,18 @@ import styled, { css } from "styled-components";
 import ExerciseSets from "./ExerciseSets";
 import { useState } from "react";
 import { useWorkout, type Exercise } from "../contexts/WorkoutContext";
+import ExerciseWorkoutSelector from "./ExerciseWorkoutSelector";
 
 const Container = styled.div`
   border: 2px solid black;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
 `;
+
+const MenuModeContainer = styled.div`
+  height: 220px;
+  overflow-y: auto;
+`
 
 const sharedTitleStyles = css`
   padding: 0.5rem;
@@ -36,6 +42,7 @@ type ExerciseItemProps = {
 
 const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
   const [editMode, setEditMode] = useState(exercise.editStatus);
+  const [menuMode, setMenuMode] = useState(false);
   const { addSet, removeExercise, updateExerciseTitle, updateExerciseEditMode } = useWorkout();
 
   return (
@@ -51,6 +58,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
         <button onClick={() => {
           setEditMode((prev) => !prev);
           updateExerciseEditMode(exercise.id, !editMode);
+          setMenuMode(false);
         }}>
           {editMode ? "Lock" : "Unlock"}
         </button>
@@ -69,12 +77,18 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
         <ExerciseDisplayTitle>{exercise.title}</ExerciseDisplayTitle>
       )}
 
-      <ExerciseSets
-        exercise={exercise}
-        editMode={editMode}
-      />
+      <MenuModeContainer>
+        {menuMode ? 
+          <ExerciseWorkoutSelector />
+          :
+          <ExerciseSets
+            exercise={exercise}
+            editMode={editMode}
+          />
+        }
+      </MenuModeContainer>
 
-      {editMode === false && <button>Add to workout</button>}
+      {editMode === false && <button onClick={() => setMenuMode((prev) => !prev)}>{menuMode ? "Back" : "Add to workout"}</button>}
     </Container>
   );
 };
