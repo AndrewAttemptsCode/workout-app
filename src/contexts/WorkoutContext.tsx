@@ -26,6 +26,7 @@ type WorkoutContextTypes = {
   addSet: (exerciseId: string) => void;
   removeSet: (exerciseId: string, setId: string) => void;
   updateExerciseEditMode: (exerciseId: string, editMode: boolean) => void;
+  addExerciseToWorkout: (workoutId: string, exerciseId: string) => void;
 }
 
 type WorkoutProviderProps = {
@@ -149,6 +150,20 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
     );
   };
 
+  const addExerciseToWorkout = (workoutId: string, exerciseId: string) => {
+    setWorkouts((prev) =>
+      prev.map((workout) =>
+        workout.id === workoutId
+        ? {
+          ...workout,
+          exercises: [...workout.exercises, exerciseId]
+        }
+        :
+        workout
+      )
+    );
+  };
+
   const removeSet= (exerciseId: string, setId: string) => {
     setExercises((prev) =>
       prev.map((exercise) => 
@@ -165,7 +180,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   };
 
   return (
-    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode }}>
+    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout }}>
       {children}
     </WorkoutContext.Provider>
   );
