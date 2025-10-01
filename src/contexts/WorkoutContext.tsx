@@ -59,7 +59,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   const addNewWorkout = () => {
     setWorkouts((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), workoutTitle: "", exercises: [] },
+      { id: crypto.randomUUID(), workoutTitle: `Workout#${workouts.length + 1}`, exercises: [] },
     ]);
   };
 
