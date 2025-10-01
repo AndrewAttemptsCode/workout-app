@@ -23,20 +23,17 @@ const SelectItem = styled.div`
 
 type ExerciseWorkoutSelectorProps = {
   exercise: Exercise;
-  setMenuMode: React.Dispatch<React.SetStateAction<boolean>>;
+  onSelectWorkout: (workoutId: string, exerciseId: string) => void;
 }
 
-const ExerciseWorkoutSelector = ({ exercise, setMenuMode }: ExerciseWorkoutSelectorProps) => {
-  const { workouts, addExerciseToWorkout } = useWorkout();
+const ExerciseWorkoutSelector = ({ exercise, onSelectWorkout }: ExerciseWorkoutSelectorProps) => {
+  const { workouts } = useWorkout();
 
   return (
     <Container>
       <h2>Select Workout</h2>
       {workouts.map((workout) => (
-        <SelectItem key={workout.id} onClick={() => {
-          addExerciseToWorkout(workout.id, exercise.id);
-          setMenuMode(false);
-        }}>
+        <SelectItem key={workout.id} onClick={() => onSelectWorkout(workout.id, exercise.id)}>
           {workout.workoutTitle}
         </SelectItem>
       ))}

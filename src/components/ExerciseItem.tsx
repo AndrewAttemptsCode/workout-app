@@ -43,7 +43,7 @@ type ExerciseItemProps = {
 const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
   const [editMode, setEditMode] = useState(exercise.editStatus);
   const [menuMode, setMenuMode] = useState(false);
-  const { addSet, removeExercise, updateExerciseTitle, updateExerciseEditMode } = useWorkout();
+  const { addSet, removeExercise, updateExerciseTitle, updateExerciseEditMode, addExerciseToWorkout } = useWorkout();
 
   return (
     <Container>
@@ -79,7 +79,13 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
 
       <MenuModeContainer>
         {menuMode ? 
-          <ExerciseWorkoutSelector exercise={exercise} setMenuMode={setMenuMode} />
+          <ExerciseWorkoutSelector 
+            exercise={exercise} 
+            onSelectWorkout={(workoutId, exerciseId) => {
+              addExerciseToWorkout(workoutId, exerciseId);
+              setMenuMode(false);
+            }} 
+          />
           :
           <ExerciseSets
             exercise={exercise}
