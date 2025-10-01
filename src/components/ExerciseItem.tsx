@@ -79,7 +79,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
 
       <MenuModeContainer>
         {menuMode ? 
-          <ExerciseWorkoutSelector />
+          <ExerciseWorkoutSelector exercise={exercise} setMenuMode={setMenuMode} />
           :
           <ExerciseSets
             exercise={exercise}
