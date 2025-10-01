@@ -80,9 +80,8 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
       <MenuModeContainer>
         {menuMode ? 
           <ExerciseWorkoutSelector 
-            exercise={exercise} 
-            onSelectWorkout={(workoutId, exerciseId) => {
-              addExerciseToWorkout(workoutId, exerciseId);
+            onSelectWorkout={(workoutId) => {
+              addExerciseToWorkout(workoutId, exercise.id);
               setMenuMode(false);
             }} 
           />

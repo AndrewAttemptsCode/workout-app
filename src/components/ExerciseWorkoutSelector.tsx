@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useWorkout, type Exercise } from "../contexts/WorkoutContext";
+import { useWorkout } from "../contexts/WorkoutContext";
 
 const Container = styled.div`
   display: flex;
@@ -22,18 +22,17 @@ const SelectItem = styled.div`
 `
 
 type ExerciseWorkoutSelectorProps = {
-  exercise: Exercise;
-  onSelectWorkout: (workoutId: string, exerciseId: string) => void;
+  onSelectWorkout: (workoutId: string) => void;
 }
 
-const ExerciseWorkoutSelector = ({ exercise, onSelectWorkout }: ExerciseWorkoutSelectorProps) => {
+const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorProps) => {
   const { workouts } = useWorkout();
 
   return (
     <Container>
       <h2>Select Workout</h2>
       {workouts.map((workout) => (
-        <SelectItem key={workout.id} onClick={() => onSelectWorkout(workout.id, exercise.id)}>
+        <SelectItem key={workout.id} onClick={() => onSelectWorkout(workout.id)}>
           {workout.workoutTitle}
         </SelectItem>
       ))}
