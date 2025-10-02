@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useWorkout } from "../contexts/WorkoutContext";
 
 const Table = styled.table`
   width: 100%;
@@ -25,11 +26,13 @@ const Table = styled.table`
 `;
 
 type WorkoutExercisesDisplayProps = {
-  exercises: string[];
+  workoutExercises: string[];
   editMode: boolean;
 }
 
-const WorkoutExercisesDisplay = ({ exercises, editMode }: WorkoutExercisesDisplayProps) => {
+const WorkoutExercisesDisplay = ({ workoutExercises, editMode }: WorkoutExercisesDisplayProps) => {
+  const { exercises } = useWorkout();
+
   return (
     <Table>
       <thead>
@@ -39,19 +42,20 @@ const WorkoutExercisesDisplay = ({ exercises, editMode }: WorkoutExercisesDispla
         </tr>
       </thead>
       <tbody>
-        {exercises.map((exercise, index) => (
-          <tr key={index}>
-            <td>
-              {exercise}
-            </td>
-            
-            {editMode &&
-            <td>
-              <button>&times;</button>
-            </td>
-            }
-          </tr>
-        ))}
+        {workoutExercises.map((exerciseId, index) => {
+          const exercise = exercises.find((exercise) => exercise.id === exerciseId); 
+          
+          if (!exercise) return null;
+
+          return (
+            <tr key={index}>
+              <td>{exercise.title}</td>
+
+              {editMode && (
+              <td><button>&times;</button></td>
+              )}
+            </tr>
+        )})}
       </tbody>
     </Table>
   );
