@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import shortUuid from "../utils/shortUuid";
 
 export type Workout = {
   id: string;
@@ -59,7 +60,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   const addNewWorkout = () => {
     setWorkouts((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), workoutTitle: `Workout#${workouts.length + 1}`, exercises: [] },
+      { id: crypto.randomUUID(), workoutTitle: `Workout#${shortUuid()}`, exercises: [] },
     ]);
   };
 
@@ -82,7 +83,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   const addNewExercise = () => {
     setExercises((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), title: "", sets: [{ id: crypto.randomUUID() ,reps: 5, weight: 5, rest: 30 }], editStatus: true },
+      { id: crypto.randomUUID(), title: `Exercise#${shortUuid()}`, sets: [{ id: crypto.randomUUID() ,reps: 5, weight: 5, rest: 30 }], editStatus: true },
     ]);
   };
 
