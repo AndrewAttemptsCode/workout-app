@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { useWorkout, type Workout } from "../contexts/WorkoutContext";
 import { useState } from "react";
 import WorkoutExercisesDisplay from "./WorkoutExercisesDisplay";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   border: 2px solid black;
@@ -9,7 +10,7 @@ const Container = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-const SetsContainer = styled.div`
+const ExerciseContainer = styled.div`
   height: 220px;
   overflow-y: auto;
 `
@@ -33,6 +34,14 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
+`;
+
+const EmptyExercisesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
 `;
 
 type WorkoutItemProps = {
@@ -74,12 +83,19 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
         <WorkoutDisplayTitle>{workout.workoutTitle}</WorkoutDisplayTitle>
       )}
 
-      <SetsContainer>
-        <WorkoutExercisesDisplay
-          exercises={workout.exercises}
-          editMode={editMode}
-        />
-      </SetsContainer>
+      <ExerciseContainer>
+        {workout.exercises.length === 0 ? (
+          <EmptyExercisesContainer>
+            <p>Exercise list is currently empty...</p>
+            <p><Link to={"/exercises"}>Add</Link> an exercise to get started</p>
+          </EmptyExercisesContainer>
+        ) : (
+          <WorkoutExercisesDisplay
+            workoutExercises={workout.exercises}
+            editMode={editMode}
+          />
+        )}
+      </ExerciseContainer>
       
     </Container>
   );
