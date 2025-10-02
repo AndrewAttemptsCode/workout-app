@@ -5,6 +5,7 @@ export type Workout = {
   id: string;
   workoutTitle: string;
   exercises: string[];
+  editStatus: boolean;
 };
 
 export type Exercise = {
@@ -60,7 +61,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   const addNewWorkout = () => {
     setWorkouts((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), workoutTitle: `Workout#${shortUuid()}`, exercises: [] },
+      { id: crypto.randomUUID(), workoutTitle: `Workout#${shortUuid()}`, exercises: [], editStatus: true },
     ]);
   };
 
