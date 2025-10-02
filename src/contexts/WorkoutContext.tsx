@@ -11,7 +11,7 @@ export type Workout = {
 export type Exercise = {
   id: string;
   title: string;
-  sets: { id: string; reps: number | null; weight: number | null, rest: number | null }[];
+  sets: { id: string; reps: number | null; weight: number | null; rest: number | null }[];
   editStatus: boolean;
 };
 
@@ -27,6 +27,7 @@ type WorkoutContextTypes = {
   updateSetField: (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number | null) => void;
   addSet: (exerciseId: string) => void;
   removeSet: (exerciseId: string, setId: string) => void;
+  updateWorkoutEditMode: (workoutId: string, editMode: boolean) => void;
   updateExerciseEditMode: (exerciseId: string, editMode: boolean) => void;
   addExerciseToWorkout: (workoutId: string, exerciseId: string) => void;
 }
@@ -77,6 +78,16 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
 
   const removeWorkoutItem = (workoutId: string) => {
     setWorkouts((prev) => prev.filter((workout) => workout.id !== workoutId));
+  };
+
+  const updateWorkoutEditMode = (workoutId: string, editMode: boolean) => {
+    setWorkouts((prev) =>
+      prev.map((workout) =>
+        workout.id === workoutId
+        ? { ...workout, editStatus: editMode }
+        : workout
+      )
+    );
   };
 
   // Exercises
@@ -182,7 +193,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   };
 
   return (
-    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout }}>
+    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode }}>
       {children}
     </WorkoutContext.Provider>
   );
