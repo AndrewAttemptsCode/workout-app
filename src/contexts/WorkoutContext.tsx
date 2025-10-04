@@ -139,6 +139,14 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
         exercise.id !== id
       )
     );
+
+    setWorkouts((prev) =>
+      prev.map((workout) =>
+        ({...workout,
+          exercises: workout.exercises?.filter((exercise) =>
+          exercise !== id) || []
+        }))
+    );
   };
 
   const updateSetField = (exerciseId: string, setId: string, field: "reps" | "weight" | "rest", value: number | null) => {
