@@ -7,6 +7,10 @@ const Table = styled.table`
   border-collapse: separate;
   border-spacing: 0.5rem;
 
+  th:first-of-type {
+    text-align: left;
+  }
+
   td {
     height: 2rem;
   }
