@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { useWorkout, type Workout } from "../contexts/WorkoutContext";
 import { useState } from "react";
-import WorkoutExercisesDisplay from "./WorkoutExercisesDisplay";
+import WorkoutExercisesList from "./WorkoutExercisesList";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -90,7 +90,7 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
             <p><Link to={"/exercises"}>Add</Link> an exercise to get started</p>
           </EmptyExercisesContainer>
         ) : (
-          <WorkoutExercisesDisplay
+          <WorkoutExercisesList
             workoutExercises={workout.exercises}
             editMode={editMode}
           />
