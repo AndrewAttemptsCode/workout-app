@@ -28,10 +28,11 @@ const Table = styled.table`
 type WorkoutExercisesListProps = {
   workoutExercises: string[];
   editMode: boolean;
+  workoutId: string;
 }
 
-const WorkoutExercisesList = ({ workoutExercises, editMode }: WorkoutExercisesListProps) => {
-  const { exercises } = useWorkout();
+const WorkoutExercisesList = ({ workoutExercises, editMode, workoutId }: WorkoutExercisesListProps) => {
+  const { exercises, removeExerciseFromWorkout } = useWorkout();
 
   return (
     <Table>
@@ -52,7 +53,7 @@ const WorkoutExercisesList = ({ workoutExercises, editMode }: WorkoutExercisesLi
               <td>{exercise.title}</td>
 
               {editMode && (
-              <td><button>&times;</button></td>
+              <td><button onClick={() => removeExerciseFromWorkout(workoutId, index)}>&times;</button></td>
               )}
             </tr>
         )})}
