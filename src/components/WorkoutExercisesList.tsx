@@ -3,26 +3,22 @@ import { useWorkout } from "../contexts/WorkoutContext";
 
 const Table = styled.table`
   width: 100%;
-  table-layout: fixed;
+  table-layout: auto;
   border-collapse: separate;
   border-spacing: 0.5rem;
 
-  td input {
-    width: 100%;
-  }
-
-  td span {
-    display: block;
-    width: 100%;
-  }
-
   td {
-    text-align: center;
+    height: 2rem;
   }
 
   td button {
     width: 50%;
+    text-align: center;
   }
+`;
+
+const ButtonTD = styled.td`
+  text-align: center;
 `;
 
 type WorkoutExercisesListProps = {
@@ -53,7 +49,7 @@ const WorkoutExercisesList = ({ workoutExercises, editMode, workoutId }: Workout
               <td>{exercise.title}</td>
 
               {editMode && (
-              <td><button onClick={() => removeExerciseFromWorkout(workoutId, index)}>&times;</button></td>
+              <ButtonTD><button onClick={() => removeExerciseFromWorkout(workoutId, index)}>&times;</button></ButtonTD>
               )}
             </tr>
         )})}
