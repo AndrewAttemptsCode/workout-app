@@ -25,12 +25,12 @@ const Table = styled.table`
   }
 `;
 
-type WorkoutExercisesDisplayProps = {
+type WorkoutExercisesListProps = {
   workoutExercises: string[];
   editMode: boolean;
 }
 
-const WorkoutExercisesDisplay = ({ workoutExercises, editMode }: WorkoutExercisesDisplayProps) => {
+const WorkoutExercisesList = ({ workoutExercises, editMode }: WorkoutExercisesListProps) => {
   const { exercises } = useWorkout();
 
   return (
@@ -61,4 +61,4 @@ const WorkoutExercisesDisplay = ({ workoutExercises, editMode }: WorkoutExercise
   );
 };
 
-export default WorkoutExercisesDisplay;
+export default WorkoutExercisesList;
