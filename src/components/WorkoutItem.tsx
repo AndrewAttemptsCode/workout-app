@@ -91,6 +91,7 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
           </EmptyExercisesContainer>
         ) : (
           <WorkoutExercisesList
+            workoutId={workout.id}
             workoutExercises={workout.exercises}
             editMode={editMode}
           />
