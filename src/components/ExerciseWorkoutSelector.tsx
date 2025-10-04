@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useWorkout } from "../contexts/WorkoutContext";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -34,7 +35,8 @@ const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorPro
       
       {workouts.length === 0 && ( 
         <SelectItem>
-          No workouts available
+          <p>No workouts available...</p>
+          <p><Link to={"/workouts"}>Create</Link> a workout to get started</p>
         </SelectItem>
       )}
 
