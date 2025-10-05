@@ -36,7 +36,7 @@ const ButtonControlsContainer = styled.div`
   gap: 0.5rem;
 `;
 
-const AddToWorkoutContainer=  styled.div`
+const AddToWorkoutContainer = styled.div`
   height: 1.875rem;
 `;
 
