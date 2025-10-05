@@ -7,6 +7,12 @@ const Table = styled.table`
   border-collapse: separate;
   border-spacing: 0.5rem;
 
+  th {
+    font-size: 13px;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
   td input {
     width: 100%;
   }
