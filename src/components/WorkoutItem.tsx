@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const Container = styled.div`
   border: 2px solid black;
   padding: 0.5rem;
-  margin-bottom: 0.5rem;
 `;
 
 const ExerciseContainer = styled.div`
