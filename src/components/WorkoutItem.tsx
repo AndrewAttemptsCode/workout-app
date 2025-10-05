@@ -44,6 +44,10 @@ const EmptyExercisesContainer = styled.div`
   min-height: 100%;
 `;
 
+const LoadWorkoutContainer = styled.div`
+  height: 1.875rem;
+`;
+
 type WorkoutItemProps = {
   workout: Workout;
 }
@@ -97,6 +101,10 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
           />
         )}
       </ExerciseContainer>
+
+      <LoadWorkoutContainer>
+        {!editMode && workout.exercises.length > 0 && <button>Load workout</button>}
+      </LoadWorkoutContainer>
       
     </Container>
   );
