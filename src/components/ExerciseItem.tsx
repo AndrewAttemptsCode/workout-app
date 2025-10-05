@@ -30,10 +30,14 @@ const ExerciseDisplayTitle = styled.p`
   border: 2px solid transparent;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonControlsContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
+`;
+
+const AddToWorkoutContainer=  styled.div`
+  height: 1.875rem;
 `;
 
 type ExerciseItemProps = {
@@ -47,7 +51,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
 
   return (
     <Container>
-      <ButtonContainer>
+      <ButtonControlsContainer>
         {editMode && (
           <>
             <button onClick={() => addSet(exercise.id)}>Add new set</button>
@@ -62,7 +66,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
         }}>
           {editMode ? "Lock" : "Unlock"}
         </button>
-      </ButtonContainer>
+      </ButtonControlsContainer>
 
       {editMode ? (
         <ExerciseTitle
@@ -93,7 +97,9 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
         }
       </MenuModeContainer>
 
-      {editMode === false && <button onClick={() => setMenuMode((prev) => !prev)}>{menuMode ? "Back" : "Add to workout"}</button>}
+      <AddToWorkoutContainer>
+        {editMode === false && <button onClick={() => setMenuMode((prev) => !prev)}>{menuMode ? "Back" : "Add to workout"}</button>}
+      </AddToWorkoutContainer>
     </Container>
   );
 };
