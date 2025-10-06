@@ -20,6 +20,10 @@ const SelectItem = styled.div`
   width: 100%;
   padding: 0.5rem;
   cursor: pointer;
+
+  &:hover {
+    background: rgba(var(--gold-accent), 0.6);
+  }
 `
 
 type ExerciseWorkoutSelectorProps = {
