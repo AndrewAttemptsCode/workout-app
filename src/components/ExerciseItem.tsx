@@ -4,16 +4,26 @@ import { useState } from "react";
 import { useWorkout, type Exercise } from "../contexts/WorkoutContext";
 import ExerciseWorkoutSelector from "./ExerciseWorkoutSelector";
 
-const Container = styled.div`
-  border: 2px solid black;
+const Container = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  border: 2px solid rgb(var(--gold-accent));
+  ${({$editMode}) =>
+    $editMode &&
+    css`
+      box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+    `}
 `;
 
 const MenuModeContainer = styled.div`
   height: 220px;
   overflow-y: auto;
-`
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--gold-accent)) #1a1919;
+  background: rgba(var(--primary-color), 0.2);
+`;
 
 const sharedTitleStyles = css`
   padding: 0.5rem;
@@ -22,12 +32,23 @@ const sharedTitleStyles = css`
 
 const ExerciseTitle = styled.input`
   ${sharedTitleStyles}
+  color: rgb(var(--primary-color));
+  font-weight: bold;
+  background: rgba(var(--gold-accent), 0.6);
+  border: 2px solid rgb(var(--gold-accent));
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+  }
 `;
 
 const ExerciseDisplayTitle = styled.p`
   ${sharedTitleStyles}
   margin: none;
   border: 2px solid transparent;
+  font-weight: bold;
+  background: rgba(var(--primary-color), 0.2);
 `;
 
 const ButtonControlsContainer = styled.div`
@@ -38,11 +59,25 @@ const ButtonControlsContainer = styled.div`
 
 const AddToWorkoutContainer = styled.div`
   height: 1.875rem;
+
+  button {
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(var(--primary-color));
+    border: 2px solid rgb(var(--gold-accent));
+    background: rgba(var(--gold-accent), 0.6);
+  }
 `;
 
 type ExerciseItemProps = {
   exercise: Exercise;
 };
+
+type ContainerProps = {
+  $editMode: boolean;
+}
 
 const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
   const [editMode, setEditMode] = useState(exercise.editStatus);
@@ -50,7 +85,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
   const { addSet, removeExercise, updateExerciseTitle, updateExerciseEditMode, addExerciseToWorkout } = useWorkout();
 
   return (
-    <Container>
+    <Container $editMode={editMode}>
       <ButtonControlsContainer>
         {editMode && (
           <>

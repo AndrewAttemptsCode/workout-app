@@ -13,6 +13,19 @@ const Table = styled.table`
     line-height: 1.1;
   }
 
+  td input,
+  td button {
+    font-weight: bold;
+    color: rgb(var(--primary-color));
+    background: rgba(var(--gold-accent), 0.6);
+    border: 2px solid rgb(var(--gold-accent));
+    outline: none;
+
+    &:focus {
+      box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+    }
+  }
+
   td input {
     width: 100%;
   }
@@ -27,7 +40,8 @@ const Table = styled.table`
   }
 
   td button {
-    width: 50%;
+    width: 75%;
+    cursor: pointer;
   }
 `;
 
