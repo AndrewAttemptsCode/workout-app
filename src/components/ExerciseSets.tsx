@@ -24,6 +24,11 @@ const Table = styled.table`
     &:focus {
       box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
     }
+
+    &:disabled {
+      background: rgba(var(--gold-accent), 0.2);
+      border: 2px solid rgba(var(--gold-accent), 0.3);
+    }
   }
 
   td input {
