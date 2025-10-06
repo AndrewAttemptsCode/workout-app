@@ -3,6 +3,7 @@ import ExerciseSets from "./ExerciseSets";
 import { useState } from "react";
 import { useWorkout, type Exercise } from "../contexts/WorkoutContext";
 import ExerciseWorkoutSelector from "./ExerciseWorkoutSelector";
+import LockButton from "./LockButton";
 
 const Container = styled.div<ContainerProps>`
   display: flex;
@@ -94,13 +95,14 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
           </>
         )}
 
-        <button onClick={() => {
-          setEditMode((prev) => !prev);
-          updateExerciseEditMode(exercise.id, !editMode);
-          setMenuMode(false);
-        }}>
-          {editMode ? "Lock" : "Unlock"}
-        </button>
+        <LockButton 
+          onClick={() => {
+            setEditMode((prev) => !prev);
+            updateExerciseEditMode(exercise.id, !editMode);
+            setMenuMode(false);
+          }}
+          status={editMode} 
+        />
       </ButtonControlsContainer>
 
       {editMode ? (
