@@ -1,0 +1,23 @@
+import { Trash2 } from "lucide-react";
+import styled from "styled-components";
+
+const Button = styled.button`
+  background: rgba(var(--primary-color), 0.2);
+  background: rgba(var(--red-accent), 0.6);
+  border: 2px solid rgb(var(--red-accent));
+  cursor: pointer;
+`;
+
+type RemoveItemButtonProps = {
+  onClick: () => void;
+}
+
+const RemoveItemButton = ({ onClick }: RemoveItemButtonProps) => {
+  return (
+    <Button onClick={onClick} aria-label="Remove item from list">
+      <Trash2 size={20} color="rgb(var(--primary-color))" />
+    </Button>
+  );
+};
+
+export default RemoveItemButton;
