@@ -1,3 +1,4 @@
+import { LockKeyhole, LockKeyholeOpen } from "lucide-react";
 import styled, { css } from "styled-components";
 
 const Container = styled.div`
@@ -15,13 +16,34 @@ const Button = styled.button`
   background: rgba(var(--primary-color), 0.2);
   border: 2px solid transparent;
   -webkit-tap-highlight-color: transparent;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .lock {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(13px);
+  }
+
+  .unlock {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(-13px) rotate(-10deg);
+  }
+
+  .hidden {
+    opacity: 0;
+  }
 `;
 
 const SliderPip = styled.div<SliderPipProps>`
   position: absolute;
   height: 20px;
   width: 20px;
-  background: red;
   border-radius: 4rem;
   top: 50%;
   left: 5px;
@@ -48,10 +70,21 @@ type SliderPipProps = {
 const LockButton = ({ onClick, status = false }: LockButtonProps) => {
   return (
     <Container>
-      <Button
-        onClick={onClick}
-      >
+      <Button onClick={onClick} >
         <SliderPip $status={status} />
+
+        <LockKeyholeOpen
+          size={20} 
+          color="rgb(var(--gold-accent))"
+          className={status ? "unlock" : "hidden"} 
+        />
+
+        <LockKeyhole 
+          size={20} 
+          color="rgb(var(--gold-accent))" 
+          className={status ? "hidden" : "lock"}
+        />
+        
       </Button>
     </Container>
   );
