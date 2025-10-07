@@ -6,6 +6,15 @@ const Button = styled.button`
   background: rgba(var(--red-accent), 0.6);
   border: 2px solid rgb(var(--red-accent));
   cursor: pointer;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 4px 2px rgb(var(--red-accent));
+  }
+
+  &:hover {
+    box-shadow: 0 0 4px 2px rgb(var(--red-accent));
+  }
 `;
 
 type RemoveItemButtonProps = {
