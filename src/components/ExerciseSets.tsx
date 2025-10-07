@@ -17,22 +17,17 @@ const Table = styled.table`
   td button {
     font-weight: bold;
     color: rgb(var(--primary-color));
-    background: rgba(var(--gold-accent), 0.6);
-    border: 2px solid rgb(var(--gold-accent));
     outline: none;
-
-    &:focus {
-      box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
-    }
-
-    &:disabled {
-      background: rgba(var(--gold-accent), 0.2);
-      border: 2px solid rgba(var(--gold-accent), 0.3);
-    }
   }
 
   td input {
     width: 100%;
+    background: rgba(var(--gold-accent), 0.6);
+    border: 2px solid rgb(var(--gold-accent));
+
+    &:focus {
+      box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+    }
   }
 
   td span {
@@ -47,6 +42,18 @@ const Table = styled.table`
   td button {
     width: 75%;
     cursor: pointer;
+    background: rgba(var(--red-accent), 0.6);
+    border: 2px solid rgb(var(--red-accent));
+
+    &:focus {
+      box-shadow: 0 0 4px 2px rgb(var(--red-accent));
+    }
+
+    &:disabled {
+      background: rgba(var(--red-accent), 0.4);
+      border: 2px solid rgba(var(--red-accent), 0.4);
+    }
+    
   }
 `;
 
