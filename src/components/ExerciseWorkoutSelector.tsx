@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useWorkout } from "../contexts/WorkoutContext";
 import { Link } from "react-router-dom";
 
@@ -11,20 +11,37 @@ const Container = styled.div`
   h2 {
     font-size: 1rem;
   }
-`
+`;
 
-const SelectItem = styled.div`
+const SelectItem = css`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   padding: 0.5rem;
-  cursor: pointer;
+`;
 
+const FallbackContainer = styled.div`
+  ${SelectItem}
+
+  a {
+    padding: 0.1rem;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(var(--primary-color));
+    border: 2px solid rgb(var(--gold-accent));
+    background: rgba(var(--gold-accent), 0.6);
+  }
+`;
+
+const SelectWorkoutItem = styled.div`
+  ${SelectItem}
+  cursor: pointer;
+  
   &:hover {
     background: rgba(var(--gold-accent), 0.6);
   }
-`
+`;
 
 type ExerciseWorkoutSelectorProps = {
   onSelectWorkout: (workoutId: string) => void;
@@ -38,16 +55,16 @@ const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorPro
       <h2>Select Workout</h2>
       
       {workouts.length === 0 && ( 
-        <SelectItem>
+        <FallbackContainer>
           <p>No workouts available...</p>
           <p><Link to={"/workouts"}>Create</Link> a workout to get started</p>
-        </SelectItem>
+        </FallbackContainer>
       )}
 
       {workouts.map((workout) => (
-        <SelectItem key={workout.id} onClick={() => onSelectWorkout(workout.id)}>
+        <SelectWorkoutItem key={workout.id} onClick={() => onSelectWorkout(workout.id)}>
           {workout.workoutTitle}
-        </SelectItem>
+        </SelectWorkoutItem>
       ))}
 
     </Container>
