@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useWorkout, type Exercise } from "../contexts/WorkoutContext";
 import ExerciseWorkoutSelector from "./ExerciseWorkoutSelector";
 import LockButton from "./LockButton";
+import RemoveItemButton from "./RemoveItemButton";
 
 const Container = styled.div<ContainerProps>`
   display: flex;
@@ -55,7 +56,7 @@ const ExerciseDisplayTitle = styled.p`
 const ButtonControlsContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
 const AddToWorkoutContainer = styled.div`
@@ -91,7 +92,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
         {editMode && (
           <>
             <button onClick={() => addSet(exercise.id)}>Add new set</button>
-            <button onClick={() => removeExercise(exercise.id)}>Remove</button>
+            <RemoveItemButton onClick={() => removeExercise(exercise.id)} />
           </>
         )}
 
