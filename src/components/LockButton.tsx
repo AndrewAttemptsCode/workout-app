@@ -13,9 +13,19 @@ const Button = styled.button`
   width: 60px;
   border-radius: 4rem;
   cursor: pointer;
+  outline: none;
   background: rgba(var(--primary-color), 0.2);
   border: 2px solid transparent;
   -webkit-tap-highlight-color: transparent;
+  transition: box-shadow 0.3s ease;
+
+  &:focus-visible {
+    box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+  }
+
+  &:hover {
+    box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+  }
 
   svg {
     position: absolute;
