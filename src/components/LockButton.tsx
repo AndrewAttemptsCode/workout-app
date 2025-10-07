@@ -70,7 +70,10 @@ type SliderPipProps = {
 const LockButton = ({ onClick, status = false }: LockButtonProps) => {
   return (
     <Container>
-      <Button onClick={onClick} >
+      <Button
+        onClick={onClick}
+        aria-label={`Edit item mode is ${status ? "enabled" : "disabled"}`}
+      >
         <SliderPip $status={status} />
 
         <LockKeyholeOpen
