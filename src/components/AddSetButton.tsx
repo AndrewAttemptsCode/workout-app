@@ -12,8 +12,9 @@ const Button = styled.button`
   border: 2px solid rgb(var(--green-accent));
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition: box-shadow 0.3s ease;
 
-  &:focus {
+  &:focus-visible {
       box-shadow: 0 0 4px 2px rgb(var(--green-accent));
     }
 
