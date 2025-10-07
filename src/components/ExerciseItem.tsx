@@ -5,6 +5,7 @@ import { useWorkout, type Exercise } from "../contexts/WorkoutContext";
 import ExerciseWorkoutSelector from "./ExerciseWorkoutSelector";
 import LockButton from "./LockButton";
 import RemoveItemButton from "./RemoveItemButton";
+import AddSetButton from "./AddSetButton";
 
 const Container = styled.div<ContainerProps>`
   display: flex;
@@ -91,7 +92,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
       <ButtonControlsContainer>
         {editMode && (
           <>
-            <button onClick={() => addSet(exercise.id)}>Add new set</button>
+            <AddSetButton onClick={() => addSet(exercise.id)} />
             <RemoveItemButton onClick={() => removeExercise(exercise.id)} />
           </>
         )}
