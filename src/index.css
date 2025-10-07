@@ -1,6 +1,7 @@
 :root {
   --primary-color: 224, 224, 224;
   --gold-accent: 212, 175, 55;
+  --red-accent: 255, 59, 48;
 }
 
 * {
