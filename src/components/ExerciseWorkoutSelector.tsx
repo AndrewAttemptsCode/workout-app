@@ -37,7 +37,12 @@ const FallbackContainer = styled.div`
 const SelectWorkoutItem = styled.div`
   ${SelectItem}
   cursor: pointer;
+  outline: none;
   transition: background 0.3s ease;
+
+  &:focus-visible {
+    background: rgba(var(--gold-accent), 0.6);
+  }
   
   &:hover {
     background: rgba(var(--gold-accent), 0.6);
@@ -63,7 +68,7 @@ const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorPro
       )}
 
       {workouts.map((workout) => (
-        <SelectWorkoutItem key={workout.id} onClick={() => onSelectWorkout(workout.id)}>
+        <SelectWorkoutItem key={workout.id} onClick={() => onSelectWorkout(workout.id)} tabIndex={0}>
           {workout.workoutTitle}
         </SelectWorkoutItem>
       ))}
