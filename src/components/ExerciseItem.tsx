@@ -68,9 +68,19 @@ const AddToWorkoutContainer = styled.div`
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
+    outline: none;
     color: rgb(var(--primary-color));
     border: 2px solid rgb(var(--gold-accent));
     background: rgba(var(--gold-accent), 0.6);
+    transition: box-shadow 0.3s ease;
+
+    &:focus-visible {
+      box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+    }
+
+    &:hover {
+      box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+    }
   }
 `;
 
