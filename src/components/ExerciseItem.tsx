@@ -84,6 +84,19 @@ const AddToWorkoutContainer = styled.div`
   }
 `;
 
+const ExerciseStats = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgba(var(--primary-color), 0.2);
+`;
+
 type ExerciseItemProps = {
   exercise: Exercise;
 };
@@ -147,7 +160,13 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
       </MenuModeContainer>
 
       <AddToWorkoutContainer>
-        {editMode === false && <button onClick={() => setMenuMode((prev) => !prev)}>{menuMode ? "Back" : "Add to workout"}</button>}
+        {editMode ? (
+          <ExerciseStats>
+            Total Sets: {exercise.sets.length}
+          </ExerciseStats>  
+        ) : (
+          <button onClick={() => setMenuMode((prev) => !prev)}>{menuMode ? "Back" : "Add to workout"}</button>
+        )}
       </AddToWorkoutContainer>
     </Container>
   );
