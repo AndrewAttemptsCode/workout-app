@@ -63,7 +63,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   const addNewWorkout = () => {
     setWorkouts((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), workoutTitle: `Workout#${shortUuid()}`, exercises: [], editStatus: true },
+      { id: shortUuid(), workoutTitle: `Workout#${shortUuid()}`, exercises: [], editStatus: true },
     ]);
   };
 
@@ -111,7 +111,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   const addNewExercise = () => {
     setExercises((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), title: `Exercise#${shortUuid()}`, sets: [{ id: crypto.randomUUID() ,reps: 5, weight: 5, rest: 30 }], editStatus: true },
+      { id: shortUuid(), title: `Exercise#${shortUuid()}`, sets: [{ id: shortUuid() ,reps: 5, weight: 5, rest: 30 }], editStatus: true },
     ]);
   };
 
@@ -175,7 +175,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
           sets: [
             ...exercise.sets,
             {
-              id: crypto.randomUUID(),
+              id: shortUuid(),
               reps: 5,
               weight: 5,
               rest: 30,

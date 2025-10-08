@@ -1,5 +1,7 @@
+import { nanoid } from "nanoid";
+
 const shortUuid = () => {
-  return crypto.randomUUID().split("-")[1];
+  return nanoid().slice(0, 4);
 };
 
 export default shortUuid;
