@@ -37,6 +37,7 @@ const FallbackContainer = styled.div`
 const SelectWorkoutItem = styled.div`
   ${SelectItem}
   cursor: pointer;
+  transition: background 0.3s ease;
   
   &:hover {
     background: rgba(var(--gold-accent), 0.6);
