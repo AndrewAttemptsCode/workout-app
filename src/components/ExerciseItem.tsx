@@ -31,6 +31,7 @@ const MenuModeContainer = styled.div`
 const sharedTitleStyles = css`
   padding: 0.5rem;
   width: 100%;
+  min-height: 44px;
 `;
 
 const ExerciseTitle = styled.input`
@@ -43,6 +44,10 @@ const ExerciseTitle = styled.input`
 
   &:focus {
     box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+  }
+
+  &::placeholder {
+    color: rgba(var(--primary-color), 0.6);
   }
 `;
 

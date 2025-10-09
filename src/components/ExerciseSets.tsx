@@ -28,6 +28,10 @@ const Table = styled.table`
     &:focus {
       box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
     }
+
+    &::placeholder {
+      color: rgba(var(--primary-color), 0.6);
+    }
   }
 
   td span {
