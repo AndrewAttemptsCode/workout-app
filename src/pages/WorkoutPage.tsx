@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import WorkoutList from "../components/WorkoutList";
-import { useWorkout } from "../contexts/WorkoutContext";
 
 const StylesContainer = styled.div`
   min-height: 100vh;
@@ -15,13 +14,10 @@ const ResponsiveContainer = styled.div`
 `;
 
 const WorkoutPage = () => {
-  const { addNewWorkout } = useWorkout();
-
   return (
     <StylesContainer>
       <ResponsiveContainer>
         <h1>Workouts</h1>
-        <button onClick={addNewWorkout}>Add new workout</button>
         <WorkoutList />
       </ResponsiveContainer>
     </StylesContainer>
