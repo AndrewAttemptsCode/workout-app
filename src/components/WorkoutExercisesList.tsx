@@ -7,6 +7,12 @@ const Table = styled.table`
   border-collapse: separate;
   border-spacing: 0.5rem;
 
+  th {
+    font-size: 13px;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
   th:first-of-type {
     text-align: left;
   }
@@ -16,8 +22,28 @@ const Table = styled.table`
   }
 
   td button {
-    width: 50%;
+    font-weight: bold;
+    color: rgb(var(--primary-color));
+    outline: none;
+    width: 36px;
+    height: 30px;
     text-align: center;
+    cursor: pointer;
+    background: rgba(var(--red-accent), 0.6);
+    border: 2px solid rgb(var(--red-accent));
+
+    &:focus-visible {
+      box-shadow: 0 0 4px 2px rgb(var(--red-accent));
+    }
+
+    &:hover {
+      box-shadow: 0 0 4px 2px rgb(var(--red-accent));
+    }
+
+    &:disabled {
+      background: rgba(var(--red-accent), 0.4);
+      border: 2px solid rgba(var(--red-accent), 0.4);
+    }
   }
 `;
 
