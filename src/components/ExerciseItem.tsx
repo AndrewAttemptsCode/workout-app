@@ -57,6 +57,8 @@ const ExerciseDisplayTitle = styled.div`
   border: 2px solid transparent;
   font-weight: bold;
   background: rgba(var(--primary-color), 0.2);
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--gold-accent)) #1a1919;
   white-space: nowrap;
 `;
 
