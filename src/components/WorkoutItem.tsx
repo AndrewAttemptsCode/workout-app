@@ -107,6 +107,19 @@ const LoadWorkoutContainer = styled.div`
   }
 `;
 
+const WorkoutStats = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgba(var(--primary-color), 0.2);
+`;
+
 type WorkoutItemProps = {
   workout: Workout;
 }
@@ -167,7 +180,13 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
       </ExerciseContainer>
 
       <LoadWorkoutContainer>
-        {!editMode && workout.exercises.length > 0 && <button>Load workout</button>}
+        {editMode ? (
+          <WorkoutStats>Total Exercises: {workout.exercises.length}</WorkoutStats>
+        ) : workout.exercises.length > 0 ? (
+          <button>Load workout</button>
+        ) : (
+          <WorkoutStats>Total Exercises: {workout.exercises.length}</WorkoutStats>
+        )}
       </LoadWorkoutContainer>
       
     </Container>
