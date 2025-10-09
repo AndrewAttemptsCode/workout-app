@@ -73,6 +73,7 @@ const AddToWorkoutContainer = styled.div`
     border: 2px solid rgb(var(--gold-accent));
     background: rgba(var(--gold-accent), 0.6);
     transition: box-shadow 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
 
     &:focus-visible {
       box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
