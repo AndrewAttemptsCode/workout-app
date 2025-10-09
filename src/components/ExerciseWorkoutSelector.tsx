@@ -31,6 +31,7 @@ const FallbackContainer = styled.div`
     color: rgb(var(--primary-color));
     border: 2px solid rgb(var(--gold-accent));
     background: rgba(var(--gold-accent), 0.6);
+    -webkit-tap-highlight-color: transparent;
   }
 `;
 
