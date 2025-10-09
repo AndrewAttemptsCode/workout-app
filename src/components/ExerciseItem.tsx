@@ -51,12 +51,13 @@ const ExerciseTitle = styled.input`
   }
 `;
 
-const ExerciseDisplayTitle = styled.p`
+const ExerciseDisplayTitle = styled.div`
   ${sharedTitleStyles}
-  margin: none;
+  overflow-x: auto;
   border: 2px solid transparent;
   font-weight: bold;
   background: rgba(var(--primary-color), 0.2);
+  white-space: nowrap;
 `;
 
 const ButtonControlsContainer = styled.div`
@@ -146,7 +147,9 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
           onChange={(e) => updateExerciseTitle(exercise.id, e.target.value)}
         />
       ) : (
-        <ExerciseDisplayTitle>{exercise.title}</ExerciseDisplayTitle>
+        <ExerciseDisplayTitle>
+          {exercise.title}
+        </ExerciseDisplayTitle>
       )}
 
       <MenuModeContainer>
