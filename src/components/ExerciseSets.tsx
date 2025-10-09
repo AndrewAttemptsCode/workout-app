@@ -44,7 +44,8 @@ const Table = styled.table`
   }
 
   td button {
-    width: 75%;
+    width: 36px;
+    height: 30px;
     cursor: pointer;
     background: rgba(var(--red-accent), 0.6);
     border: 2px solid rgb(var(--red-accent));
