@@ -15,7 +15,7 @@ const Button = styled.button`
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   outline: none;
-  transition: border 0.3s ease;
+  transition: border 0.3s ease, background 0.3s ease;
 
   svg {
     transition: transform 0.3s ease;
@@ -23,17 +23,19 @@ const Button = styled.button`
 
   &:focus-visible {
     border: 2px dashed rgb(var(--green-accent));
+    background: rgba(var(--green-accent), 0.6);
 
     svg {
-      transform: rotate(-180deg) scale(1.4);
+      transform: scale(1.1);
     }
   }
 
   &:hover {
     border: 2px dashed rgb(var(--green-accent));
+    background: rgba(var(--green-accent), 0.6);
 
     svg {
-      transform: rotate(-180deg) scale(1.4);
+      transform: scale(1.1);
     }
   }
 `;
