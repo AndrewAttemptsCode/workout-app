@@ -130,7 +130,7 @@ type ContainerProps = {
 
 const WorkoutItem = ({ workout }: WorkoutItemProps) => {
   const [editMode, setEditMode] = useState(workout.editStatus);
-  const { updateWorkoutTitle, removeWorkoutItem, updateWorkoutEditMode } = useWorkout();
+  const { updateWorkoutTitle, removeWorkoutItem, updateWorkoutEditMode, startWorkoutTimer } = useWorkout();
 
   return (
     <Container $editMode={editMode}>
@@ -183,7 +183,7 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
         {editMode ? (
           <WorkoutStats>Total Exercises: {workout.exercises.length}</WorkoutStats>
         ) : workout.exercises.length > 0 ? (
-          <button>Load workout</button>
+          <button onClick={() => startWorkoutTimer(workout.id)}>Load workout</button>
         ) : (
           <WorkoutStats>Total Exercises: {workout.exercises.length}</WorkoutStats>
         )}
