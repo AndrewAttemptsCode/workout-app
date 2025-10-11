@@ -15,6 +15,15 @@ export type Exercise = {
   editStatus: boolean;
 };
 
+export type Timer = {
+  workoutId: string;
+  exercises: {
+    exerciseId: string;
+    setsCompleted: boolean[];
+  }[];
+  complete: boolean;
+}
+
 type WorkoutContextTypes = {
   workouts: Workout[];
   exercises: Exercise[];
@@ -31,6 +40,7 @@ type WorkoutContextTypes = {
   updateExerciseEditMode: (exerciseId: string, editMode: boolean) => void;
   addExerciseToWorkout: (workoutId: string, exerciseId: string) => void;
   removeExerciseFromWorkout: (workoutId: string, exerciseIndex: number) => void;
+  startWorkoutTimer: (workoutId: string) => void;
 }
 
 type WorkoutProviderProps = {
@@ -49,6 +59,8 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
     const savedExercises = localStorage.getItem("exercises");
     return savedExercises ? (JSON.parse(savedExercises) as Exercise[]) : [];
   });
+
+  const [workoutTimer, setWorkoutTimer] = useState<Timer | null>(null);
   
   useEffect(() => {
     localStorage.setItem("workouts", JSON.stringify(workouts));
@@ -57,6 +69,29 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   useEffect(() => {
     localStorage.setItem("exercises", JSON.stringify(exercises));
   }, [exercises]);
+
+  // Timer
+
+  const startWorkoutTimer = (workoutId: string) => {
+    const workout = workouts.find((workout) => workout.id === workoutId);
+    if (!workout) return;
+
+    const timerExercises = workout.exercises.map((exerciseId) => {
+      const exercise = exercises.find((exercise) => exercise.id === exerciseId);
+      return {
+        exerciseId,
+        setsCompleted: exercise ? exercise.sets.map(() => false) : [],
+      }
+    })
+
+    setWorkoutTimer({
+      workoutId,
+      exercises: timerExercises,
+      complete: false,
+    });
+
+    console.log(workoutTimer);
+  }
 
   // Workouts
 
@@ -217,7 +252,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   };
 
   return (
-    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout }}>
+    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout, startWorkoutTimer }}>
       {children}
     </WorkoutContext.Provider>
   );
