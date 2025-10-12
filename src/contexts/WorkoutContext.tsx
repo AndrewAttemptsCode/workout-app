@@ -49,6 +49,7 @@ type WorkoutContextTypes = {
   addExerciseToWorkout: (workoutId: string, exerciseId: string) => void;
   removeExerciseFromWorkout: (workoutId: string, exerciseIndex: number) => void;
   startWorkoutTimer: (workoutId: string) => void;
+  workoutTimer: Timer | null;
 }
 
 type WorkoutProviderProps = {
@@ -270,7 +271,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   };
 
   return (
-    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout, startWorkoutTimer }}>
+    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout, startWorkoutTimer, workoutTimer }}>
       {children}
     </WorkoutContext.Provider>
   );
