@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { useWorkout, type Workout } from "../contexts/WorkoutContext";
 import { useState } from "react";
 import WorkoutExercisesList from "./WorkoutExercisesList";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RemoveItemButton from "./RemoveItemButton";
 import LockButton from "./LockButton";
 
@@ -131,6 +131,7 @@ type ContainerProps = {
 const WorkoutItem = ({ workout }: WorkoutItemProps) => {
   const [editMode, setEditMode] = useState(workout.editStatus);
   const { updateWorkoutTitle, removeWorkoutItem, updateWorkoutEditMode, startWorkoutTimer } = useWorkout();
+  const navigate = useNavigate();
 
   return (
     <Container $editMode={editMode}>
@@ -183,7 +184,12 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
         {editMode ? (
           <WorkoutStats>Total Exercises: {workout.exercises.length}</WorkoutStats>
         ) : workout.exercises.length > 0 ? (
-          <button onClick={() => startWorkoutTimer(workout.id)}>Load workout</button>
+          <button onClick={() => {
+            startWorkoutTimer(workout.id);
+            navigate("/timer");
+          }}>
+            Load workout
+          </button>
         ) : (
           <WorkoutStats>Total Exercises: {workout.exercises.length}</WorkoutStats>
         )}
