@@ -17,10 +17,18 @@ export type Exercise = {
 
 export type Timer = {
   workoutId: string;
-  exercises: {
+  workoutTitle: string;
+  exercises: ({
     exerciseId: string;
-    setsCompleted: boolean[];
-  }[];
+    exerciseTitle: string;
+    sets: {
+      id: string;
+      reps: number | null;
+      weight: number | null;
+      rest: number | null;
+      complete: boolean;
+    }[];
+  } | null)[];
   complete: boolean;
 }
 
@@ -78,14 +86,24 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
 
     const timerExercises = workout.exercises.map((exerciseId) => {
       const exercise = exercises.find((exercise) => exercise.id === exerciseId);
+      if (!exercise) return null;
+
       return {
         exerciseId,
-        setsCompleted: exercise ? exercise.sets.map(() => false) : [],
+        exerciseTitle: exercise.title,
+        sets: exercise.sets.map((set) => ({
+          id: set.id,
+          reps: set.reps,
+          weight: set.weight,
+          rest: set.rest,
+          complete: false,
+        }))
       }
     })
 
     setWorkoutTimer({
       workoutId,
+      workoutTitle: workout.workoutTitle,
       exercises: timerExercises,
       complete: false,
     });
