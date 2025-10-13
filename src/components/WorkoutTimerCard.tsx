@@ -1,5 +1,17 @@
 import { useState } from "react";
 import { useWorkout } from "../contexts/WorkoutContext";
+import styled from "styled-components";
+
+const Container = styled.div`
+  width: min(100%, 768px);
+  margin: 0 auto;
+
+  button {
+    width: 100%;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+`
 
 const WorkoutTimerCard = () => {
   const { workoutTimer } = useWorkout();
@@ -7,7 +19,7 @@ const WorkoutTimerCard = () => {
   const [showSets, setShowSets] = useState(-1);
 
   return (
-    <div>
+    <Container>
       <button
         onClick={() => {
           setShowExercises(!showExercises);
@@ -27,7 +39,7 @@ const WorkoutTimerCard = () => {
             >
               {exercise?.title}
             </button>
-            
+
             {showSets === index &&
               exercise?.sets.map((set, index) => (
                 <div key={index}>
@@ -38,7 +50,7 @@ const WorkoutTimerCard = () => {
               ))}
           </div>
         ))}
-    </div>
+    </Container>
   );
 };
 
