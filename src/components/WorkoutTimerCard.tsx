@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useWorkout } from "../contexts/WorkoutContext";
 import styled, { css } from "styled-components";
-import { ChevronDown } from "lucide-react";
+import { Check, ChevronDown, X } from "lucide-react";
 
 const Container = styled.div`
   width: min(100%, 768px);
@@ -69,6 +69,12 @@ const SetStyles = css`
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
   text-align: center;
+
+  span {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+  }
 `;
 
 const SetHeading = styled.div`
@@ -80,6 +86,10 @@ const SetHeading = styled.div`
 
 const SetRow = styled.div`
   ${SetStyles}
+
+  span svg {
+    display: inline-block;
+  }
 `;
 
 const WorkoutTimerCard = () => {
@@ -126,7 +136,7 @@ const WorkoutTimerCard = () => {
                   <span>{set.reps}</span>
                   <span>{set.weight}</span>
                   <span>{set.rest}</span>
-                  <span>{set.complete}</span>
+                  <span>{set.complete ? (<Check color="rgb(var(--green-accent))"/>) : (<X color="grey" />)}</span>
                 </SetRow>
               ))}
             </SetsList>
@@ -138,12 +148,3 @@ const WorkoutTimerCard = () => {
 };
 
 export default WorkoutTimerCard;
-
-            // {showSets === index &&
-            //   exercise?.sets.map((set, index) => (
-            //     <div key={index}>
-            //       <p>
-            //         {set.reps} {set.weight} {set.rest}
-            //       </p>
-            //     </div>
-            //   ))}
