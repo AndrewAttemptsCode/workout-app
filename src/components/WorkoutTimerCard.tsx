@@ -61,6 +61,25 @@ const SetsList = styled.div<{ $selectedExercise: number; $index: number }>`
   opacity: ${({ $selectedExercise, $index }) =>
     ($selectedExercise === $index ? 1 : 0)
   };
+  padding: 0 0.5rem;
+`;
+
+const SetStyles = css`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+`;
+
+const SetHeading = styled.div`
+  ${SetStyles}
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
+`;
+
+const SetRow = styled.div`
+  ${SetStyles}
 `;
 
 const WorkoutTimerCard = () => {
@@ -95,10 +114,20 @@ const WorkoutTimerCard = () => {
             </button>
 
             <SetsList $selectedExercise={selectedExercise} $index={index}>
+              <SetHeading>
+                <span>Reps</span>
+                <span>Weight</span>
+                <span>Rest</span>
+                <span>Complete</span>
+              </SetHeading>
+              
               {exercise?.sets.map((set, index) => (
-                <div key={index}>
-                  {set.reps} {set.weight} {set.rest}
-                </div>
+                <SetRow key={index}>
+                  <span>{set.reps}</span>
+                  <span>{set.weight}</span>
+                  <span>{set.rest}</span>
+                  <span>{set.complete}</span>
+                </SetRow>
               ))}
             </SetsList>
           </div>
