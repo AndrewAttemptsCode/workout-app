@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useWorkout } from "../contexts/WorkoutContext";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ChevronDown } from "lucide-react";
 
 const Container = styled.div`
@@ -19,10 +19,16 @@ const Container = styled.div`
   }
 `;
 
-const Chevron = styled(ChevronDown)<{$showExercises: boolean}>`
+const WorkoutChevron = styled(ChevronDown)<{ $showExercises: boolean }>`
   transition: transform 0.3s ease;
   transform: rotate(${({ $showExercises }) =>
     $showExercises ? "180deg" : "0deg"});
+`;
+
+const ExerciseChevron = styled(ChevronDown)<{ $selectedExercise: number; $index: number }>`
+  transition: transform 0.3s ease;
+  transform: rotate(${({ $selectedExercise, $index }) => 
+    $selectedExercise === $index ? "180deg": "0deg"});
 `;
 
 const ExerciseList = styled.div<{ $showExercises: boolean }>`
@@ -34,8 +40,16 @@ const ExerciseList = styled.div<{ $showExercises: boolean }>`
   opacity: ${({ $showExercises }) => ($showExercises ? 1 : 0)};
 `;
 
-const WorkoutTitle = styled.div`
+const TitleStyle = css`
   margin-right: auto;
+`;
+
+const WorkoutTitle = styled.div`
+  ${TitleStyle}
+`;
+
+const ExerciseTitle = styled.div`
+  ${TitleStyle}
 `;
 
 const SetsList = styled.div<{ $selectedExercise: number; $index: number }>`
@@ -64,7 +78,7 @@ const WorkoutTimerCard = () => {
       >
         <WorkoutTitle>{workoutTimer?.workoutTitle}</WorkoutTitle>
         <span>0/{workoutTimer?.exercises.length}</span>
-        <Chevron $showExercises={showExercises} />
+        <WorkoutChevron $showExercises={showExercises} />
       </button>
 
       <ExerciseList $showExercises={showExercises}>
@@ -75,7 +89,9 @@ const WorkoutTimerCard = () => {
                 setSelectedExercise((prev) => (prev === index ? -1 : index))
               }
             >
-              {exercise?.title}
+              <ExerciseTitle>{exercise?.title}</ExerciseTitle>
+              <span>0/{exercise?.sets.length}</span>
+              <ExerciseChevron $selectedExercise={selectedExercise} $index={index} />
             </button>
 
             <SetsList $selectedExercise={selectedExercise} $index={index}>
