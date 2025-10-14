@@ -25,30 +25,41 @@ const Chevron = styled(ChevronDown)<{$showExercises: boolean}>`
     $showExercises ? "180deg" : "0deg"});
 `;
 
-const ExerciseList = styled.div<{$showExercises: boolean}>`
+const ExerciseList = styled.div<{ $showExercises: boolean }>`
   overflow: hidden;
-  transform-origin: top;
-  transform: scaleY(${({ $showExercises }) => ($showExercises ? 1 : 0)});
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  max-height: ${({ $showExercises }) =>
+    ($showExercises ? "1000px" : 0)
+  };
   opacity: ${({ $showExercises }) => ($showExercises ? 1 : 0)};
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  will-change: transform, opacity;
 `;
 
 const WorkoutTitle = styled.div`
   margin-right: auto;
 `;
 
+const SetsList = styled.div<{ $selectedExercise: number; $index: number }>`
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  max-height: ${({ $selectedExercise, $index }) =>
+    ($selectedExercise === $index ? "1000px" : 0)
+  };
+  opacity: ${({ $selectedExercise, $index }) =>
+    ($selectedExercise === $index ? 1 : 0)
+  };
+`;
+
 const WorkoutTimerCard = () => {
   const { workoutTimer } = useWorkout();
   const [showExercises, setShowExercises] = useState(false);
-  const [showSets, setShowSets] = useState(-1);
+  const [selectedExercise, setSelectedExercise] = useState(-1);
 
   return (
     <Container>
       <button
         onClick={() => {
           setShowExercises(!showExercises);
-          setShowSets(-1);
+          setSelectedExercise(-1);
         }}
       >
         <WorkoutTitle>{workoutTimer?.workoutTitle}</WorkoutTitle>
@@ -61,20 +72,19 @@ const WorkoutTimerCard = () => {
           <div key={index}>
             <button
               onClick={() =>
-                setShowSets((prev) => (prev === index ? -1 : index))
+                setSelectedExercise((prev) => (prev === index ? -1 : index))
               }
             >
               {exercise?.title}
             </button>
 
-            {showSets === index &&
-              exercise?.sets.map((set, index) => (
+            <SetsList $selectedExercise={selectedExercise} $index={index}>
+              {exercise?.sets.map((set, index) => (
                 <div key={index}>
-                  <p>
-                    {set.reps} {set.weight} {set.rest}
-                  </p>
+                  {set.reps} {set.weight} {set.rest}
                 </div>
               ))}
+            </SetsList>
           </div>
         ))}
       </ExerciseList>
@@ -83,3 +93,12 @@ const WorkoutTimerCard = () => {
 };
 
 export default WorkoutTimerCard;
+
+            // {showSets === index &&
+            //   exercise?.sets.map((set, index) => (
+            //     <div key={index}>
+            //       <p>
+            //         {set.reps} {set.weight} {set.rest}
+            //       </p>
+            //     </div>
+            //   ))}
