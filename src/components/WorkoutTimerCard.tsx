@@ -111,37 +111,40 @@ const WorkoutTimerCard = () => {
       </button>
 
       <ExerciseList $showExercises={showExercises}>
-        {workoutTimer?.exercises.map((exercise, index) => (
-          <div key={index}>
-            <button
-              onClick={() =>
-                setSelectedExercise((prev) => (prev === index ? -1 : index))
-              }
-            >
-              <ExerciseTitle>{exercise?.title}</ExerciseTitle>
-              <span>0/{exercise?.sets.length}</span>
-              <ExerciseChevron $selectedExercise={selectedExercise} $index={index} />
-            </button>
+        {workoutTimer?.exercises.map((exercise, index) => {
+          const exerciseComplete = exercise?.sets.filter((set) => set.complete).length;
 
-            <SetsList $selectedExercise={selectedExercise} $index={index}>
-              <SetHeading>
-                <span>Reps</span>
-                <span>Weight</span>
-                <span>Rest</span>
-                <span>Complete</span>
-              </SetHeading>
-              
-              {exercise?.sets.map((set, index) => (
-                <SetRow key={index}>
-                  <span>{set.reps}</span>
-                  <span>{set.weight}</span>
-                  <span>{set.rest}</span>
-                  <span>{set.complete ? (<Check color="rgb(var(--green-accent))"/>) : (<X color="grey" />)}</span>
-                </SetRow>
-              ))}
-            </SetsList>
+          return (
+            <div key={index}>
+              <button
+                onClick={() =>
+                  setSelectedExercise((prev) => (prev === index ? -1 : index))
+                }
+              >
+                <ExerciseTitle>{exercise?.title}</ExerciseTitle>
+                <span>{exerciseComplete}/{exercise?.sets.length}</span>
+                <ExerciseChevron $selectedExercise={selectedExercise} $index={index} />
+              </button>
+
+              <SetsList $selectedExercise={selectedExercise} $index={index}>
+                <SetHeading>
+                  <span>Reps</span>
+                  <span>Weight</span>
+                  <span>Rest</span>
+                  <span>Complete</span>
+                </SetHeading>
+                
+                {exercise?.sets.map((set, index) => (
+                  <SetRow key={index}>
+                    <span>{set.reps}</span>
+                    <span>{set.weight}</span>
+                    <span>{set.rest}</span>
+                    <span>{set.complete ? (<Check color="rgb(var(--green-accent))"/>) : (<X color="grey" />)}</span>
+                  </SetRow>
+                ))}
+              </SetsList>
           </div>
-        ))}
+        )})}
       </ExerciseList>
     </Container>
   );
