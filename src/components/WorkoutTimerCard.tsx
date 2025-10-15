@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useWorkout } from "../contexts/WorkoutContext";
 import styled, { css } from "styled-components";
 import { Check, ChevronDown, X } from "lucide-react";
+import ProgressBar from "./ProgressBar";
 
 const Container = styled.div`
   width: min(100%, 768px);
@@ -9,6 +10,7 @@ const Container = styled.div`
 `;
 
 const DefaultButtonStyles = css`
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0.5rem;
@@ -32,7 +34,7 @@ const WorkoutButton = styled.button`
 const ExerciseButton = styled.button`
   ${DefaultButtonStyles}
   color: rgb(var(--primary-color));
-  border: 2px solid transparent;
+  border: none;
   border-bottom: 2px solid rgba(var(--primary-color), 0.8);
   background: rgba(var(--primary-color), 0.3);
 `;
@@ -68,6 +70,11 @@ const WorkoutTitle = styled.div`
 
 const ExerciseTitle = styled.div`
   ${TitleStyle}
+  z-index: 5;
+`;
+
+const CompleteTracker = styled.span`
+  z-index: 5;
 `;
 
 const SetsList = styled.div<{ $selectedExercise: number; $index: number }>`
@@ -113,7 +120,8 @@ const WorkoutTimerCard = () => {
   const [showExercises, setShowExercises] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(-1);
 
-  const workoutComplete = workoutTimer?.exercises.filter((exercise) => exercise?.complete).length;
+  const workoutComplete = workoutTimer?.exercises?.filter((exercise) => exercise?.complete).length ?? 0;
+  const totalExercises = workoutTimer?.exercises?.length ?? 0;
 
   return (
     <Container>
@@ -123,14 +131,16 @@ const WorkoutTimerCard = () => {
           setSelectedExercise(-1);
         }}
       >
-        <WorkoutTitle>{workoutTimer?.workoutTitle}</WorkoutTitle>
-        <span>{workoutComplete}/{workoutTimer?.exercises.length}</span>
+        <WorkoutTitle>{workoutTimer?.workoutTitle ?? "Empty workout"}</WorkoutTitle>
+        <CompleteTracker>{workoutComplete}/{totalExercises}</CompleteTracker>
         <WorkoutChevron $showExercises={showExercises} />
       </WorkoutButton>
 
       <ExerciseList $showExercises={showExercises}>
         {workoutTimer?.exercises.map((exercise, index) => {
-          const exerciseComplete = exercise?.sets.filter((set) => set.complete).length;
+
+          const exerciseComplete = exercise?.sets?.filter((set) => set.complete).length ?? 0;
+          const totalSets = exercise?.sets?.length ?? 0;
 
           return (
             <div key={index}>
@@ -139,8 +149,9 @@ const WorkoutTimerCard = () => {
                   setSelectedExercise((prev) => (prev === index ? -1 : index))
                 }
               >
+                <ProgressBar progress={totalSets > 0 ? exerciseComplete / totalSets : 0} />
                 <ExerciseTitle>{exercise?.title}</ExerciseTitle>
-                <span>{exerciseComplete}/{exercise?.sets.length}</span>
+                <CompleteTracker>{exerciseComplete}/{exercise?.sets.length}</CompleteTracker>
                 <ExerciseChevron $selectedExercise={selectedExercise} $index={index} />
               </ExerciseButton>
 
