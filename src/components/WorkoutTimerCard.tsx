@@ -61,19 +61,18 @@ const SetsList = styled.div<{ $selectedExercise: number; $index: number }>`
   opacity: ${({ $selectedExercise, $index }) =>
     ($selectedExercise === $index ? 1 : 0)
   };
-  padding: 0 0.5rem;
+  background: rgba(var(--primary-color), 0.2);
 `;
 
 const SetStyles = css`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
-  text-align: center;
 
   span {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -82,10 +81,13 @@ const SetHeading = styled.div`
   font-weight: bold;
   font-size: 13px;
   text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
 `;
 
 const SetRow = styled.div`
   ${SetStyles}
+  padding: 0.2rem 0.5rem;
+  background: rgba(var(--primary-color), 0.2);
 
   span svg {
     display: inline-block;
@@ -141,7 +143,7 @@ const WorkoutTimerCard = () => {
                     <span>{set.reps}</span>
                     <span>{set.weight}</span>
                     <span>{set.rest}</span>
-                    <span>{set.complete ? (<Check color="rgb(var(--green-accent))"/>) : (<X color="grey" />)}</span>
+                    <span>{set.complete ? (<Check color="rgb(var(--green-accent))"/>) : (<X color="rgba(var(--primary-color), 0.8)" />)}</span>
                   </SetRow>
                 ))}
               </SetsList>
