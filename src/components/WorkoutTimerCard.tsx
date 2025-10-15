@@ -6,17 +6,35 @@ import { Check, ChevronDown, X } from "lucide-react";
 const Container = styled.div`
   width: min(100%, 768px);
   margin: 0 auto;
+`;
 
-  button {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    min-height: 44px;
-    gap: 0.5rem;
-    width: 100%;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
+const DefaultButtonStyles = css`
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  min-height: 44px;
+  gap: 0.5rem;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+`;
+
+const WorkoutButton = styled.button`
+  ${DefaultButtonStyles}
+  text-transform: uppercase;
+  font-weight: bold;
+  color: rgb(var(--primary-color));
+  border: 2px solid rgb(var(--gold-accent));
+  background: rgba(var(--gold-accent), 0.6);
+`;
+
+const ExerciseButton = styled.button`
+  ${DefaultButtonStyles}
+  color: rgb(var(--primary-color));
+  border: 2px solid transparent;
+  border-bottom: 2px solid rgba(var(--primary-color), 0.8);
+  background: rgba(var(--primary-color), 0.3);
 `;
 
 const WorkoutChevron = styled(ChevronDown)<{ $showExercises: boolean }>`
@@ -61,7 +79,7 @@ const SetsList = styled.div<{ $selectedExercise: number; $index: number }>`
   opacity: ${({ $selectedExercise, $index }) =>
     ($selectedExercise === $index ? 1 : 0)
   };
-  background: rgba(var(--primary-color), 0.2);
+  background: rgba(var(--primary-color), 0.1);
 `;
 
 const SetStyles = css`
@@ -87,11 +105,7 @@ const SetHeading = styled.div`
 const SetRow = styled.div`
   ${SetStyles}
   padding: 0.2rem 0.5rem;
-  background: rgba(var(--primary-color), 0.2);
-
-  span svg {
-    display: inline-block;
-  }
+  background: rgba(var(--primary-color), 0.1);
 `;
 
 const WorkoutTimerCard = () => {
@@ -103,7 +117,7 @@ const WorkoutTimerCard = () => {
 
   return (
     <Container>
-      <button
+      <WorkoutButton
         onClick={() => {
           setShowExercises(!showExercises);
           setSelectedExercise(-1);
@@ -112,7 +126,7 @@ const WorkoutTimerCard = () => {
         <WorkoutTitle>{workoutTimer?.workoutTitle}</WorkoutTitle>
         <span>{workoutComplete}/{workoutTimer?.exercises.length}</span>
         <WorkoutChevron $showExercises={showExercises} />
-      </button>
+      </WorkoutButton>
 
       <ExerciseList $showExercises={showExercises}>
         {workoutTimer?.exercises.map((exercise, index) => {
@@ -120,7 +134,7 @@ const WorkoutTimerCard = () => {
 
           return (
             <div key={index}>
-              <button
+              <ExerciseButton
                 onClick={() =>
                   setSelectedExercise((prev) => (prev === index ? -1 : index))
                 }
@@ -128,7 +142,7 @@ const WorkoutTimerCard = () => {
                 <ExerciseTitle>{exercise?.title}</ExerciseTitle>
                 <span>{exerciseComplete}/{exercise?.sets.length}</span>
                 <ExerciseChevron $selectedExercise={selectedExercise} $index={index} />
-              </button>
+              </ExerciseButton>
 
               <SetsList $selectedExercise={selectedExercise} $index={index}>
                 <SetHeading>
