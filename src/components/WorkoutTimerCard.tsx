@@ -97,6 +97,8 @@ const WorkoutTimerCard = () => {
   const [showExercises, setShowExercises] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(-1);
 
+  const workoutComplete = workoutTimer?.exercises.filter((exercise) => exercise?.complete).length;
+
   return (
     <Container>
       <button
@@ -106,7 +108,7 @@ const WorkoutTimerCard = () => {
         }}
       >
         <WorkoutTitle>{workoutTimer?.workoutTitle}</WorkoutTitle>
-        <span>0/{workoutTimer?.exercises.length}</span>
+        <span>{workoutComplete}/{workoutTimer?.exercises.length}</span>
         <WorkoutChevron $showExercises={showExercises} />
       </button>
 
