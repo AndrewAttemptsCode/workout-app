@@ -51,6 +51,7 @@ type WorkoutContextTypes = {
   removeExerciseFromWorkout: (workoutId: string, exerciseIndex: number) => void;
   startWorkoutTimer: (workoutId: string) => void;
   workoutTimer: Timer | null;
+  handleWorkoutTimerComplete: () => void;
 }
 
 type WorkoutProviderProps = {
@@ -113,6 +114,38 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
 
     console.log(workoutTimer);
   }
+
+const handleWorkoutTimerComplete = () => {
+  setWorkoutTimer(prev => {
+    if (!prev) return prev;
+
+    let foundSetToComplete = false;
+
+    const updatedExercises = prev.exercises.map(exercise => {
+      if (!exercise) return exercise;
+      if (foundSetToComplete) return exercise;
+      if (exercise?.complete) return exercise;
+
+      const updatedSets = exercise?.sets.map(set => {
+        if (!set.complete && !foundSetToComplete) {
+          foundSetToComplete = true;
+          return { ...set, complete: true };
+        }
+        return set;
+      });
+
+      const allSetsComplete = updatedSets?.every(set => set.complete);
+
+      return {
+        ...exercise,
+        sets: updatedSets,
+        complete: allSetsComplete,
+      };
+    });
+
+    return { ...prev, exercises: updatedExercises };
+  });
+};
 
   // Workouts
 
@@ -273,7 +306,7 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   };
 
   return (
-    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout, startWorkoutTimer, workoutTimer }}>
+    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout, startWorkoutTimer, workoutTimer, handleWorkoutTimerComplete }}>
       {children}
     </WorkoutContext.Provider>
   );
