@@ -143,7 +143,14 @@ const handleWorkoutTimerComplete = () => {
       };
     });
 
-    return { ...prev, exercises: updatedExercises };
+    const allExercisesComplete = updatedExercises.every(exercise => exercise?.complete);
+
+    return {
+      ...prev,
+      exercises: updatedExercises,
+      complete: allExercisesComplete,
+    };
+
   });
 };
 
