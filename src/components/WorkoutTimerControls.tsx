@@ -1,10 +1,10 @@
 import { useWorkout } from "../contexts/WorkoutContext";
 
 const WorkoutTimerControls = () => {
-  const { handleWorkoutTimerComplete } = useWorkout();
-  
+  const { handleWorkoutTimerComplete, workoutTimer } = useWorkout();
+
   return (
-    <button onClick={handleWorkoutTimerComplete}>Complete</button>
+    <button onClick={handleWorkoutTimerComplete}>{workoutTimer?.complete ? "Finish" : "Complete"}</button>
   );
 };
 
