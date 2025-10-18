@@ -33,6 +33,11 @@ export type Timer = {
   } | null)[];
 }
 
+type CurrentProgress = {
+  exercise: NonNullable<Timer["exercises"][0]> | null;
+  set: NonNullable<Timer["exercises"][0]>["sets"][0] | null;
+}
+
 type WorkoutContextTypes = {
   workouts: Workout[];
   exercises: Exercise[];
@@ -52,6 +57,7 @@ type WorkoutContextTypes = {
   startWorkoutTimer: (workoutId: string) => void;
   workoutTimer: Timer | null;
   handleWorkoutTimerComplete: () => void;
+  currentProgress: CurrentProgress | null;
 }
 
 type WorkoutProviderProps = {
@@ -72,6 +78,11 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   });
 
   const [workoutTimer, setWorkoutTimer] = useState<Timer | null>(null);
+
+  const [currentProgress, setCurrentProgress] = useState<CurrentProgress>({
+    exercise: null,
+    set: null,
+  });
   
   useEffect(() => {
     localStorage.setItem("workouts", JSON.stringify(workouts));
@@ -80,6 +91,16 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
   useEffect(() => {
     localStorage.setItem("exercises", JSON.stringify(exercises));
   }, [exercises]);
+
+  useEffect(() => {
+    if (!workoutTimer) return;
+
+    const exercise = workoutTimer.exercises.find(exercise => !exercise?.complete) || null;
+    const set = exercise?.sets.find(set => !set.complete) || null;
+
+    setCurrentProgress({ exercise, set });
+
+  }, [workoutTimer]);
 
   // Timer
 
@@ -313,7 +334,7 @@ const handleWorkoutTimerComplete = () => {
   };
 
   return (
-    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout, startWorkoutTimer, workoutTimer, handleWorkoutTimerComplete }}>
+    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout, startWorkoutTimer, workoutTimer, handleWorkoutTimerComplete, currentProgress }}>
       {children}
     </WorkoutContext.Provider>
   );
