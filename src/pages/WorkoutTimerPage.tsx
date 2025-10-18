@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import WorkoutTimerCard from "../components/WorkoutTimerCard";
 import WorkoutTimerControls from "../components/WorkoutTimerControls";
+import WorkoutTimerDisplay from "../components/WorkoutTimerDisplay";
 
 const StylesContainer = styled.div`
   min-height: 100vh;
@@ -20,6 +21,7 @@ const WorkoutTimerPage = () => {
     <StylesContainer>
       <ResponsiveContainer>
         <WorkoutTimerCard />
+        <WorkoutTimerDisplay />
         <WorkoutTimerControls />
       </ResponsiveContainer>
     </StylesContainer>
