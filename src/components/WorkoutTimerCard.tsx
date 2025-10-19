@@ -118,7 +118,7 @@ const SetRow = styled.div`
 
 const WorkoutTimerCard = () => {
   const { workoutTimer } = useWorkout();
-  const [showExercises, setShowExercises] = useState(false);
+  const [showExercises, setShowExercises] = useState(true);
   const [selectedExercise, setSelectedExercise] = useState(-1);
 
   const workoutComplete = workoutTimer?.exercises?.filter((exercise) => exercise?.complete).length ?? 0;
