@@ -1,6 +1,7 @@
-import { Dumbbell, Repeat2 } from "lucide-react";
+import { Dumbbell, Hourglass, Repeat2 } from "lucide-react";
 import { useWorkout } from "../contexts/WorkoutContext";
 import styled from "styled-components";
+import { useWorkoutTimer } from "../contexts/WorkoutTimerContext";
 
 const Container = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ const SetItem = styled.div`
 
 const WorkoutTimerDisplay = () => {
   const { currentProgress } = useWorkout();
+  const { timerActive, secondsLeft } = useWorkoutTimer();
 
   return (
     <Container>
@@ -63,14 +65,23 @@ const WorkoutTimerDisplay = () => {
         {currentProgress?.exercise?.title ?? "No current exercise"}
       </TitleContainer>
       <SetItemContainer>
-        <SetItem>
-          <Repeat2 />
-          <span>Reps: {currentProgress?.set?.reps ?? "N/A"}</span>
-        </SetItem>
-        <SetItem>
-          <Dumbbell />
-          <span>Weight: {currentProgress?.set?.weight ?? "N/A"}</span>
-        </SetItem>
+        {timerActive ? (
+          <SetItem>
+            <Hourglass />
+            <span>Rest: {secondsLeft}</span>
+          </SetItem>
+        ) : (
+        <>
+          <SetItem>
+            <Repeat2 />
+            <span>Reps: {currentProgress?.set?.reps ?? "N/A"}</span>
+          </SetItem>
+          <SetItem>
+            <Dumbbell />
+            <span>Weight: {currentProgress?.set?.weight ?? "N/A"}</span>
+          </SetItem>
+        </>
+        )}
       </SetItemContainer>
     </Container>
   );
