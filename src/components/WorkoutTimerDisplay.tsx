@@ -13,6 +13,7 @@ const Container = styled.div`
   color: rgb(var(--primary-color));
   border: 4px solid rgba(var(--primary-color), 0.8);
   background: rgba(var(--primary-color), 0.3);
+  margin-bottom: 2rem;
 `;
 
 const TitleContainer = styled.div`
