@@ -1,6 +1,6 @@
 import { Dumbbell, Hourglass, Repeat2 } from "lucide-react";
 import { useWorkout } from "../contexts/WorkoutContext";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useWorkoutTimer } from "../contexts/WorkoutTimerContext";
 
 const Container = styled.div`
@@ -55,6 +55,16 @@ const SetItem = styled.div`
 
 `;
 
+const spin = keyframes`
+  100% {
+    transform: rotate(180deg);
+  }
+`;
+
+const StyledHourglass = styled(Hourglass)`
+  animation: ${spin} 1s infinite forwards;
+`;
+
 const WorkoutTimerDisplay = () => {
   const { currentProgress } = useWorkout();
   const { timerActive, secondsLeft } = useWorkoutTimer();
@@ -67,7 +77,7 @@ const WorkoutTimerDisplay = () => {
       <SetItemContainer>
         {timerActive ? (
           <SetItem>
-            <Hourglass />
+            <StyledHourglass />
             <span>Rest: {secondsLeft}</span>
           </SetItem>
         ) : (
