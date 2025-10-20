@@ -3,7 +3,7 @@ import { useWorkout } from "../contexts/WorkoutContext";
 import styled, { keyframes } from "styled-components";
 import { useWorkoutTimer } from "../contexts/WorkoutTimerContext";
 
-const Container = styled.div`
+const Container = styled.div<{$timerActive: boolean}>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -12,7 +12,7 @@ const Container = styled.div`
   padding: 0.5rem;
   color: rgb(var(--primary-color));
   border: 4px solid rgba(var(--primary-color), 0.8);
-  background: rgba(var(--primary-color), 0.3);
+  background: ${({ $timerActive }) => $timerActive ? ("rgba(var(--gold-accent), 0.8)") : ("rgba(var(--primary-color), 0.3)")};
   margin-bottom: 2rem;
 `;
 
@@ -71,7 +71,7 @@ const WorkoutTimerDisplay = () => {
   const { timerActive, secondsLeft } = useWorkoutTimer();
 
   return (
-    <Container>
+    <Container $timerActive={timerActive}>
       <TitleContainer>
         {currentProgress?.exercise?.title ?? "No current exercise"}
       </TitleContainer>
