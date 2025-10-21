@@ -88,6 +88,7 @@ const SetsList = styled.div<{ $selectedExercise: number; $index: number }>`
     ($selectedExercise === $index ? 1 : 0)
   };
   background: rgba(var(--primary-color), 0.1);
+  user-select: none;
 `;
 
 const SetStyles = css`

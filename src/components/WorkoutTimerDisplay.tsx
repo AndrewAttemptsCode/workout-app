@@ -14,6 +14,7 @@ const Container = styled.div<{$timerActive: boolean}>`
   border: 4px solid rgba(var(--primary-color), 0.8);
   background: ${({ $timerActive }) => $timerActive ? ("rgba(var(--gold-accent), 0.8)") : ("rgba(var(--primary-color), 0.3)")};
   margin-bottom: 2rem;
+  user-select: none;
 `;
 
 const TitleContainer = styled.div`
