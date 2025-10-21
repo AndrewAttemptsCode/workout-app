@@ -7,6 +7,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 0.5rem;
+  user-select: none;
 
   h2 {
     font-size: 1rem;

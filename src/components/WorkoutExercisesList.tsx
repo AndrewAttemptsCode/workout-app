@@ -6,6 +6,7 @@ const Table = styled.table`
   table-layout: auto;
   border-collapse: separate;
   border-spacing: 0.5rem;
+  user-select: none;
 
   th {
     font-size: 13px;

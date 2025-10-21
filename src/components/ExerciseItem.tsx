@@ -60,6 +60,7 @@ const ExerciseDisplayTitle = styled.div`
   scrollbar-width: thin;
   scrollbar-color: rgb(var(--gold-accent)) #1a1919;
   white-space: nowrap;
+  user-select: none;
 `;
 
 const ButtonControlsContainer = styled.div`
@@ -104,6 +105,7 @@ const ExerciseStats = styled.div`
   letter-spacing: 1px;
   text-transform: uppercase;
   background: rgba(var(--primary-color), 0.2);
+  user-select: none;
 `;
 
 type ExerciseItemProps = {

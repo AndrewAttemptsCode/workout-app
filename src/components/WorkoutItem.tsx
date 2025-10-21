@@ -56,6 +56,7 @@ const WorkoutDisplayTitle = styled.p`
   border: 2px solid transparent;
   font-weight: bold;
   background: rgba(var(--primary-color), 0.2);
+  user-select: none;
 `;
 
 const ButtonContainer = styled.div`
@@ -70,6 +71,7 @@ const EmptyExercisesContainer = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100%;
+  user-select: none;
 
   a {
     padding: 0.1rem 0.2rem;
@@ -118,6 +120,7 @@ const WorkoutStats = styled.div`
   letter-spacing: 1px;
   text-transform: uppercase;
   background: rgba(var(--primary-color), 0.2);
+  user-select: none;
 `;
 
 type WorkoutItemProps = {
