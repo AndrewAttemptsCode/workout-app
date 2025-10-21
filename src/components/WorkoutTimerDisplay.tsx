@@ -68,13 +68,13 @@ const StyledHourglass = styled(Hourglass)`
 `;
 
 const WorkoutTimerDisplay = () => {
-  const { currentProgress } = useWorkout();
+  const { currentProgress, workoutTimer } = useWorkout();
   const { timerActive, secondsLeft } = useWorkoutTimer();
 
   return (
     <Container $timerActive={timerActive}>
       <TitleContainer>
-        {currentProgress?.exercise?.title ?? "No current exercise"}
+        {workoutTimer?.complete ? "Workout Complete" : currentProgress?.exercise?.title ?? "No current exercise"}
       </TitleContainer>
       <SetItemContainer>
         {timerActive ? (
@@ -84,14 +84,22 @@ const WorkoutTimerDisplay = () => {
           </SetItem>
         ) : (
         <>
-          <SetItem>
-            <Repeat2 />
-            <span>Reps: {currentProgress?.set?.reps ?? "N/A"}</span>
-          </SetItem>
-          <SetItem>
-            <Dumbbell />
-            <span>Weight: {currentProgress?.set?.weight ?? "N/A"}</span>
-          </SetItem>
+          {workoutTimer?.complete ? (
+            <SetItem>
+              <span>Well Done!</span>
+            </SetItem>
+          ) : (
+            <>
+              <SetItem>
+                <Repeat2 />
+                <span>Reps: {currentProgress?.set?.reps ?? "N/A"}</span>
+              </SetItem>
+              <SetItem>
+                <Dumbbell />
+                <span>Weight: {currentProgress?.set?.weight ?? "N/A"}</span>
+              </SetItem>
+            </>
+          )}
         </>
         )}
       </SetItemContainer>
