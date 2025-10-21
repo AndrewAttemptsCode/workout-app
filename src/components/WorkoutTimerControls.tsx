@@ -39,7 +39,7 @@ const WorkoutTimerControls = () => {
         onClick={() => startTimer(setRestTime)}
         disabled={timerActive}
       >
-        {workoutTimer?.complete ? "Finish" : "Complete Set"}
+        {workoutTimer?.complete ? "Finish Workout" : "Complete Set"}
       </button>
     </Container>
   );
