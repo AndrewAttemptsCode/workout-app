@@ -128,6 +128,7 @@ const WorkoutTimerCard = () => {
   return (
     <Container>
       <WorkoutButton
+        disabled={!workoutTimer}
         onClick={() => {
           setShowExercises(!showExercises);
           setSelectedExercise(-1);
