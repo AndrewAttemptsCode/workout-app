@@ -58,6 +58,7 @@ type WorkoutContextTypes = {
   workoutTimer: Timer | null;
   handleWorkoutTimerComplete: () => void;
   currentProgress: CurrentProgress | null;
+  resetWorkoutTimer: () => void;
 }
 
 type WorkoutProviderProps = {
@@ -174,6 +175,10 @@ const handleWorkoutTimerComplete = () => {
 
   });
 };
+
+const resetWorkoutTimer = () => {
+  setWorkoutTimer(null);
+}
 
   // Workouts
 
@@ -334,7 +339,7 @@ const handleWorkoutTimerComplete = () => {
   };
 
   return (
-    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout, startWorkoutTimer, workoutTimer, handleWorkoutTimerComplete, currentProgress }}>
+    <WorkoutContext.Provider value={{ workouts, exercises, addNewWorkout, updateWorkoutTitle, removeWorkoutItem, addNewExercise, updateExerciseTitle, removeExercise, updateSetField, addSet, removeSet, updateExerciseEditMode, addExerciseToWorkout, updateWorkoutEditMode, removeExerciseFromWorkout, startWorkoutTimer, workoutTimer, handleWorkoutTimerComplete, currentProgress, resetWorkoutTimer }}>
       {children}
     </WorkoutContext.Provider>
   );
