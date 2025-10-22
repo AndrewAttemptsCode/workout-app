@@ -30,6 +30,12 @@ const WorkoutButton = styled.button`
   color: rgb(var(--primary-color));
   border: 2px solid rgb(var(--gold-accent));
   background: rgba(var(--gold-accent), 0.6);
+  transition: box-shadow 0.3s ease;
+
+  &:focus-visible,
+  &:hover {
+    box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+  }
 `;
 
 const ExerciseButton = styled.button`
