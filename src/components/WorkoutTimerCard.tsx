@@ -44,6 +44,12 @@ const ExerciseButton = styled.button`
   border: none;
   border-bottom: 2px solid rgba(var(--primary-color), 0.8);
   background: rgba(var(--primary-color), 0.3);
+  transition: opacity 0.3s ease;
+
+  &:focus-visible,
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
 const WorkoutChevron = styled(ChevronDown)<{ $showExercises: boolean }>`
