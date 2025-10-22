@@ -19,6 +19,12 @@ const Container = styled.div`
     color: rgb(var(--primary-color));
     border: 2px solid rgb(var(--green-accent));
     background: rgba(var(--green-accent), 0.6);
+    transition: opacity 0.3s ease;
+
+    &:focus-visible,
+    &:hover {
+      opacity: 0.9;
+    }
 
     &:disabled {
       color: rgba(var(--primary-color), 0.5);
