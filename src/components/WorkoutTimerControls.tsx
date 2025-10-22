@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useWorkout } from "../contexts/WorkoutContext";
 import { useWorkoutTimer } from "../contexts/WorkoutTimerContext";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: min(100%, 768px);
@@ -28,16 +29,28 @@ const Container = styled.div`
 `;
 
 const WorkoutTimerControls = () => {
-  const { workoutTimer, currentProgress } = useWorkout();
+  const { workoutTimer, resetWorkoutTimer, currentProgress } = useWorkout();
   const { startTimer, timerActive } = useWorkoutTimer();
+  const navigate = useNavigate();
 
   const setRestTime = currentProgress?.set?.rest ?? 0;
+
+  const handleButtonClick = () => {
+    if (!workoutTimer) return;
+
+    if (workoutTimer.complete) {
+      navigate("/workouts");
+      resetWorkoutTimer();
+      return;
+    }
+    startTimer(setRestTime);
+  }
 
   return (
     <Container>
       <button
-        onClick={() => startTimer(setRestTime)}
-        disabled={timerActive}
+        onClick={handleButtonClick}
+        disabled={timerActive || !workoutTimer}
       >
         {workoutTimer?.complete ? "Finish Workout" : "Complete Set"}
       </button>
