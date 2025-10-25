@@ -2,10 +2,7 @@ import styled from "styled-components";
 import WorkoutList from "../components/WorkoutList";
 
 const StylesContainer = styled.div`
-  min-height: 100vh;
-  min-height: 100dvh;
   padding: 1rem 0;
-  background: linear-gradient(to bottom, #3f3f3f, #1a1919);
 `;
 
 const ResponsiveContainer = styled.div`
