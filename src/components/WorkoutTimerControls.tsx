@@ -107,7 +107,7 @@ const WorkoutTimerControls = () => {
         disabled={timerActive || !workoutTimer}
         $workoutActive={startWorkout}
       >
-        {!startWorkout && <ButtonStripe />}
+        {(!startWorkout && workoutTimer) && <ButtonStripe />}
         <span>{!startWorkout ? "Start Workout" : workoutTimer?.complete ? "Finish Workout" : "Complete Set"}</span>
       </Button>
     </Container>
