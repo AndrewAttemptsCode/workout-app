@@ -14,6 +14,13 @@ const StylesContainer = styled.div`
 const ResponsiveContainer = styled.div`
   width: 90%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    gap: 2rem;
+  }
 `;
 
 const WorkoutTimerPage = () => {
@@ -21,11 +28,11 @@ const WorkoutTimerPage = () => {
   return (
     <StylesContainer>
       <ResponsiveContainer>
-        <WorkoutTimerCard />
         <WorkoutTimerProvider>
           <WorkoutTimerDisplay />
           <WorkoutTimerControls />
         </WorkoutTimerProvider>
+        <WorkoutTimerCard />
       </ResponsiveContainer>
     </StylesContainer>
   );

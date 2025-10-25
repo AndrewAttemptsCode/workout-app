@@ -7,7 +7,6 @@ import ProgressBar from "./ProgressBar";
 const Container = styled.div`
   width: min(100%, 768px);
   margin: 0 auto;
-  margin-bottom: 2rem;
 `;
 
 const DefaultButtonStyles = css`
