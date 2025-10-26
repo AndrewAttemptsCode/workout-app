@@ -14,7 +14,6 @@ const WorkoutPage = () => {
   return (
     <StylesContainer>
       <ResponsiveContainer>
-        <h1>Workouts</h1>
         <WorkoutList />
       </ResponsiveContainer>
     </StylesContainer>
