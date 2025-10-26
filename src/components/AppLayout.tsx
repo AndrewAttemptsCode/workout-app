@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import NavBar from "./NavBar";
+import HeaderLogo from "./HeaderLogo";
 
 const Container = styled.div`
   display: grid;
@@ -11,6 +12,7 @@ const Container = styled.div`
 
   header {
     margin: 0 auto;
+    padding: 0.5rem 0;
   }
 `;
 
@@ -18,6 +20,7 @@ const AppLayout = () => {
   return (
     <Container>
       <header>
+        <HeaderLogo />
         <NavBar />
       </header>
       <main>
