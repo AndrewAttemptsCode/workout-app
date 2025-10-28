@@ -20,16 +20,24 @@ const Title = styled.h1`
   line-height: 1.1;
   text-align: center;
   text-transform: uppercase;
+  font-size: clamp(2rem, 1.3333rem + 3.3333vw, 4rem);
+  user-select: none;
 `;
 
 const Subtitle = styled.p`
   text-align: center;
   font-weight: bold;
+  font-size: clamp(1rem, 0.7333rem + 1.3333vw, 1.8rem);
+  user-select: none;
 `;
 
 const CtaButton = styled.button`
+  margin: 0 auto;
+  padding: 1rem;
+  width: min(100%, 440px);
   text-transform: uppercase;
   font-weight: bold;
+  font-size: clamp(1rem, 0.7333rem + 1.3333vw, 1.8rem);
   outline: none;
   color: rgb(var(--primary-color));
   background: rgba(var(--gold-accent), 0.6);
@@ -37,7 +45,6 @@ const CtaButton = styled.button`
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: box-shadow 0.3s ease;
-  padding: 1rem;
 
   &:focus-visible {
       box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
