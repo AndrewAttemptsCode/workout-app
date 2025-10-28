@@ -4,6 +4,7 @@ import ExercisePage from "../pages/ExercisePage";
 import WorkoutTimerPage from "../pages/WorkoutTimerPage";
 import AppLayout from "../components/AppLayout";
 import ErrorBoundary from "../components/ErrorBoundary";
+import HomePage from "../pages/HomePage";
 
 const routes = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const routes = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <ErrorBoundary />,
     children: [
+    {
+      index: true,
+      element: <HomePage />,
+    },
     {
       path: "/workouts",
       element: <WorkoutPage />,
