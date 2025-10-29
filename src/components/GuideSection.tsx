@@ -19,6 +19,12 @@ const GuideCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  user-select: none;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 0 8px 4px rgb(var(--gold-accent));
+  }
 `;
 
 const Title = styled.h2`
