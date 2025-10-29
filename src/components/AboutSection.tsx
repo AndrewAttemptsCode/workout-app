@@ -11,6 +11,7 @@ const ResponsiveContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  user-select: none;
 `;
 
 const AboutTitle = styled.h2`
