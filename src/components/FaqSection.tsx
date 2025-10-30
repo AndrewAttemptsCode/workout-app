@@ -34,6 +34,7 @@ const QuestionContainer = styled.button`
 
 const AnswerContainer = styled.div<{ $active: number; $index: number }>`
   overflow: hidden;
+  user-select: none;
   padding: ${({ $active, $index }) => (
     $active === $index ? "0.5rem" : "0 0.5rem"
   )};
@@ -82,11 +83,16 @@ const FaqSection = () => {
           <div key={index}>
             <QuestionContainer
               onClick={() => setQuestionSelected(questionSelected === index ? -1 : index)}
+              aria-expanded={questionSelected === index}
             >
               <span>{faq.question}</span>
               <FaqChevron $active={questionSelected} $index={index} />
             </QuestionContainer>
-            <AnswerContainer $active={questionSelected} $index={index}>
+            <AnswerContainer
+              $active={questionSelected}
+              $index={index}
+              aria-hidden={questionSelected !== index}
+            >
               <span>{faq.answer}</span>
             </AnswerContainer>
           </div>
