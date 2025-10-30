@@ -41,7 +41,7 @@ const AnswerContainer = styled.div<{ $active: number; $index: number }>`
     $active === $index ? "500px" : 0
   )};
   opacity: ${({ $active, $index }) => (
-    $active === $index ? 1: 0
+    $active === $index ? 1 : 0
   )};
   transition: max-height 0.4s ease, opacity 0.3s ease;
 `;
