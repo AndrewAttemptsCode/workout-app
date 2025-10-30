@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StylesContainer = styled.div`
+  margin-top: 2rem;
   padding: 2rem 0;
   background: rgba(var(--primary-color), 0.3);
 `;
