@@ -9,12 +9,17 @@ const StylesContainer = styled.div`
 const ResponsiveContainer = styled.div`
   width: min(90%);
   margin: 0 auto;
+
+  h2 {
+    font-size: clamp(1.5rem, 1.3333rem + 0.8333vw, 2rem);
+  }
 `;
 
 const QuestionContainer = styled.button`
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem;
+  align-items: center;
+  padding: 1rem;
   min-height: 44px;
   width: 100%;
   cursor: pointer;
@@ -26,6 +31,11 @@ const QuestionContainer = styled.button`
   background: rgba(var(--primary-color), 0.3);
   transition: opacity 0.3s ease;
 
+  span {
+    font-weight: bold;
+    font-size: clamp(1rem, 0.8rem + 1vw, 1.6rem);
+  }
+
   &:focus-visible,
   &:hover {
     opacity: 0.9;
@@ -36,7 +46,7 @@ const AnswerContainer = styled.div<{ $active: number; $index: number }>`
   overflow: hidden;
   user-select: none;
   padding: ${({ $active, $index }) => (
-    $active === $index ? "0.5rem" : "0 0.5rem"
+    $active === $index ? "1rem" : "0 1rem"
   )};
   max-height: ${({ $active, $index }) => (
     $active === $index ? "500px" : 0
@@ -45,6 +55,10 @@ const AnswerContainer = styled.div<{ $active: number; $index: number }>`
     $active === $index ? 1 : 0
   )};
   transition: max-height 0.4s ease, opacity 0.3s ease;
+
+  span {
+    font-size: clamp(1rem, 0.8rem + 1vw, 1.6rem);
+  }
 `;
 
 const FaqChevron = styled(ChevronDown)<{ $active: number; $index: number }>`
