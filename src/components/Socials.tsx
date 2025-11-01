@@ -29,6 +29,12 @@ const SocialItem = styled.div`
 
   a {
     color: inherit;
+    outline: none;
+
+    &:focus-visible svg{
+      transform: translateY(-5px);
+      color: rgb(var(--gold-accent));
+    }
   }
 `;
 
