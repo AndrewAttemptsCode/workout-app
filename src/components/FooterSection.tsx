@@ -5,7 +5,6 @@ import Socials from "./Socials";
 const Container = styled.footer`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   padding-top: 2rem;
 
   hr {
