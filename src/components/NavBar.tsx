@@ -21,13 +21,21 @@ const Nav = styled.nav`
   }
 
   li a {
+    display: inline-block;
     color: inherit;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
-    transition: opacity 0.3s ease;
+    outline: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+    &:focus-visible {
+      color: rgb(var(--gold-accent));
+      transform: translateY(-2px);
+    }
 
     &:hover {
-      opacity: 0.8;
+      color: rgb(var(--gold-accent));
+      transform: translateY(-2px);
     }
 
     &.active {
