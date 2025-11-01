@@ -47,6 +47,12 @@ const StyledNavLink = styled(NavLink)`
   color: inherit;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  outline: none;
+  padding: 0.5rem;
+
+  &:focus-visible {
+    box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+  }
 `;
 
 const HeaderLogo = () => {
