@@ -29,7 +29,7 @@ const QuestionContainer = styled.button`
   border: none;
   border-bottom: 2px solid rgba(var(--primary-color), 0.8);
   background: rgba(var(--primary-color), 0.3);
-  transition: opacity 0.3s ease;
+  transition: color 0.3s ease, background 0.2s ease;
 
   span {
     font-weight: bold;
@@ -38,7 +38,8 @@ const QuestionContainer = styled.button`
 
   &:focus-visible,
   &:hover {
-    opacity: 0.9;
+    color: rgb(var(--gold-accent));
+    background: rgba(var(--primary-color), 0.2);
   }
 `;
 
