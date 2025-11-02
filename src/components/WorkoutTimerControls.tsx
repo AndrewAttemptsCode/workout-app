@@ -94,7 +94,7 @@ const WorkoutTimerControls = () => {
 
     if (workoutTimer.complete) {
       await release();
-      dashWorkoutComplete(workoutTimer.workoutTitle);
+      dashWorkoutComplete(workoutTimer);
       navigate("/dashboard");
       resetWorkoutTimer();
       return;
