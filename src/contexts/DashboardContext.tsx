@@ -28,6 +28,10 @@ const defaultStats: Stats[] = [
     name: "Exercises complete",
     value: 0,
   },
+  {
+    name: "Sets complete",
+    value: 0,
+  },
 ];
 
 
@@ -54,6 +58,9 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
         }
         if (stat.name === "Exercises complete") {
           return { ...stat, value: Number(stat.value) + workout.exercises.length };
+        }
+        if (stat.name === "Sets complete") {
+          return { ...stat, value: Number(stat.value) + workout.exercises.reduce((acc, exercise) => acc + (exercise?.sets.length ?? 0), 0)};
         }
         return stat;
       })
