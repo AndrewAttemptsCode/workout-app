@@ -4,6 +4,7 @@ import { useWorkoutTimer } from "../contexts/WorkoutTimerContext";
 import { useNavigate } from "react-router-dom";
 import { useWakeLock } from "react-screen-wake-lock";
 import { useState } from "react";
+import { useDashboard } from "../contexts/DashboardContext";
 
 const Container = styled.div`
   width: min(100%, 768px);
@@ -75,6 +76,7 @@ const ButtonStripe = styled.div`
 const WorkoutTimerControls = () => {
   const { workoutTimer, resetWorkoutTimer, currentProgress } = useWorkout();
   const { startTimer, timerActive } = useWorkoutTimer();
+  const { dashWorkoutComplete } = useDashboard();
   const navigate = useNavigate();
   const [startWorkout, setStartWorkout] = useState(false);
   const { request, release } = useWakeLock({ reacquireOnPageVisible: true });
@@ -92,7 +94,8 @@ const WorkoutTimerControls = () => {
 
     if (workoutTimer.complete) {
       await release();
-      navigate("/workouts");
+      dashWorkoutComplete(workoutTimer.workoutTitle);
+      navigate("/dashboard");
       resetWorkoutTimer();
       return;
     }
