@@ -2,12 +2,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 type Stats = {
   name: string;
-  value: number;
+  value: number | string;
 }
 
 type DashboardContextTypes = {
   stats: Stats[];
-  dashWorkoutComplete: () => void;
+  dashWorkoutComplete: (workoutTitle: string) => void;
 }
 
 type DashboardProviderProps = {
@@ -18,6 +18,10 @@ const defaultStats: Stats[] = [
   {
     name: "Workouts Complete",
     value: 0,
+  },
+  {
+    name: "Last workout complete",
+    value: "None yet",
   },
 ];
 
@@ -34,13 +38,17 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
     localStorage.setItem("stats", JSON.stringify(stats));
   }, [stats]);
   
-  const dashWorkoutComplete = () => {
+  const dashWorkoutComplete = (workoutTitle: string) => {
     setStats((prev) => (
-      prev.map((stat) => (
-        stat.name === "Workouts Complete"
-        ? { ...stat, value: stat.value + 1 }
-        : stat
-      ))
+      prev.map((stat) => {
+        if (stat.name === "Workouts Complete") {
+          return { ...stat, value: Number(stat.value) + 1 };
+        }
+        if (stat.name === "Last workout complete") {
+          return { ...stat, value: workoutTitle};
+        }
+        return stat;
+      })
     ));
   };
 
