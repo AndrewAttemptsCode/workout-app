@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import type { Timer } from "./WorkoutContext";
 
 type Stats = {
   name: string;
@@ -7,7 +8,7 @@ type Stats = {
 
 type DashboardContextTypes = {
   stats: Stats[];
-  dashWorkoutComplete: (workoutTitle: string) => void;
+  dashWorkoutComplete: (workout: Timer) => void;
 }
 
 type DashboardProviderProps = {
@@ -16,12 +17,16 @@ type DashboardProviderProps = {
 
 const defaultStats: Stats[] = [
   {
-    name: "Workouts Complete",
+    name: "Workouts complete",
     value: 0,
   },
   {
     name: "Last workout complete",
     value: "None yet",
+  },
+  {
+    name: "Exercises complete",
+    value: 0,
   },
 ];
 
@@ -38,14 +43,17 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
     localStorage.setItem("stats", JSON.stringify(stats));
   }, [stats]);
   
-  const dashWorkoutComplete = (workoutTitle: string) => {
+  const dashWorkoutComplete = (workout: Timer) => {
     setStats((prev) => (
       prev.map((stat) => {
-        if (stat.name === "Workouts Complete") {
+        if (stat.name === "Workouts complete") {
           return { ...stat, value: Number(stat.value) + 1 };
         }
         if (stat.name === "Last workout complete") {
-          return { ...stat, value: workoutTitle};
+          return { ...stat, value: workout.workoutTitle};
+        }
+        if (stat.name === "Exercises complete") {
+          return { ...stat, value: Number(stat.value) + workout.exercises.length };
         }
         return stat;
       })
