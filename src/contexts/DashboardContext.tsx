@@ -99,7 +99,7 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
             return Math.max(acc, heaviest);
           }, 0);
 
-          return { ...stat, value: weight };
+          return { ...stat, value: Math.max(Number(stat.value), weight) };
         }
 
         return stat;
