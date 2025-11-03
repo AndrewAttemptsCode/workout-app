@@ -58,6 +58,24 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
   useEffect(() => {
     localStorage.setItem("stats", JSON.stringify(stats));
   }, [stats]);
+
+  useEffect(() => {
+    if (defaultStats.length !== stats.length) {
+        
+      setStats((prev) => {
+
+        const filtered = prev.filter(
+          (stat) => defaultStats.some((defaultStat) => defaultStat.name === stat.name)
+        );
+
+        const missingStats = defaultStats.filter(
+          (defaultStat) => !filtered.some((stat) => stat.name === defaultStat.name)
+        );
+
+        return [...filtered, ...missingStats];
+      });
+    };
+  }, [stats]);
   
   const dashWorkoutComplete = (workout: Timer) => {
     setStats((prev) => (
