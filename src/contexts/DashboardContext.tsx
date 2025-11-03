@@ -64,7 +64,11 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
           return { ...stat, value: Number(stat.value) + workout.exercises.length };
         }
         if (stat.name === "Sets complete") {
-          return { ...stat, value: Number(stat.value) + workout.exercises.reduce((acc, exercise) => acc + (exercise?.sets.length ?? 0), 0)};
+          const totalSets = workout.exercises.reduce((acc, exercise) => {
+            return acc + (exercise?.sets.length ?? 0);
+          }, 0);
+
+          return { ...stat, value: Number(stat.value) + totalSets };
         }
         if (stat.name === "Reps complete") {
           const totalReps = workout.exercises.reduce((acc, exercise) => {
