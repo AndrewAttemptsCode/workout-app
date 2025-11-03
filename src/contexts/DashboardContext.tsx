@@ -40,6 +40,10 @@ const defaultStats: Stats[] = [
     name: "Last worked out",
     value: "None yet",
   },
+  {
+    name: "Heaviest weight lifted",
+    value: 0,
+  },
 ];
 
 
@@ -86,6 +90,16 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
         }
         if (stat.name === "Last worked out") {
           return { ...stat, value: new Date() };
+        }
+        if (stat.name === "Heaviest weight lifted") {
+          const weight = workout.exercises.reduce((acc, exercise) => {
+            const heaviest = exercise?.sets.reduce((accWeight, set) => {
+              return Math.max(accWeight, set.weight ?? 0);
+            }, 0) ?? 0;
+            return Math.max(acc, heaviest);
+          }, 0);
+
+          return { ...stat, value: weight };
         }
 
         return stat;
