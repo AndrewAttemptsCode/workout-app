@@ -32,6 +32,10 @@ const defaultStats: Stats[] = [
     name: "Sets complete",
     value: 0,
   },
+  {
+    name: "Reps complete",
+    value: 0,
+  },
 ];
 
 
@@ -61,6 +65,16 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
         }
         if (stat.name === "Sets complete") {
           return { ...stat, value: Number(stat.value) + workout.exercises.reduce((acc, exercise) => acc + (exercise?.sets.length ?? 0), 0)};
+        }
+        if (stat.name === "Reps complete") {
+          const totalReps = workout.exercises.reduce((acc, exercise) => {
+            const exerciseReps = exercise?.sets.reduce((sum, set) => {
+              return sum + (set.reps ?? 0);
+            }, 0) ?? 0;
+            return acc + exerciseReps;
+          }, 0);
+
+          return { ...stat, value: Number(stat.value) + totalReps };
         }
         return stat;
       })
