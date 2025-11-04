@@ -17,12 +17,16 @@ type DashboardProviderProps = {
 
 const defaultStats: Stats[] = [
   {
-    name: "Workouts complete",
-    value: 0,
+    name: "Last worked out",
+    value: "None yet",
   },
   {
     name: "Last workout complete",
     value: "None yet",
+  },
+  {
+    name: "Workouts complete",
+    value: 0,
   },
   {
     name: "Exercises complete",
@@ -35,10 +39,6 @@ const defaultStats: Stats[] = [
   {
     name: "Reps complete",
     value: 0,
-  },
-  {
-    name: "Last worked out",
-    value: "None yet",
   },
   {
     name: "Heaviest weight lifted",
@@ -80,11 +80,14 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
   const dashWorkoutComplete = (workout: Timer) => {
     setStats((prev) => (
       prev.map((stat) => {
-        if (stat.name === "Workouts complete") {
-          return { ...stat, value: Number(stat.value) + 1 };
+        if (stat.name === "Last worked out") {
+          return { ...stat, value: new Date() };
         }
         if (stat.name === "Last workout complete") {
           return { ...stat, value: workout.workoutTitle};
+        }
+        if (stat.name === "Workouts complete") {
+          return { ...stat, value: Number(stat.value) + 1 };
         }
         if (stat.name === "Exercises complete") {
           return { ...stat, value: Number(stat.value) + workout.exercises.length };
@@ -105,9 +108,6 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
           }, 0);
 
           return { ...stat, value: Number(stat.value) + totalReps };
-        }
-        if (stat.name === "Last worked out") {
-          return { ...stat, value: new Date() };
         }
         if (stat.name === "Heaviest weight lifted") {
           const weight = workout.exercises.reduce((acc, exercise) => {
