@@ -49,7 +49,7 @@ const DashboardStats = () => {
             } else {
               displayValue = Number(stat.value);
             }
-          } else if (stat.value instanceof Date) {
+          } else if (stat.name === "Last worked out") {
             const currentDate = new Date();
             displayValue = formatDistance(new Date(stat.value), currentDate, {
               addSuffix: true,
