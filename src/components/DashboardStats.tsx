@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useDashboard } from "../contexts/DashboardContext";
+import { formatDistance } from "date-fns";
 
 const StylesContainer = styled.div`
   padding: 1rem 0;
@@ -49,7 +50,11 @@ const DashboardStats = () => {
               displayValue = Number(stat.value);
             }
           } else if (stat.value instanceof Date) {
-            displayValue = stat.value.toDateString();
+            const currentDate = new Date();
+            displayValue = formatDistance(new Date(stat.value), currentDate, {
+              addSuffix: true,
+              includeSeconds: true,
+            });
           } else {
             displayValue = String(stat.value);
           }
