@@ -50,11 +50,15 @@ const DashboardStats = () => {
               displayValue = Number(stat.value);
             }
           } else if (stat.name === "Last worked out") {
-            const currentDate = new Date();
-            displayValue = formatDistance(new Date(stat.value), currentDate, {
-              addSuffix: true,
-              includeSeconds: true,
-            });
+            if (stat.value !== "None yet") {
+              const currentDate = new Date();
+              displayValue = formatDistance(new Date(stat.value), currentDate, {
+                addSuffix: true,
+                includeSeconds: true,
+              });
+            } else {
+              displayValue = String(stat.value);
+            }
           } else {
             displayValue = String(stat.value);
           }
