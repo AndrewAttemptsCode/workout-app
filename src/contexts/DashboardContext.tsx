@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { Timer } from "./WorkoutContext";
+import { isAfter, nextMonday, startOfDay } from "date-fns";
 
 type Stats = {
   name: string;
@@ -103,6 +104,19 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
   useEffect(() => {
     localStorage.setItem("daysComplete", JSON.stringify(daysComplete));
   }, [daysComplete]);
+
+  useEffect(() => {
+    const savedNextReset = localStorage.getItem("nextResetDate");
+    const now = new Date();
+
+    const upcomingMonday = startOfDay(nextMonday(now));
+
+    if (!savedNextReset || isAfter(now, new Date(savedNextReset))) {
+      setDaysComplete(defaultDaysComplete);
+      localStorage.setItem("nextResetDate", upcomingMonday.toISOString());
+    };
+
+  }, []);
 
   useEffect(() => {
     if (defaultStats.length !== stats.length) {
