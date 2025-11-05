@@ -3,7 +3,7 @@ import type { Timer } from "./WorkoutContext";
 
 type Stats = {
   name: string;
-  value: number | string | Date;
+  value: number | string;
 }
 
 type DashboardContextTypes = {
@@ -81,7 +81,7 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
     setStats((prev) => (
       prev.map((stat) => {
         if (stat.name === "Last worked out") {
-          return { ...stat, value: new Date() };
+          return { ...stat, value: new Date().toISOString() };
         }
         if (stat.name === "Last workout complete") {
           return { ...stat, value: workout.workoutTitle};
