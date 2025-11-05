@@ -6,6 +6,11 @@ type Stats = {
   value: number | string;
 }
 
+type DaysComplete = {
+  day: string;
+  complete: boolean;
+}
+
 type DashboardContextTypes = {
   stats: Stats[];
   dashWorkoutComplete: (workout: Timer) => void;
@@ -46,18 +51,58 @@ const defaultStats: Stats[] = [
   },
 ];
 
+const defaultDaysComplete: DaysComplete[] = [
+  {
+    day: "Monday",
+    complete: false,
+  },
+  {
+    day: "Tuesday",
+    complete: false,
+  },
+  {
+    day: "Wednesday",
+    complete: false,
+  },
+  {
+    day: "Thursday",
+    complete: false,
+  },
+  {
+    day: "Friday",
+    complete: false,
+  },
+  {
+    day: "Saturday",
+    complete: false,
+  },
+  {
+    day: "Sunday",
+    complete: false,
+  },
+];
+
 
 const DashboardContext = createContext<DashboardContextTypes | null>(null);
 
 export const DashboardProvider = ({ children }: DashboardProviderProps) => {
   const [stats, setStats] = useState<Stats[]>(() => {
     const savedStats = localStorage.getItem("stats");
-    return savedStats ? (JSON.parse(savedStats) as Stats[] ) : defaultStats;
+    return savedStats ? (JSON.parse(savedStats) as Stats[]) : defaultStats;
+  });
+
+  const [daysComplete, setDaysComplete] = useState<DaysComplete[]>(() => {
+    const savedDays = localStorage.getItem("daysComplete");
+    return savedDays ? (JSON.parse(savedDays) as DaysComplete[]) : defaultDaysComplete;
   });
 
   useEffect(() => {
     localStorage.setItem("stats", JSON.stringify(stats));
   }, [stats]);
+
+  useEffect(() => {
+    localStorage.setItem("daysComplete", JSON.stringify(daysComplete));
+  }, [daysComplete]);
 
   useEffect(() => {
     if (defaultStats.length !== stats.length) {
