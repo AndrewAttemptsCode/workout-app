@@ -41,7 +41,7 @@ const DashboardStats = () => {
     <StylesContainer>
       <ResponsiveContainer>
         {stats.map(stat => {
-          let displayValue
+          let displayValue: number | string;
 
           if (typeof stat.value === "number") {
             if (stat.name === "Heaviest weight lifted") {
