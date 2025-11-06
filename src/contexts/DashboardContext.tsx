@@ -14,6 +14,7 @@ type DaysComplete = {
 
 type DashboardContextTypes = {
   stats: Stats[];
+  daysComplete: DaysComplete[];
   dashWorkoutComplete: (workout: Timer) => void;
 }
 
@@ -185,7 +186,7 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
   };
 
   return (
-    <DashboardContext.Provider value={{ stats, dashWorkoutComplete }}>
+    <DashboardContext.Provider value={{ stats, dashWorkoutComplete, daysComplete }}>
       {children}
     </DashboardContext.Provider>
   );
