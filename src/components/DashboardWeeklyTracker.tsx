@@ -73,7 +73,10 @@ const DashboardWeeklyTracker = () => {
         <DaysContainer>
           {daysComplete.map(dayComplete => (
             <ItemWrapper key={dayComplete.day}>
-              <ItemDisplay $complete={dayComplete.complete} />
+              <ItemDisplay 
+                $complete={dayComplete.complete} 
+                aria-label={`${dayComplete.day} is ${dayComplete.complete ? "complete" : "not complete"}`}
+              />
               <ItemText
                 data-short={dayComplete.day.slice(0, 2)}
                 data-long={dayComplete.day}
