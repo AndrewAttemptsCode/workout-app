@@ -31,7 +31,8 @@ const StatName = styled.h2`
 `;
 
 const StatValue = styled.p`
-
+  font-weight: bold;
+  color: rgb(var(--gold-accent));
 `;
 
 const DashboardStats = () => {
