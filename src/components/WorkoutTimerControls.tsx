@@ -76,7 +76,7 @@ const ButtonStripe = styled.div`
 const WorkoutTimerControls = () => {
   const { workoutTimer, resetWorkoutTimer, currentProgress } = useWorkout();
   const { startTimer, timerActive } = useWorkoutTimer();
-  const { dashWorkoutComplete } = useDashboard();
+  const { dashWorkoutComplete, updateDayComplete } = useDashboard();
   const navigate = useNavigate();
   const [startWorkout, setStartWorkout] = useState(false);
   const { request, release } = useWakeLock({ reacquireOnPageVisible: true });
@@ -95,6 +95,7 @@ const WorkoutTimerControls = () => {
     if (workoutTimer.complete) {
       await release();
       dashWorkoutComplete(workoutTimer);
+      updateDayComplete();
       navigate("/dashboard");
       resetWorkoutTimer();
       return;
