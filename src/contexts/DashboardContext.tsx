@@ -16,6 +16,7 @@ type DashboardContextTypes = {
   stats: Stats[];
   daysComplete: DaysComplete[];
   dashWorkoutComplete: (workout: Timer) => void;
+  updateDayComplete: () => void;
 }
 
 type DashboardProviderProps = {
@@ -185,8 +186,22 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
     ));
   };
 
+  const updateDayComplete = () => {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const dayOfWeek = new Date().getDay();
+    const today = daysOfWeek[dayOfWeek];
+
+    setDaysComplete(prev =>
+      prev.map(dayComplete =>
+        dayComplete.day === today
+        ? { ...dayComplete, complete: true }
+        : dayComplete
+      )
+    );
+  };
+
   return (
-    <DashboardContext.Provider value={{ stats, dashWorkoutComplete, daysComplete }}>
+    <DashboardContext.Provider value={{ stats, dashWorkoutComplete, daysComplete, updateDayComplete }}>
       {children}
     </DashboardContext.Provider>
   );
