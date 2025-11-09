@@ -8,8 +8,6 @@ const StylesContainer = styled.div`
 const ResponsiveContainer = styled.div`
   width: min(90%, 1024px);
   margin: 0 auto;
-  background: rgba(var(--primary-color), 0.2);
-  padding: 1rem;
 
   h2 {
     line-height: 1;
@@ -44,7 +42,7 @@ const ItemWrapper = styled.div`
 
 const ItemDisplay = styled.div<{ $complete: boolean; }>`
   aspect-ratio: 16 / 9;
-  background: ${({ $complete }) => $complete ? ("rgba(var(--green-accent), 0.6)") : ("rgba(var(--primary-color), 0.1)")}; 
+  background: ${({ $complete }) => $complete ? ("rgba(var(--green-accent), 0.6)") : ("rgba(var(--primary-color), 0.2)")}; 
 `;
 
 const ItemText = styled.span`
