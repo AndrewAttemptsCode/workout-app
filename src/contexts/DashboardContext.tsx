@@ -193,6 +193,7 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
 
     if (!resetDates.nextYear || isAfter(now, new Date(resetDates.nextYear))) {
       resetDates.nextYear = upcomingNewYear;
+      setMonthlyWorkoutCount(defaultMonthlyWorkoutCount);
     }
 
     localStorage.setItem("nextResetDates", JSON.stringify(resetDates));
