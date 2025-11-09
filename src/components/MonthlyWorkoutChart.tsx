@@ -57,6 +57,7 @@ const MonthlyWorkoutChart = () => {
         <YAxis 
           width="auto"
           interval={0}
+          allowDecimals={false}
           tick={{ fill: "rgb(var(--primary-color))" }}
         />
       </BarChart>
