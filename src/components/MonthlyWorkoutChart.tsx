@@ -1,56 +1,6 @@
 import { Bar, BarChart, XAxis, YAxis } from "recharts";
 import styled from "styled-components";
-
-const defaultMonthlyWorkoutCount = [
-  {
-    month: "January",
-    count: 2,
-  },
-  {
-    month: "February",
-    count: 5,
-  },
-  {
-    month: "March",
-    count: 2,
-  },
-  {
-    month: "April",
-    count: 0,
-  },
-  {
-    month: "May",
-    count: 8,
-  },
-  {
-    month: "June",
-    count: 2,
-  },
-  {
-    month: "July",
-    count: 6,
-  },
-  {
-    month: "August",
-    count: 11,
-  },
-  {
-    month: "September",
-    count: 0,
-  },
-  {
-    month: "October",
-    count: 7,
-  },
-  {
-    month: "November",
-    count: 5,
-  },
-  {
-    month: "December",
-    count: 1,
-  },
-];
+import { useDashboard } from "../contexts/DashboardContext";
 
 const Container = styled.div`
   padding: 1rem 0;
@@ -77,6 +27,7 @@ const Container = styled.div`
 `;
 
 const MonthlyWorkoutChart = () => {
+  const { monthlyWorkoutCount } = useDashboard();
 
   return (
     <Container>
@@ -84,7 +35,7 @@ const MonthlyWorkoutChart = () => {
       <BarChart
         style={{ width: "100%", maxHeight: "150px", aspectRatio: 1.618 }}
         responsive
-        data={defaultMonthlyWorkoutCount}
+        data={monthlyWorkoutCount}
         margin={{
         top: 10,
         right: 0,
