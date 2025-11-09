@@ -12,6 +12,11 @@ type DaysComplete = {
   complete: boolean;
 }
 
+type ResetDates = {
+  nextMonday?: string;
+  nextYear?: string;
+}
+
 type DashboardContextTypes = {
   stats: Stats[];
   daysComplete: DaysComplete[];
@@ -159,15 +164,24 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
   }, [daysComplete]);
 
   useEffect(() => {
-    const savedNextReset = localStorage.getItem("nextResetDate");
     const now = new Date();
+    
+    const storedDates = localStorage.getItem("nextResetDates");
+    const resetDates: ResetDates = storedDates ? JSON.parse(storedDates) : {};
 
-    const upcomingMonday = startOfDay(nextMonday(now));
+    const upcomingMonday = startOfDay(nextMonday(now)).toISOString();
+    const upcomingNewYear = new Date(now.getFullYear() + 1, 0, 1).toISOString();
 
-    if (!savedNextReset || isAfter(now, new Date(savedNextReset))) {
+    if (!resetDates.nextMonday || isAfter(now, new Date(resetDates.nextMonday))) {
+      resetDates.nextMonday = upcomingMonday;
       setDaysComplete(defaultDaysComplete);
-      localStorage.setItem("nextResetDate", upcomingMonday.toISOString());
-    };
+    }
+
+    if (!resetDates.nextYear || isAfter(now, new Date(resetDates.nextYear))) {
+      resetDates.nextYear = upcomingNewYear;
+    }
+
+    localStorage.setItem("nextResetDates", JSON.stringify(resetDates));
 
   }, []);
 
