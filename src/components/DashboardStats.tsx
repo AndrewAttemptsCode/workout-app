@@ -17,6 +17,7 @@ const ResponsiveContainer = styled.div`
       font-size: 1rem;
       display: flex;
       align-items: center;
+      user-select: none;
 
       &::after  {
         content: "";
@@ -33,6 +34,7 @@ const StatsContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: 1fr;
   gap: 1rem;
+  user-select: none;
 `;
 
 const StatItem = styled.div`

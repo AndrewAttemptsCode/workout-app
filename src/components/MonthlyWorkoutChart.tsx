@@ -64,6 +64,7 @@ const Container = styled.div`
     font-size: 1rem;
     display: flex;
     align-items: center;
+    user-select: none;
 
     &::after  {
       content: "";
