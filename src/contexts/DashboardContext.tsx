@@ -281,6 +281,22 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
     );
   };
 
+  const updateMonthlyWorkoutCount = () => {
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June", "July", 
+      "August", "September", "October", "November", "December"
+    ];
+    const currentMonth = monthNames[new Date().getMonth()];
+
+    setMonthlyWorkoutCount(prev =>
+      prev.map(entry =>
+        entry.month === currentMonth
+        ? { ...entry, count: entry.count + 1 }
+        : entry
+      )
+    );
+  };
+
   return (
     <DashboardContext.Provider value={{ stats, dashWorkoutComplete, daysComplete, updateDayComplete, monthlyWorkoutCount }}>
       {children}
