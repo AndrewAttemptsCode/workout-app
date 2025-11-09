@@ -1,4 +1,4 @@
-import { Bar, BarChart, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 import styled from "styled-components";
 import { useDashboard } from "../contexts/DashboardContext";
 
@@ -42,7 +42,7 @@ const MonthlyWorkoutChart = () => {
         left: 0,
         bottom: 10,
       }}
-        >
+      >
         <Bar dataKey="count" fill="rgb(var(--primary-color))" />
         <XAxis
           dataKey="month"
@@ -53,12 +53,23 @@ const MonthlyWorkoutChart = () => {
           fontSize={14}
           tick={{ fill: "rgb(var(--primary-color))" }}
           tickFormatter={(value) => value.slice(0, 3)}
+          stroke="rgb(var(--primary-color))"
         />
         <YAxis 
           width="auto"
           interval={0}
           allowDecimals={false}
           tick={{ fill: "rgb(var(--primary-color))" }}
+          stroke="rgb(var(--primary-color))"
+        />
+        <Tooltip 
+          contentStyle={{
+            backgroundColor: "#1e1e1e",
+            border: "2px solid rgb(var(--gold-accent))",
+            color: "rgb(var(--primary-color))",
+            padding: "0.5rem 1rem"
+          }}
+          cursor={false}
         />
       </BarChart>
     </Container>
