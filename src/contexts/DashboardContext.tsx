@@ -17,6 +17,11 @@ type ResetDates = {
   nextYear?: string;
 }
 
+type MonthlyWorkoutCount = {
+  month: string;
+  count: number;
+}
+
 type DashboardContextTypes = {
   stats: Stats[];
   daysComplete: DaysComplete[];
@@ -90,56 +95,56 @@ const defaultDaysComplete: DaysComplete[] = [
   },
 ];
 
-// const defaultMonthlyWorkoutCount = [
-//   {
-//     month: "January",
-//     count: 0,
-//   },
-//   {
-//     month: "February",
-//     count: 0,
-//   },
-//   {
-//     month: "March",
-//     count: 0,
-//   },
-//   {
-//     month: "April",
-//     count: 0,
-//   },
-//   {
-//     month: "May",
-//     count: 0,
-//   },
-//   {
-//     month: "June",
-//     count: 0,
-//   },
-//   {
-//     month: "July",
-//     count: 0,
-//   },
-//   {
-//     month: "August",
-//     count: 0,
-//   },
-//   {
-//     month: "September",
-//     count: 0,
-//   },
-//   {
-//     month: "October",
-//     count: 0,
-//   },
-//   {
-//     month: "November",
-//     count: 0,
-//   },
-//   {
-//     month: "December",
-//     count: 0,
-//   },
-// ];
+const defaultMonthlyWorkoutCount: MonthlyWorkoutCount[] = [
+  {
+    month: "January",
+    count: 0,
+  },
+  {
+    month: "February",
+    count: 0,
+  },
+  {
+    month: "March",
+    count: 0,
+  },
+  {
+    month: "April",
+    count: 0,
+  },
+  {
+    month: "May",
+    count: 0,
+  },
+  {
+    month: "June",
+    count: 0,
+  },
+  {
+    month: "July",
+    count: 0,
+  },
+  {
+    month: "August",
+    count: 0,
+  },
+  {
+    month: "September",
+    count: 0,
+  },
+  {
+    month: "October",
+    count: 0,
+  },
+  {
+    month: "November",
+    count: 0,
+  },
+  {
+    month: "December",
+    count: 0,
+  },
+];
 
 
 const DashboardContext = createContext<DashboardContextTypes | null>(null);
@@ -153,6 +158,11 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
   const [daysComplete, setDaysComplete] = useState<DaysComplete[]>(() => {
     const savedDays = localStorage.getItem("daysComplete");
     return savedDays ? (JSON.parse(savedDays) as DaysComplete[]) : defaultDaysComplete;
+  });
+
+  const [monthlyWorkoutCount, setMonthlyWorkoutCount] = useState(() => {
+    const savedMonthCount = localStorage.getItem("workoutsPerMonth");
+    return savedMonthCount ? (JSON.parse(savedMonthCount) as MonthlyWorkoutCount[]) : defaultMonthlyWorkoutCount;
   });
 
   useEffect(() => {
