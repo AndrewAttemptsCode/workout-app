@@ -174,6 +174,10 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
   }, [daysComplete]);
 
   useEffect(() => {
+    localStorage.setItem("workoutsPerMonth", JSON.stringify(monthlyWorkoutCount));
+  }, [monthlyWorkoutCount]);
+
+  useEffect(() => {
     const now = new Date();
     
     const storedDates = localStorage.getItem("nextResetDates");
