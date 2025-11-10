@@ -1,5 +1,6 @@
 import { RiResetLeftLine } from "react-icons/ri";
 import styled from "styled-components";
+import { useDashboard, type DashResetStatProps } from "../contexts/DashboardContext";
 
 const Button = styled.button`
   aspect-ratio: 1 / 1;
@@ -24,12 +25,18 @@ const Button = styled.button`
 `;
 
 type DashResetButtonProps = {
-  value: string;
+  value: DashResetStatProps;
 }
 
 const DashResetButton = ({ value }: DashResetButtonProps) => {
+  const { dashResetStat } = useDashboard();
+  
   return (
-    <Button title="Reset Stats" aria-label={`Reset stats for ${value}`}>
+    <Button
+      title="Reset Stats"
+      aria-label={`Reset stats for ${value}`}
+      onClick={() => dashResetStat(value)}
+    >
       <RiResetLeftLine />
     </Button>
   );
