@@ -70,6 +70,14 @@ const DashboardStats = () => {
             if (typeof stat.value === "number") {
               if (stat.name === "Heaviest weight lifted") {
                 displayValue = Number(stat.value) + " kg";
+              } else if (stat.name === "Total workout duration") {
+                const totalSeconds = Number(stat.value);
+                
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+
+                displayValue = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
               } else {
                 displayValue = Number(stat.value);
               }
