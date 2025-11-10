@@ -2,7 +2,6 @@ import { Trash2 } from "lucide-react";
 import styled from "styled-components";
 
 const Button = styled.button`
-  background: rgba(var(--primary-color), 0.2);
   background: rgba(var(--red-accent), 0.6);
   border: 2px solid rgb(var(--red-accent));
   cursor: pointer;
