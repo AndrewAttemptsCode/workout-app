@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useDashboard } from "../contexts/DashboardContext";
 import { formatDistance } from "date-fns";
+import DashResetButton from "./DashResetButton";
 
 const StylesContainer = styled.div`
   padding: 1rem 0;
@@ -9,24 +10,6 @@ const StylesContainer = styled.div`
 const ResponsiveContainer = styled.div`
   width: min(90%, 1024px);
   margin: 0 auto;
-
-    h2 {
-      line-height: 1;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      user-select: none;
-
-      &::after  {
-        content: "";
-        flex: 1;
-        height: 2px;
-        background: rgb(var(--primary-color));
-        margin-left: 1rem;
-      }
-    }
 `;
 
 const StatsContainer = styled.div`
@@ -56,13 +39,41 @@ const StatValue = styled.p`
   color: rgb(var(--gold-accent));
 `;
 
+const Heading = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h2 {
+      line-height: 1;
+      margin: 1rem 0;
+      text-transform: uppercase;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      flex: 1;
+      user-select: none;
+
+      &::after  {
+        content: "";
+        flex: 1;
+        height: 2px;
+        background: rgb(var(--primary-color));
+        margin: 0 1rem;
+      }
+    }
+`;
+
 const DashboardStats = () => {
   const { stats } = useDashboard();
 
   return (
     <StylesContainer>
       <ResponsiveContainer>
-        <h2>Quick Stats</h2>
+        <Heading>
+          <h2>Quick Stats</h2>
+          <DashResetButton />
+        </Heading>
         <StatsContainer>
           {stats.map(stat => {
             let displayValue: number | string;

@@ -1,29 +1,37 @@
 import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 import styled from "styled-components";
 import { useDashboard } from "../contexts/DashboardContext";
+import DashResetButton from "./DashResetButton";
 
 const Container = styled.div`
   padding: 1rem 0;
   margin: 0 auto;
   width: min(90%, 1024px);
+`;
+
+const Heading = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 
   h2 {
-    line-height: 1;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    user-select: none;
-
-    &::after  {
-      content: "";
+      line-height: 1;
+      margin: 1rem 0;
+      text-transform: uppercase;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
       flex: 1;
-      height: 2px;
-      background: rgb(var(--primary-color));
-      margin-left: 1rem;
+      user-select: none;
+
+      &::after  {
+        content: "";
+        flex: 1;
+        height: 2px;
+        background: rgb(var(--primary-color));
+        margin: 0 1rem;
+      }
     }
-  }
 `;
 
 const MonthlyWorkoutChart = () => {
@@ -31,7 +39,10 @@ const MonthlyWorkoutChart = () => {
 
   return (
     <Container>
-      <h2>Workouts per month</h2>
+      <Heading>
+        <h2>Workouts per month</h2>
+        <DashResetButton />
+      </Heading>
       <BarChart
         style={{ width: "100%", maxHeight: "150px", aspectRatio: 1.618 }}
         responsive

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useDashboard } from "../contexts/DashboardContext";
+import DashResetButton from "./DashResetButton";
 
 const StylesContainer = styled.div`
   padding: 1rem 0;
@@ -8,24 +9,6 @@ const StylesContainer = styled.div`
 const ResponsiveContainer = styled.div`
   width: min(90%, 1024px);
   margin: 0 auto;
-
-  h2 {
-    line-height: 1;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    user-select: none;
-
-    &::after  {
-      content: "";
-      flex: 1;
-      height: 2px;
-      background: rgb(var(--primary-color));
-      margin-left: 1rem;
-    }
-  }
 `;
 
 const DaysContainer = styled.div`
@@ -61,6 +44,31 @@ const ItemText = styled.span`
 
 `;
 
+const Heading = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h2 {
+      line-height: 1;
+      margin: 1rem 0;
+      text-transform: uppercase;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      flex: 1;
+      user-select: none;
+
+      &::after  {
+        content: "";
+        flex: 1;
+        height: 2px;
+        background: rgb(var(--primary-color));
+        margin: 0 1rem;
+      }
+    }
+`;
+
 
 const DashboardWeeklyTracker = () => {
   const { daysComplete } = useDashboard();
@@ -68,7 +76,10 @@ const DashboardWeeklyTracker = () => {
   return (
     <StylesContainer>
       <ResponsiveContainer>
+        <Heading>
           <h2>Weekly Tracker</h2>
+          <DashResetButton />
+        </Heading>
         <DaysContainer>
           {daysComplete.map(dayComplete => (
             <ItemWrapper key={dayComplete.day}>
