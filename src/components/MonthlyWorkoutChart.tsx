@@ -41,7 +41,7 @@ const MonthlyWorkoutChart = () => {
     <Container>
       <Heading>
         <h2>Workouts per month</h2>
-        <DashResetButton />
+        <DashResetButton value="workouts per month"/>
       </Heading>
       <BarChart
         style={{ width: "100%", maxHeight: "150px", aspectRatio: 1.618 }}

@@ -78,7 +78,7 @@ const DashboardWeeklyTracker = () => {
       <ResponsiveContainer>
         <Heading>
           <h2>Weekly Tracker</h2>
-          <DashResetButton />
+          <DashResetButton value="weekly tracker" />
         </Heading>
         <DaysContainer>
           {daysComplete.map(dayComplete => (

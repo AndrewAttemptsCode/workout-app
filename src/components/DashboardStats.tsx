@@ -72,7 +72,7 @@ const DashboardStats = () => {
       <ResponsiveContainer>
         <Heading>
           <h2>Quick Stats</h2>
-          <DashResetButton />
+          <DashResetButton value="quick stats" />
         </Heading>
         <StatsContainer>
           {stats.map(stat => {
