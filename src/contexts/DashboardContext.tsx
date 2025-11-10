@@ -64,6 +64,10 @@ const defaultStats: Stats[] = [
     name: "Heaviest weight lifted",
     value: 0,
   },
+  {
+    name: "Total workout duration",
+    value: 0,
+  },
 ];
 
 const defaultDaysComplete: DaysComplete[] = [
@@ -261,6 +265,16 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
           }, 0);
 
           return { ...stat, value: Math.max(Number(stat.value), weight) };
+        }
+        if (stat.name === "Total workout duration") {
+          const time = workout.exercises.reduce((acc, exercise) => {
+            const exerciseRest = exercise?.sets.reduce((accRest, set) => {
+              const estSetDuration = 60;
+              return accRest + (set.rest ?? 0) + estSetDuration;
+            }, 0) ?? 0;
+            return acc + exerciseRest;
+          }, 0);
+          return { ...stat, value: Number(stat.value) + time };
         }
 
         return stat;
