@@ -22,6 +22,8 @@ type MonthlyWorkoutCount = {
   count: number;
 }
 
+export type DashResetStatProps = "weekly tracker" | "quick stats" | "workouts per month";
+
 type DashboardContextTypes = {
   stats: Stats[];
   daysComplete: DaysComplete[];
@@ -29,6 +31,7 @@ type DashboardContextTypes = {
   dashWorkoutComplete: (workout: Timer) => void;
   updateDayComplete: () => void;
   updateMonthlyWorkoutCount: () => void;
+  dashResetStat: (value: DashResetStatProps) => void;
 }
 
 type DashboardProviderProps = {
@@ -312,8 +315,20 @@ export const DashboardProvider = ({ children }: DashboardProviderProps) => {
     );
   };
 
+  const dashResetStat = (value: DashResetStatProps) => {
+    if (value === "weekly tracker") {
+      setDaysComplete(defaultDaysComplete);
+    }
+    if (value === "quick stats") {
+      setStats(defaultStats);
+    }
+    if (value === "workouts per month") {
+      setMonthlyWorkoutCount(defaultMonthlyWorkoutCount);
+    }
+  }
+
   return (
-    <DashboardContext.Provider value={{ stats, dashWorkoutComplete, daysComplete, updateDayComplete, monthlyWorkoutCount, updateMonthlyWorkoutCount }}>
+    <DashboardContext.Provider value={{ stats, dashWorkoutComplete, daysComplete, updateDayComplete, monthlyWorkoutCount, updateMonthlyWorkoutCount, dashResetStat }}>
       {children}
     </DashboardContext.Provider>
   );
