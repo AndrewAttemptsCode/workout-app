@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import WorkoutPage from "../pages/WorkoutPage";
@@ -17,7 +17,11 @@ const renderWorkoutPage = () => {
 };
 
 describe("Workouts page", () => {
-  it("renders new workout item", async () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("adds new workout item", async () => {
     renderWorkoutPage();
 
     const button = screen.getByRole("button", { name: /add new workout/i });
@@ -31,4 +35,20 @@ describe("Workouts page", () => {
     const workoutItem = screen.getByRole("textbox", { name: /workout name/i });
     expect(workoutItem).toBeInTheDocument();
   });
+
+  it("removes a workout item", async () => {
+    renderWorkoutPage();
+
+    // Adds workout item
+    const button = screen.getByRole("button", { name: /add new workout/i });
+    await userEvent.click(button);
+    // Workout item is rendered
+    const workoutItem = screen.getByRole("textbox", { name: /workout name/i });
+    expect(workoutItem).toBeInTheDocument();
+    // Remove workout item button is clicked
+    const removeButton = screen.getByRole("button", { name: /remove item from list/i });
+    await userEvent.click(removeButton);
+    // Workout item is no longer rendered
+    expect(workoutItem).not.toBeInTheDocument();
+  })
 });
