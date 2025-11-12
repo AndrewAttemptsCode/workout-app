@@ -6,15 +6,19 @@ import WorkoutPage from "../pages/WorkoutPage";
 import { WorkoutProvider } from "../contexts/WorkoutContext";
 import { MemoryRouter } from "react-router-dom";
 
-describe("Workouts page", () => {
-  it("renders new workout item", async () => {
-    render(
+const renderWorkoutPage = () => {
+  render(
       <MemoryRouter>
         <WorkoutProvider>
           <WorkoutPage />
         </WorkoutProvider>
       </MemoryRouter>
     );
+};
+
+describe("Workouts page", () => {
+  it("renders new workout item", async () => {
+    renderWorkoutPage();
 
     const button = screen.getByRole("button", { name: /add new workout/i });
     // Add new workout item button is rendered
