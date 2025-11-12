@@ -50,6 +50,17 @@ const WorkoutTitle = styled.input`
   }
 `;
 
+const WorkoutTitleLabel = styled.label`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+`;
+
 const WorkoutDisplayTitle = styled.p`
   ${sharedTitleStyles}
   margin: none;
@@ -156,14 +167,17 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
       </ButtonContainer>
 
       {editMode ? (
-        <WorkoutTitle
-          type="text"
-          name="workoutTitle"
-          id="workoutTitle"
-          placeholder="Workout Name..."
-          value={workout.workoutTitle}
-          onChange={(e) => updateWorkoutTitle(workout.id, e.target.value)}
-        />
+        <>
+          <WorkoutTitleLabel htmlFor="workoutTitle">workout name</WorkoutTitleLabel>
+          <WorkoutTitle
+            type="text"
+            name="workoutTitle"
+            id="workoutTitle"
+            placeholder="Workout Name..."
+            value={workout.workoutTitle}
+            onChange={(e) => updateWorkoutTitle(workout.id, e.target.value)}
+          />
+        </>
       ) : (
         <WorkoutDisplayTitle>{workout.workoutTitle}</WorkoutDisplayTitle>
       )}
