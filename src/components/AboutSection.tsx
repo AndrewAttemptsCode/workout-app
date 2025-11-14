@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StylesContainer = styled.div`
+const StylesContainer = styled.section`
   margin-top: 2rem;
   padding: 2rem 0;
   background: rgba(var(--primary-color), 0.3);
@@ -28,7 +28,7 @@ const AboutSubtitle = styled.p`
 
 const AboutSection = () => {
   return (
-    <StylesContainer>
+    <StylesContainer aria-label="About the app">
       <ResponsiveContainer>
         <AboutTitle>
           Build and organize personalized workouts from your own exercises.

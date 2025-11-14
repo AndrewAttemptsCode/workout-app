@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const StylesContainer = styled.div`
+const StylesContainer = styled.section`
   padding: 2rem 0;
   background: rgba(var(--gold-accent), 0.6);
   border-top: 2px solid rgb(var(--gold-accent));
@@ -59,7 +59,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <StylesContainer>
+    <StylesContainer aria-label="Hero section introducing Storm Lifts app">
       <ResponsiveContainer>
         <Title>Track. Train.<br /> Transform.</Title>
         <Subtitle>

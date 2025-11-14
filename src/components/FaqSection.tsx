@@ -2,7 +2,7 @@ import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import styled from "styled-components";
 
-const StylesContainer = styled.div`
+const StylesContainer = styled.section`
   padding-bottom: 2rem;
 `;
 
@@ -91,9 +91,9 @@ const FaqSection = () => {
   const [questionSelected, setQuestionSelected] = useState(-1);
 
   return (
-    <StylesContainer>
+    <StylesContainer aria-labelledby="faq-title">
       <ResponsiveContainer>
-        <h2>FAQ</h2>
+        <h2 id="faq-title">FAQ</h2>
         {faqs.map((faq, index) => (
           <div key={index}>
             <QuestionContainer
