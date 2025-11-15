@@ -6,10 +6,10 @@ import AppLayout from "../components/AppLayout";
 import ErrorBoundary from "../components/ErrorBoundary";
 import HomePage from "../pages/HomePage";
 import DashboardPage from "../pages/DashboardPage";
+import AppLayoutSecondary from "../components/AppLayoutSecondary";
 
 const routes = createBrowserRouter([
   {
-    path: "/",
     element: <AppLayout />,
     errorElement: <ErrorBoundary />,
     children: [
@@ -17,6 +17,11 @@ const routes = createBrowserRouter([
         index: true,
         element: <HomePage />,
       },
+    ],
+  },
+  {
+    element: <AppLayoutSecondary />,
+    children: [
       {
         path: "/workouts",
         element: <WorkoutPage />,
@@ -33,7 +38,7 @@ const routes = createBrowserRouter([
         path: "/dashboard",
         element: <DashboardPage />,
       },
-    ],
+    ], 
   },
 ]);
 
