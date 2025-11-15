@@ -2,11 +2,10 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import NavBar from "./NavBar";
 import HeaderLogo from "./HeaderLogo";
-import FooterSection from "./FooterSection";
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
   min-height: 100vh;
   min-height: 100dvh;
   background: linear-gradient(to bottom, #3f3f3f, #1a1919);
@@ -17,7 +16,7 @@ const Container = styled.div`
   }
 `;
 
-const AppLayout = () => {
+const AppLayoutSecondary = () => {
   return (
     <Container>
       <header>
@@ -27,9 +26,8 @@ const AppLayout = () => {
       <main>
         <Outlet />
       </main>
-      <FooterSection />
     </Container>
   );
 };
 
-export default AppLayout;
+export default AppLayoutSecondary;
