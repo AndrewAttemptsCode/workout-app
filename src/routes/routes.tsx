@@ -21,6 +21,7 @@ const routes = createBrowserRouter([
   },
   {
     element: <AppLayoutSecondary />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: "/workouts",
