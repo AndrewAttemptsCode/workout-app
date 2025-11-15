@@ -9,6 +9,7 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   min-height: 100%;
+  width: 100%;
   gap: 2rem;
   font-size: 1.5rem;
   color: rgb(var(--primary-color));
