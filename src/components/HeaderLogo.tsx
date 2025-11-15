@@ -58,9 +58,9 @@ const StyledNavLink = styled(NavLink)`
 const HeaderLogo = () => {
   return (
     <Container>
-      <StyledNavLink to={"/"}>
+      <StyledNavLink to={"/"} aria-label="Navigate to Storm Lifts homepage">
         <LogoImageWrapper>
-          <img src={logo} alt="Logo" />
+          <img src={logo} alt="" />
         </LogoImageWrapper>
         <LogoText>
           Storm <br /> Lifts
