@@ -86,12 +86,8 @@ const EmptyExercisesContainer = styled.div`
   user-select: none;
 
   a {
-    padding: 0.1rem 0.2rem;
-    text-decoration: none;
     font-weight: bold;
-    color: rgb(var(--primary-color));
-    border: 2px solid rgb(var(--gold-accent));
-    background: rgba(var(--gold-accent), 0.6);
+    color: rgb(var(--gold-accent));
     -webkit-tap-highlight-color: transparent;
   }
 `;
