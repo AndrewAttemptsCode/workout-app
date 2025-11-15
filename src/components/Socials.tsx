@@ -2,14 +2,15 @@ import { Globe } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.ul`
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  padding-top: 0.5rem;
+  padding: 0.5rem 0;
+  list-style: none;
 `;
 
-const SocialItem = styled.div`
+const SocialItem = styled.li`
   aspect-ratio: 1 / 1;
   height: 2rem;
   width: auto;
