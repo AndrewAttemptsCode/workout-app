@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import SrOnly from "./SrOnly";
 
 const StylesContainer = styled.section`
   padding: 2rem 0;
@@ -76,7 +77,10 @@ const GuideSection = () => {
           {steps.map((step, index) => (
             <GuideCard key={index}>
               <StepNumber aria-hidden="true">{index + 1}</StepNumber>
-              <Title aria-label={`Step ${index + 1}: ${step.title}`}>{step.title}</Title>
+              <Title>
+                <SrOnly>{`Step ${index + 1}:`}</SrOnly>
+                {step.title}
+              </Title>
               <Subtitle>{step.subtitle}</Subtitle>
             </GuideCard>
           ))}
