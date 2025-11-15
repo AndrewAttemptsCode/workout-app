@@ -32,6 +32,7 @@ const sharedTitleStyles = css`
   padding: 0.5rem;
   width: 100%;
   min-height: 44px;
+  font-size: 1rem;
 `;
 
 const WorkoutTitle = styled.input`
@@ -62,7 +63,7 @@ const WorkoutTitleLabel = styled.label`
   border: 0;
 `;
 
-const WorkoutDisplayTitle = styled.p`
+const WorkoutDisplayTitle = styled.h3`
   ${sharedTitleStyles}
   margin: none;
   border: 2px solid transparent;
