@@ -5,8 +5,9 @@ import WorkoutExercisesList from "./WorkoutExercisesList";
 import { Link, useNavigate } from "react-router-dom";
 import RemoveItemButton from "./RemoveItemButton";
 import LockButton from "./LockButton";
+import SrOnly from "./SrOnly";
 
-const Container = styled.div<ContainerProps>`
+const Container = styled.li<ContainerProps>`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -149,6 +150,8 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
 
   return (
     <Container $editMode={editMode}>
+
+      <SrOnly>{`Current workout item: ${workout.workoutTitle}`}</SrOnly>
 
       <ButtonContainer>
         {editMode && (
