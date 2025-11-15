@@ -24,8 +24,8 @@ const LayoutPad = styled.div`
 
 const FooterSection = () => {
   return (
-    <Container aria-label="Site footer">
-      <hr />
+    <Container aria-label="Footer section">
+      <hr aria-hidden="true" />
       <LayoutPad>
         <HeaderLogo />
         <Socials />
