@@ -6,8 +6,9 @@ import ExerciseWorkoutSelector from "./ExerciseWorkoutSelector";
 import LockButton from "./LockButton";
 import RemoveItemButton from "./RemoveItemButton";
 import AddSetButton from "./AddSetButton";
+import SrOnly from "./SrOnly";
 
-const Container = styled.div<ContainerProps>`
+const Container = styled.li<ContainerProps>`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -32,6 +33,7 @@ const sharedTitleStyles = css`
   padding: 0.5rem;
   width: 100%;
   min-height: 44px;
+  font-size: 1rem;
 `;
 
 const ExerciseTitle = styled.input`
@@ -51,7 +53,7 @@ const ExerciseTitle = styled.input`
   }
 `;
 
-const ExerciseDisplayTitle = styled.div`
+const ExerciseDisplayTitle = styled.h3`
   ${sharedTitleStyles}
   overflow-x: auto;
   border: 2px solid transparent;
@@ -123,6 +125,9 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
 
   return (
     <Container $editMode={editMode}>
+
+      <SrOnly>{`Current exercise item: ${exercise.title}`}</SrOnly>
+
       <ButtonControlsContainer>
         {editMode && (
           <>

@@ -136,7 +136,13 @@ const ExerciseSets = ({ exercise, editMode }: ExerciseSetsProps) => {
 
             {editMode && 
               <td>
-                <button disabled={exercise.sets.length <= 1} onClick={() => removeSet(exercise.id, set.id)}>&times;</button>
+                <button
+                  disabled={exercise.sets.length <= 1}
+                  onClick={() => removeSet(exercise.id, set.id)}
+                  aria-label="Remove set from exercise"
+                >
+                  &times;
+                </button>
               </td>
             }
           </tr>

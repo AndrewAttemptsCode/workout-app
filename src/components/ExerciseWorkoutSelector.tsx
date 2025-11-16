@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { useWorkout } from "../contexts/WorkoutContext";
 import { Link } from "react-router-dom";
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,28 +26,38 @@ const FallbackContainer = styled.div`
   ${SelectItem}
 
   a {
-    padding: 0.1rem;
-    text-decoration: none;
     font-weight: bold;
-    color: rgb(var(--primary-color));
-    border: 2px solid rgb(var(--gold-accent));
-    background: rgba(var(--gold-accent), 0.6);
+    color: rgb(var(--gold-accent));
     -webkit-tap-highlight-color: transparent;
   }
 `;
 
-const SelectWorkoutItem = styled.div`
-  ${SelectItem}
-  cursor: pointer;
-  outline: none;
-  transition: background 0.3s ease;
+const SelectWorkoutWrapper = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+`;
 
-  &:focus-visible {
-    background: rgba(var(--gold-accent), 0.6);
-  }
+const SelectWorkoutItem = styled.li`
+
+  button {
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: inherit;
+    padding: 0.5rem;
+    text-align: center;
+    transition: background 0.3s ease;
   
-  &:hover {
-    background: rgba(var(--gold-accent), 0.6);
+    &:focus-visible {
+      background: rgba(var(--gold-accent), 0.6);
+    }
+    
+    &:hover {
+      background: rgba(var(--gold-accent), 0.6);
+    }
   }
 `;
 
@@ -59,8 +69,8 @@ const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorPro
   const { workouts } = useWorkout();
 
   return (
-    <Container>
-      <h2>Select Workout</h2>
+    <Container aria-labelledby="select-workout-heading">
+      <h2 id="select-workout-heading">Select Workout</h2>
       
       {workouts.length === 0 && ( 
         <FallbackContainer>
@@ -69,11 +79,18 @@ const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorPro
         </FallbackContainer>
       )}
 
-      {workouts.map((workout) => (
-        <SelectWorkoutItem key={workout.id} onClick={() => onSelectWorkout(workout.id)} tabIndex={0}>
-          {workout.workoutTitle}
-        </SelectWorkoutItem>
-      ))}
+      <SelectWorkoutWrapper>
+        {workouts.map((workout) => (
+          <SelectWorkoutItem key={workout.id}>
+            <button
+              onClick={() => onSelectWorkout(workout.id)}
+              aria-label={`Add exercise to ${workout.workoutTitle}`}
+            >
+              {workout.workoutTitle}
+            </button>
+          </SelectWorkoutItem>
+        ))}
+      </SelectWorkoutWrapper>
 
     </Container>
   );
