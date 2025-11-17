@@ -12,6 +12,7 @@ const Container = styled.section`
 
   h2 {
     font-size: 1rem;
+    outline: none;
   }
 `;
 
@@ -78,7 +79,13 @@ const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorPro
 
   return (
     <Container aria-labelledby="select-workout-heading">
-      <h2 id="select-workout-heading" ref={workoutHeadingRef} tabIndex={-1}>Select Workout</h2>
+      <h2
+        id="select-workout-heading"
+        ref={workoutHeadingRef}
+        tabIndex={-1}
+      >
+        Select Workout
+      </h2>
       
       {workouts.length === 0 && ( 
         <FallbackContainer>
