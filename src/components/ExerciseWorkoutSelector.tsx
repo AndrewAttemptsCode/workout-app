@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { useWorkout } from "../contexts/WorkoutContext";
 import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 const Container = styled.section`
   display: flex;
@@ -67,10 +68,17 @@ type ExerciseWorkoutSelectorProps = {
 
 const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorProps) => {
   const { workouts } = useWorkout();
+  const workoutHeadingRef = useRef<HTMLHeadingElement| null>(null);
+
+  useEffect(() => {
+    if (workoutHeadingRef.current) {
+      workoutHeadingRef.current.focus();
+    }
+  }, []);
 
   return (
     <Container aria-labelledby="select-workout-heading">
-      <h2 id="select-workout-heading">Select Workout</h2>
+      <h2 id="select-workout-heading" ref={workoutHeadingRef} tabIndex={-1}>Select Workout</h2>
       
       {workouts.length === 0 && ( 
         <FallbackContainer>
