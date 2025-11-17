@@ -96,7 +96,7 @@ const AddToWorkoutContainer = styled.div`
   }
 `;
 
-const ExerciseStats = styled.div`
+const ExerciseStats = styled.h4`
   width: 100%;
   height: 100%;
   display: flex;
