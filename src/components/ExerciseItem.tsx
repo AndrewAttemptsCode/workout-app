@@ -142,10 +142,18 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
               onClick={() => {
                 addSet(exercise.id);
                 setAnnouncement("New set added to exercise");
-                setTimeout(() => { setAnnouncement(null) }, 3000);
+                setTimeout(() => { setAnnouncement(null) }, 100);
               }}
             />
-            <RemoveItemButton onClick={() => removeExercise(exercise.id)} />
+            <RemoveItemButton
+              onClick={() => {
+                setAnnouncement("Exercise removed from list");
+                setTimeout(() => {
+                  removeExercise(exercise.id);
+                  setAnnouncement(null);
+                }, 100);
+              }}
+            />
           </>
         )}
 
@@ -181,7 +189,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
               addExerciseToWorkout(workoutId, exercise.id);
               setMenuMode(false);
               setAnnouncement("Exercise added. Back to sets list");
-              setTimeout(() => { setAnnouncement(null) }, 3000);
+              setTimeout(() => { setAnnouncement(null) }, 100);
             }} 
           />
           :
