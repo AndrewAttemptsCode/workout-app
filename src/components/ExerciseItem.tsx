@@ -121,11 +121,18 @@ type ContainerProps = {
 const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
   const [editMode, setEditMode] = useState(exercise.editStatus);
   const [menuMode, setMenuMode] = useState(false);
+  const [announcement, setAnnouncement] = useState<string | null>(null);
   const { addSet, removeExercise, updateExerciseTitle, updateExerciseEditMode, addExerciseToWorkout } = useWorkout();
 
   return (
     <Container $editMode={editMode}>
 
+      {announcement && (
+        <SrOnly ariaLive>
+          {announcement}
+        </SrOnly>
+      )}
+      
       <SrOnly>{`Current exercise item: ${exercise.title}`}</SrOnly>
 
       <ButtonControlsContainer>
@@ -167,6 +174,8 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
             onSelectWorkout={(workoutId) => {
               addExerciseToWorkout(workoutId, exercise.id);
               setMenuMode(false);
+              setAnnouncement("Exercise added. Back to sets list");
+              setTimeout(() => { setAnnouncement(null) }, 3000);
             }} 
           />
           :
