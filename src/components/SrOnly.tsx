@@ -15,11 +15,12 @@ const SrOnlyWrapper = styled.span`
 
 type SrOnlyProps = {
   children: React.ReactNode;
+  ariaLive?: boolean;
 }
 
-const SrOnly = ({ children }: SrOnlyProps) => {
+const SrOnly = ({ children, ariaLive = false }: SrOnlyProps) => {
   return (
-    <SrOnlyWrapper>{children}</SrOnlyWrapper>
+    <SrOnlyWrapper aria-live={ ariaLive ? "polite" : undefined }>{children}</SrOnlyWrapper>
   );
 };
 
