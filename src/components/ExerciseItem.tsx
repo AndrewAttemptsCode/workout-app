@@ -138,7 +138,13 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
       <ButtonControlsContainer>
         {editMode && (
           <>
-            <AddSetButton onClick={() => addSet(exercise.id)} />
+            <AddSetButton
+              onClick={() => {
+                addSet(exercise.id);
+                setAnnouncement("New set added to exercise");
+                setTimeout(() => { setAnnouncement(null) }, 3000);
+              }}
+            />
             <RemoveItemButton onClick={() => removeExercise(exercise.id)} />
           </>
         )}
