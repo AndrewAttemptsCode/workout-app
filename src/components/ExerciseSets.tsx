@@ -71,9 +71,10 @@ const Table = styled.table`
 type ExerciseSetsProps = {
   exercise: Exercise;
   editMode: boolean;
+  onRemoveSet: () => void;
 }
 
-const ExerciseSets = ({ exercise, editMode }: ExerciseSetsProps) => {
+const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) => {
   const { updateSetField, removeSet } = useWorkout();
 
   return (
@@ -138,8 +139,11 @@ const ExerciseSets = ({ exercise, editMode }: ExerciseSetsProps) => {
               <td>
                 <button
                   disabled={exercise.sets.length <= 1}
-                  onClick={() => removeSet(exercise.id, set.id)}
                   aria-label="Remove set from exercise"
+                  onClick={() => {
+                    removeSet(exercise.id, set.id);
+                    onRemoveSet();
+                  }}
                 >
                   &times;
                 </button>

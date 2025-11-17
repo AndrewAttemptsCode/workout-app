@@ -196,6 +196,10 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
           <ExerciseSets
             exercise={exercise}
             editMode={editMode}
+            onRemoveSet={() => {
+              setAnnouncement("Set removed from exercise");
+              setTimeout(() => { setAnnouncement((null)) }, 100);
+            }}
           />
         }
       </MenuModeContainer>
