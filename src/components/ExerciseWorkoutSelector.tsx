@@ -52,6 +52,10 @@ const SelectWorkoutItem = styled.li`
     padding: 0.5rem;
     text-align: center;
     transition: background 0.3s ease;
+    overflow: hidden;
+    overflow-wrap: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   
     &:focus-visible {
       background: rgba(var(--gold-accent), 0.6);
@@ -100,6 +104,7 @@ const ExerciseWorkoutSelector = ({ onSelectWorkout }: ExerciseWorkoutSelectorPro
             <button
               onClick={() => onSelectWorkout(workout.id)}
               aria-label={`Add exercise to ${workout.workoutTitle}`}
+              title={workout.workoutTitle}
             >
               {workout.workoutTitle}
             </button>
