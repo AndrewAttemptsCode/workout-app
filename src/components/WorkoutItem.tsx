@@ -70,6 +70,9 @@ const WorkoutDisplayTitle = styled.h3`
   font-weight: bold;
   background: rgba(var(--primary-color), 0.2);
   user-select: none;
+  overflow-wrap: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const ButtonContainer = styled.div`
@@ -179,7 +182,7 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
           />
         </>
       ) : (
-        <WorkoutDisplayTitle>{workout.workoutTitle}</WorkoutDisplayTitle>
+        <WorkoutDisplayTitle title={workout.workoutTitle}>{workout.workoutTitle}</WorkoutDisplayTitle>
       )}
 
       <ExerciseContainer>
