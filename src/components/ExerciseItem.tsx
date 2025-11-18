@@ -55,13 +55,13 @@ const ExerciseTitle = styled.input`
 
 const ExerciseDisplayTitle = styled.h3`
   ${sharedTitleStyles}
-  overflow-x: auto;
   border: 2px solid transparent;
   font-weight: bold;
   background: rgba(var(--primary-color), 0.2);
-  scrollbar-width: thin;
-  scrollbar-color: rgb(var(--gold-accent)) #1a1919;
   white-space: nowrap;
+  overflow-wrap: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
   user-select: none;
 `;
 
@@ -177,7 +177,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
           onChange={(e) => updateExerciseTitle(exercise.id, e.target.value)}
         />
       ) : (
-        <ExerciseDisplayTitle>
+        <ExerciseDisplayTitle title={exercise.title}>
           {exercise.title}
         </ExerciseDisplayTitle>
       )}
