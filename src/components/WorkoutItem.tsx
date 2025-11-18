@@ -71,6 +71,7 @@ const WorkoutDisplayTitle = styled.h3`
   background: rgba(var(--primary-color), 0.2);
   user-select: none;
   overflow-wrap: normal;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
