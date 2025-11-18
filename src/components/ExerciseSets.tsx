@@ -140,6 +140,7 @@ const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) =>
                 <button
                   disabled={exercise.sets.length <= 1}
                   aria-label="Remove set from exercise"
+                  title="Remove set from exercise"
                   onClick={() => {
                     removeSet(exercise.id, set.id);
                     onRemoveSet();
