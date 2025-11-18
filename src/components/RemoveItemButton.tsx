@@ -23,7 +23,11 @@ type RemoveItemButtonProps = {
 
 const RemoveItemButton = ({ onClick }: RemoveItemButtonProps) => {
   return (
-    <Button onClick={onClick} aria-label="Remove item from list">
+    <Button
+      onClick={onClick}
+      aria-label="Remove item from list"
+      title="Remove item"  
+    >
       <Trash2 size={20} color="rgb(var(--primary-color))" />
     </Button>
   );
