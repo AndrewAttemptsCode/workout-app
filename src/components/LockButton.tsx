@@ -84,6 +84,7 @@ const LockButton = ({ onClick, status = false }: LockButtonProps) => {
         onClick={onClick}
         aria-label={"Edit item"}
         aria-pressed={status}
+        title={`${status ? "Lock" : "Unlock"} item`}
       >
         <SliderPip $status={status} />
 
