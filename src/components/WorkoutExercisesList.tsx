@@ -84,6 +84,7 @@ const WorkoutExercisesList = ({ workoutExercises, editMode, workoutId }: Workout
                 <button
                   onClick={() => removeExerciseFromWorkout(workoutId, index)}
                   aria-label={`Remove ${exercise.title} from workout`}
+                  title="Remove exercise from workout"
                 >
                   &times;
                 </button>
