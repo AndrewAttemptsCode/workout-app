@@ -29,7 +29,11 @@ type AddSetButtonProps = {
 
 const AddSetButton = ({ onClick }: AddSetButtonProps) => {
   return (
-    <Button onClick={onClick} aria-label="Add new set">
+    <Button
+      onClick={onClick}
+      aria-label="Add new set"
+      title="Add additional set"
+    >
       <Dumbbell size={20} color="rgb(var(--primary-color))" />
       +
     </Button>
