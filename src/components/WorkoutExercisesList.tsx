@@ -3,7 +3,7 @@ import { useWorkout } from "../contexts/WorkoutContext";
 
 const Table = styled.table`
   width: 100%;
-  table-layout: auto;
+  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0.5rem;
   user-select: none;
@@ -20,6 +20,19 @@ const Table = styled.table`
 
   td {
     height: 2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  td:first-of-type,
+  th:first-of-type {
+    width: 70%;
+  }
+
+  td:last-of-type,
+  th:last-of-type {
+    width: 30%;
   }
 
   td button {
@@ -77,7 +90,7 @@ const WorkoutExercisesList = ({ workoutExercises, editMode, workoutId }: Workout
 
           return (
             <tr key={index}>
-              <td>{exercise.title}</td>
+              <td title={exercise.title}>{exercise.title}</td>
 
               {editMode && (
               <ButtonTD>
