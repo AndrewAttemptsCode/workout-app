@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDashboard } from "../contexts/DashboardContext";
 import DashResetButton from "./DashResetButton";
 
-const Container = styled.div`
+const Container = styled.section`
   padding: 1rem 0;
   margin: 0 auto;
   width: min(90%, 1024px);
@@ -38,9 +38,9 @@ const MonthlyWorkoutChart = () => {
   const { monthlyWorkoutCount } = useDashboard();
 
   return (
-    <Container>
+    <Container aria-labelledby="chart-heading">
       <Heading>
-        <h2>Workouts per month</h2>
+        <h2 id="chart-heading">Workouts per month</h2>
         <DashResetButton value="workouts per month"/>
       </Heading>
       <BarChart
