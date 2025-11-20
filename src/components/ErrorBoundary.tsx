@@ -11,7 +11,7 @@ const Container = styled.div`
   background: linear-gradient(to bottom, #3f3f3f, #1a1919);
 `;
 
-const MessageContainer = styled.div`
+const MessageContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -66,7 +66,7 @@ const ErrorBoundary = () => {
 
   return (
     <Container>
-      <MessageContainer>
+      <MessageContainer aria-label="Error">
         <HeaderLogo />
         <h1>Oops!</h1>
         <p>{message}</p>
