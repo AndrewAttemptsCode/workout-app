@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useDashboard } from "../contexts/DashboardContext";
 import DashResetButton from "./DashResetButton";
+import SrOnly from "./SrOnly";
 
 const StylesContainer = styled.section`
   padding: 1rem 0;
@@ -11,14 +12,16 @@ const ResponsiveContainer = styled.div`
   margin: 0 auto;
 `;
 
-const DaysContainer = styled.div`
+const DaysContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 1rem;
   text-align: center;
+  list-style-type: none;
+  padding: 0;
 `;
 
-const ItemWrapper = styled.div`
+const ItemWrapper = styled.li`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -83,14 +86,15 @@ const DashboardWeeklyTracker = () => {
         <DaysContainer>
           {daysComplete.map(dayComplete => (
             <ItemWrapper key={dayComplete.day}>
-              <ItemDisplay 
-                $complete={dayComplete.complete} 
-                aria-label={`${dayComplete.day} is ${dayComplete.complete ? "complete" : "not complete"}`}
-              />
+              <ItemDisplay $complete={dayComplete.complete} />
               <ItemText
                 data-short={dayComplete.day.slice(0, 2)}
                 data-long={dayComplete.day}
+                aria-hidden="true"
               />
+              <SrOnly>
+                {`${dayComplete.day} is ${dayComplete.complete ? "complete" : "not complete"}`}
+              </SrOnly>
             </ItemWrapper>
           ))}
         </DaysContainer>
