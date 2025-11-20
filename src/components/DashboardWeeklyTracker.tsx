@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useDashboard } from "../contexts/DashboardContext";
 import DashResetButton from "./DashResetButton";
 
-const StylesContainer = styled.div`
+const StylesContainer = styled.section`
   padding: 1rem 0;
 `;
 
@@ -74,10 +74,10 @@ const DashboardWeeklyTracker = () => {
   const { daysComplete } = useDashboard();
 
   return (
-    <StylesContainer>
+    <StylesContainer aria-labelledby="tracker-heading">
       <ResponsiveContainer>
         <Heading>
-          <h2>Weekly Tracker</h2>
+          <h2 id="tracker-heading">Weekly Tracker</h2>
           <DashResetButton value="weekly tracker" />
         </Heading>
         <DaysContainer>
