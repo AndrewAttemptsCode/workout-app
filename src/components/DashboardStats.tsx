@@ -3,7 +3,7 @@ import { useDashboard } from "../contexts/DashboardContext";
 import { formatDistance } from "date-fns";
 import DashResetButton from "./DashResetButton";
 
-const StylesContainer = styled.div`
+const StylesContainer = styled.section`
   padding: 1rem 0;
 `;
 
@@ -12,15 +12,17 @@ const ResponsiveContainer = styled.div`
   margin: 0 auto;
 `;
 
-const StatsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-auto-rows: 1fr;
+const StatsContainer = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   user-select: none;
+  list-style-type: none;
+  padding: 0;
 `;
 
-const StatItem = styled.div`
+const StatItem = styled.li`
+  flex: 1 1 200px;
   background: rgba(var(--primary-color), 0.2);
   padding: 1rem 0.5rem;
   display: flex;
@@ -68,10 +70,10 @@ const DashboardStats = () => {
   const { stats } = useDashboard();
 
   return (
-    <StylesContainer>
+    <StylesContainer aria-labelledby="stats-heading">
       <ResponsiveContainer>
         <Heading>
-          <h2>Quick Stats</h2>
+          <h2 id="stats-heading">Quick Stats</h2>
           <DashResetButton value="quick stats" />
         </Heading>
         <StatsContainer>
