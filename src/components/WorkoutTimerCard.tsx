@@ -140,6 +140,7 @@ const WorkoutTimerCard = () => {
     <Container aria-label="Workout breakdown">
       <WorkoutButton
         disabled={!workoutTimer}
+        aria-expanded={showExercises}
         onClick={() => {
           setShowExercises(!showExercises);
           setSelectedExercise(-1);
