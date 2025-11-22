@@ -3,6 +3,7 @@ import { useWorkout } from "../contexts/WorkoutContext";
 import styled, { css } from "styled-components";
 import { Check, ChevronDown, X } from "lucide-react";
 import ProgressBar from "./ProgressBar";
+import SrOnly from "./SrOnly";
 
 const Container = styled.section`
   width: min(100%, 768px);
@@ -163,6 +164,7 @@ const WorkoutTimerCard = () => {
                 onClick={() =>
                   setSelectedExercise((prev) => (prev === index ? -1 : index))
                 }
+                aria-expanded={selectedExercise === index}
               >
                 <ProgressBar progress={totalSets > 0 ? exerciseComplete / totalSets : 0} />
                 <ExerciseTitle>{exercise?.title}</ExerciseTitle>
@@ -170,7 +172,7 @@ const WorkoutTimerCard = () => {
                 <ExerciseChevron $selectedExercise={selectedExercise} $index={index} />
               </ExerciseButton>
 
-              <SetsList $selectedExercise={selectedExercise} $index={index}>
+              <SetsList $selectedExercise={selectedExercise} $index={index} aria-hidden={selectedExercise !== index}>
                 <SetHeading>
                   <span>Reps</span>
                   <span>Weight</span>
@@ -183,7 +185,18 @@ const WorkoutTimerCard = () => {
                     <span>{set.reps}</span>
                     <span>{set.weight}</span>
                     <span>{set.rest}</span>
-                    <span>{set.complete ? (<Check color="rgb(var(--green-accent))"/>) : (<X color="rgba(var(--primary-color), 0.8)" />)}</span>
+                    <span>{set.complete ? (
+                      <>
+                        <Check color="rgb(var(--green-accent))"/>
+                        <SrOnly>Set complete</SrOnly>
+                      </>
+                    ) : (
+                    <>
+                      <X color="rgba(var(--primary-color), 0.8)" />
+                      <SrOnly>Set not complete</SrOnly>
+                    </>
+                    )}
+                    </span>
                   </SetRow>
                 ))}
               </SetsList>
