@@ -71,6 +71,7 @@ const ButtonStripe = styled.div`
   transform: translate(-50%, -50%) rotate(45deg);
   background: linear-gradient(to right, transparent, rgba(var(--gold-accent), 0.8), transparent);
   animation: ${stripeAnimation} 6s linear infinite;
+  user-select: none;
 `;
 
 const WorkoutTimerControls = () => {
@@ -112,8 +113,8 @@ const WorkoutTimerControls = () => {
         disabled={timerActive || !workoutTimer}
         $workoutActive={startWorkout}
       >
-        {(!startWorkout && workoutTimer) && <ButtonStripe />}
         <span>{!startWorkout ? "Start Workout" : workoutTimer?.complete ? "Finish Workout" : "Complete Set"}</span>
+        {(!startWorkout && workoutTimer) && <ButtonStripe />}
       </Button>
     </Container>
   );
