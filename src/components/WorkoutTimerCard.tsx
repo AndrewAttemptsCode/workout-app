@@ -90,7 +90,7 @@ const CompleteTracker = styled.span`
   z-index: 5;
 `;
 
-const SetsList = styled.div<{ $selectedExercise: number; $index: number }>`
+const SetsList = styled.section<{ $selectedExercise: number; $index: number }>`
   overflow: hidden;
   transition: max-height 0.4s ease, opacity 0.3s ease;
   max-height: ${({ $selectedExercise, $index }) =>
@@ -172,7 +172,12 @@ const WorkoutTimerCard = () => {
                 <ExerciseChevron $selectedExercise={selectedExercise} $index={index} />
               </ExerciseButton>
 
-              <SetsList $selectedExercise={selectedExercise} $index={index} aria-hidden={selectedExercise !== index}>
+              <SetsList 
+                $selectedExercise={selectedExercise}
+                $index={index}
+                aria-hidden={selectedExercise !== index}
+                aria-label="Exercise breakdown"
+              >
                 <SetHeading>
                   <span>Reps</span>
                   <span>Weight</span>
