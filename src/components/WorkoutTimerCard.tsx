@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { Check, ChevronDown, X } from "lucide-react";
 import ProgressBar from "./ProgressBar";
 
-const Container = styled.div`
+const Container = styled.section`
   width: min(100%, 768px);
   margin: 0 auto;
 `;
@@ -137,7 +137,7 @@ const WorkoutTimerCard = () => {
   const totalExercises = workoutTimer?.exercises?.length ?? 0;
 
   return (
-    <Container>
+    <Container aria-label="Workout breakdown">
       <WorkoutButton
         disabled={!workoutTimer}
         onClick={() => {

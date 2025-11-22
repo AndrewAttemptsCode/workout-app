@@ -3,7 +3,7 @@ import { useWorkout } from "../contexts/WorkoutContext";
 import styled, { keyframes } from "styled-components";
 import { useWorkoutTimer } from "../contexts/WorkoutTimerContext";
 
-const Container = styled.div<{$timerActive: boolean}>`
+const Container = styled.section<{$timerActive: boolean}>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -71,7 +71,7 @@ const WorkoutTimerDisplay = () => {
   const { timerActive, secondsLeft } = useWorkoutTimer();
 
   return (
-    <Container $timerActive={timerActive}>
+    <Container $timerActive={timerActive} aria-label="Workout timer display">
       <TitleContainer>
         {workoutTimer?.complete ? "Workout Complete" : currentProgress?.exercise?.title ?? "No current exercise"}
       </TitleContainer>

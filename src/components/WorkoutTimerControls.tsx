@@ -6,7 +6,7 @@ import { useWakeLock } from "react-screen-wake-lock";
 import { useState } from "react";
 import { useDashboard } from "../contexts/DashboardContext";
 
-const Container = styled.div`
+const Container = styled.section`
   width: min(100%, 768px);
   margin: 0 auto;
 
@@ -106,7 +106,7 @@ const WorkoutTimerControls = () => {
   }
 
   return (
-    <Container>
+    <Container aria-label="Workout timer controls">
       <Button
         onClick={handleButtonClick}
         disabled={timerActive || !workoutTimer}
