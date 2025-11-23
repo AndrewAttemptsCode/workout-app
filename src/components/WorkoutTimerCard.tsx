@@ -75,13 +75,14 @@ const ExerciseList = styled.div<{ $showExercises: boolean }>`
 
 const TitleStyle = css`
   margin-right: auto;
+  font-size: 1rem;
 `;
 
-const WorkoutTitle = styled.div`
+const WorkoutTitle = styled.h2`
   ${TitleStyle}
 `;
 
-const ExerciseTitle = styled.div`
+const ExerciseTitle = styled.h3`
   ${TitleStyle}
   z-index: 5;
 `;
