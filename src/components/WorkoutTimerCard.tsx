@@ -149,7 +149,12 @@ const WorkoutTimerCard = () => {
         }}
       >
         <WorkoutTitle>{workoutTimer?.workoutTitle ?? "Empty workout"}</WorkoutTitle>
-        <CompleteTracker>{workoutComplete}/{totalExercises}</CompleteTracker>
+        <CompleteTracker
+          title="Exercises complete"
+          aria-label={`${workoutComplete} of ${totalExercises} exercises complete`}
+        >
+          {workoutComplete}/{totalExercises}
+        </CompleteTracker>
         <WorkoutChevron $showExercises={showExercises} />
       </WorkoutButton>
 
