@@ -70,4 +70,28 @@ describe("Workouts page", () => {
     // Target input element is no longer present
     expect(workoutInputTitle).not.toBeInTheDocument();
   })
+
+  it("input title allows text", async () => {
+    renderWorkoutPage();
+
+    // Add workout item to the workout list
+    const addWorkoutButton = screen.getByRole("button", { name: /add new workout/i });
+    await userEvent.click(addWorkoutButton);
+
+    // Target workout title input element
+    const workoutInputTitle = screen.getByRole("textbox", { name: /workout name/i });
+
+    // Remove any present value in the input field
+    await userEvent.click(workoutInputTitle);
+    await userEvent.clear(workoutInputTitle);
+
+    // Checks workout title input has been cleared
+    expect(workoutInputTitle).toHaveValue("");
+  
+    // Enter text into workout input element
+    await userEvent.type(workoutInputTitle, "new workout");
+
+    // Compare expected value
+    expect(workoutInputTitle).toHaveValue("new workout");
+  })
 });
