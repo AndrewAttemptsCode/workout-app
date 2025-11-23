@@ -51,4 +51,23 @@ describe("Workouts page", () => {
     // Workout item is no longer rendered
     expect(workoutItem).not.toBeInTheDocument();
   })
+
+  it("toggles edit item mode", async () => {
+    renderWorkoutPage();
+
+    // Add workout item to the workout list
+    const addWorkoutButton = screen.getByRole("button", { name: /add new workout/i });
+    await userEvent.click(addWorkoutButton);
+
+    // Target element that is present in edit mode
+    const workoutInputTitle = screen.getByRole("textbox", { name: /workout name/i });
+    expect(workoutInputTitle).toBeInTheDocument();
+
+    // Click toggle edit item button to off
+    const editButton = screen.getByTitle("Lock item");
+    await userEvent.click(editButton);
+
+    // Target input element is no longer present
+    expect(workoutInputTitle).not.toBeInTheDocument();
+  })
 });
