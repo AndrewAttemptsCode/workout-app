@@ -174,7 +174,12 @@ const WorkoutTimerCard = () => {
               >
                 <ProgressBar progress={totalSets > 0 ? exerciseComplete / totalSets : 0} />
                 <ExerciseTitle>{exercise?.title}</ExerciseTitle>
-                <CompleteTracker>{exerciseComplete}/{exercise?.sets.length}</CompleteTracker>
+                <CompleteTracker
+                  title="Sets complete"
+                  aria-label={`${exerciseComplete} of ${totalSets} sets complete`}
+                >
+                  {exerciseComplete}/{totalSets}
+                </CompleteTracker>
                 <ExerciseChevron $selectedExercise={selectedExercise} $index={index} />
               </ExerciseButton>
 
