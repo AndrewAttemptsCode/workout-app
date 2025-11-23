@@ -16,7 +16,7 @@ const Container = styled.section<{$timerActive: boolean}>`
   user-select: none;
 `;
 
-const TitleContainer = styled.div`
+const Title = styled.h1`
   text-align: center;
   font-weight: bold;
   font-size: 1.2rem;
@@ -72,9 +72,9 @@ const WorkoutTimerDisplay = () => {
 
   return (
     <Container $timerActive={timerActive} aria-label="Workout timer display">
-      <TitleContainer>
+      <Title>
         {workoutTimer?.complete ? "Workout Complete" : currentProgress?.exercise?.title ?? "No current exercise"}
-      </TitleContainer>
+      </Title>
       <SetItemContainer>
         {timerActive ? (
           <SetItem>
