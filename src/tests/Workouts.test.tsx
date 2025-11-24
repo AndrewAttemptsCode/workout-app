@@ -1,10 +1,11 @@
 import "@testing-library/jest-dom";
 import { beforeEach, describe, expect, it } from "vitest";
-import { screen, render } from "@testing-library/react";
+import { screen, render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import WorkoutPage from "../pages/WorkoutPage";
 import { WorkoutProvider } from "../contexts/WorkoutContext";
 import { MemoryRouter } from "react-router-dom";
+import ExercisePage from "../pages/ExercisePage";
 
 const renderComponent = (children: React.ReactNode) => {
   render(
@@ -107,6 +108,42 @@ describe("Workouts page", () => {
   })
 
   it("exercise list has an exercise present", async () => {
+    renderComponent(
+      <>
+        <WorkoutPage />
+        <ExercisePage />
+      </>
+    )
 
+    // Add workout item to the workout list
+    const addWorkoutButton = screen.getByRole("button", { name: /add new workout/i });
+    await userEvent.click(addWorkoutButton);
+
+    // Add exercise item to the exercise list
+    const addExerciseButton = screen.getByRole("button", { name: /add new exercise/i });
+    await userEvent.click(addExerciseButton);
+
+    // Give exercise an accessible name
+    const exerciseList = screen.getByRole("region", { name: /my exercises/i });
+    const exerciseTitle = within(exerciseList).getByRole("textbox", { name: /exercise name/i });
+    await userEvent.click(exerciseTitle);
+    await userEvent.clear(exerciseTitle);
+    await userEvent.type(exerciseTitle, "bench press");
+
+    // Lock exercise item "edit item mode", to access add to workout button
+    const editButton = within(exerciseList).getByRole("button", { name: /edit item/i });
+    await userEvent.click(editButton);
+
+    // Add exercise to workout item exercise list
+    const addToWorkoutButton = screen.getByRole("button", { name: /add to workout/i });
+    await userEvent.click(addToWorkoutButton);
+
+    const workoutItem = screen.getByRole("button", { name: /^add exercise to/i });
+    await userEvent.click(workoutItem);
+
+    // Check for exercise in workout item exercise list
+    const workoutList = screen.getByRole("region", { name: /my workouts/i });
+    const exercise = within(workoutList).getByRole("cell", { name: /bench press/i });
+    expect(exercise).toBeInTheDocument();
   })
 });
