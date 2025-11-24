@@ -94,4 +94,15 @@ describe("Workouts page", () => {
     // Compare expected value
     expect(workoutInputTitle).toHaveValue("new workout");
   })
+
+  it("exercise list is empty", async () => {
+    renderWorkoutPage();
+
+    // Add workout item to the workout list
+    const addWorkoutButton = screen.getByRole("button", { name: /add new workout/i });
+    await userEvent.click(addWorkoutButton);
+
+    const emptyList = screen.getByText("Exercise list is currently empty...");
+    expect(emptyList).toBeInTheDocument();
+  })
 });
