@@ -36,6 +36,17 @@ const sharedTitleStyles = css`
   font-size: 1rem;
 `;
 
+const ExerciseTitleLabel = styled.label`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+`;
+
 const ExerciseTitle = styled.input`
   ${sharedTitleStyles}
   color: rgb(var(--primary-color));
@@ -168,14 +179,17 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
       </ButtonControlsContainer>
 
       {editMode ? (
-        <ExerciseTitle
-          type="text"
-          name="exerciseTitle"
-          id="exerciseTitle"
-          placeholder="Exercise Name..."
-          value={exercise.title}
-          onChange={(e) => updateExerciseTitle(exercise.id, e.target.value)}
-        />
+        <>
+          <ExerciseTitleLabel htmlFor="exerciseTitle">exercise name</ExerciseTitleLabel>
+          <ExerciseTitle
+            type="text"
+            name="exerciseTitle"
+            id="exerciseTitle"
+            placeholder="Exercise Name..."
+            value={exercise.title}
+            onChange={(e) => updateExerciseTitle(exercise.id, e.target.value)}
+          />
+        </>
       ) : (
         <ExerciseDisplayTitle title={exercise.title}>
           {exercise.title}
