@@ -6,11 +6,11 @@ import WorkoutPage from "../pages/WorkoutPage";
 import { WorkoutProvider } from "../contexts/WorkoutContext";
 import { MemoryRouter } from "react-router-dom";
 
-const renderWorkoutPage = () => {
+const renderComponent = (children: React.ReactNode) => {
   render(
       <MemoryRouter>
         <WorkoutProvider>
-          <WorkoutPage />
+          {children}
         </WorkoutProvider>
       </MemoryRouter>
     );
@@ -22,7 +22,7 @@ describe("Workouts page", () => {
   });
 
   it("adds new workout item", async () => {
-    renderWorkoutPage();
+    renderComponent(<WorkoutPage />);
 
     const button = screen.getByRole("button", { name: /add new workout/i });
     // Add new workout item button is rendered
@@ -37,7 +37,7 @@ describe("Workouts page", () => {
   });
 
   it("removes a workout item", async () => {
-    renderWorkoutPage();
+    renderComponent(<WorkoutPage />);
 
     // Adds workout item
     const button = screen.getByRole("button", { name: /add new workout/i });
@@ -53,7 +53,7 @@ describe("Workouts page", () => {
   })
 
   it("toggles edit item mode", async () => {
-    renderWorkoutPage();
+    renderComponent(<WorkoutPage />);
 
     // Add workout item to the workout list
     const addWorkoutButton = screen.getByRole("button", { name: /add new workout/i });
@@ -72,7 +72,7 @@ describe("Workouts page", () => {
   })
 
   it("input title allows text", async () => {
-    renderWorkoutPage();
+    renderComponent(<WorkoutPage />);
 
     // Add workout item to the workout list
     const addWorkoutButton = screen.getByRole("button", { name: /add new workout/i });
@@ -96,7 +96,7 @@ describe("Workouts page", () => {
   })
 
   it("exercise list is empty", async () => {
-    renderWorkoutPage();
+    renderComponent(<WorkoutPage />);
 
     // Add workout item to the workout list
     const addWorkoutButton = screen.getByRole("button", { name: /add new workout/i });
@@ -104,5 +104,9 @@ describe("Workouts page", () => {
 
     const emptyList = screen.getByText("Exercise list is currently empty...");
     expect(emptyList).toBeInTheDocument();
+  })
+
+  it("exercise list has an exercise present", async () => {
+
   })
 });
