@@ -52,4 +52,25 @@ describe("Exercises Page", () => {
     const removedExerciseItem = screen.queryByRole("button", { name: /exercise name/i });
     expect(removedExerciseItem).not.toBeInTheDocument();
   });
+
+  it("Adds an additional set to the exercise item", async () => {
+    renderComponent(<ExercisePage />);
+
+    // Target and click add new exercise button
+    const addExerciseButton = screen.getByRole("button", { name: /add new exercise/i });
+    await userEvent.click(addExerciseButton);
+
+    // Expect new exercise item to be present
+    const exerciseItem = screen.getByRole("textbox", { name: /exercise name/i });
+    expect(exerciseItem).toBeInTheDocument();
+
+    // Target and click add additional set button
+    const addNewSetButton = screen.getByRole("button", { name: /add new set/i });
+    await userEvent.click(addNewSetButton);
+
+    // Expect table to have two sets present
+    const tbody = screen.getAllByRole("rowgroup")[1];
+    const allRows = within(tbody).getAllByRole("row");
+    expect(allRows).toHaveLength(2);
+  });
 })
