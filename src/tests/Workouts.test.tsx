@@ -52,7 +52,8 @@ describe("Workouts page", () => {
     const removeButton = screen.getByRole("button", { name: /remove item from list/i });
     await userEvent.click(removeButton);
     // Workout item is no longer rendered
-    expect(workoutItem).not.toBeInTheDocument();
+    const removedWorkoutItem = screen.queryByRole("textbox", { name: /workout name/i });
+    expect(removedWorkoutItem).not.toBeInTheDocument();
   })
 
   it("toggles edit item mode", async () => {
@@ -71,7 +72,8 @@ describe("Workouts page", () => {
     await userEvent.click(editButton);
 
     // Target input element is no longer present
-    expect(workoutInputTitle).not.toBeInTheDocument();
+    const removedWorkoutInputTitle = screen.queryByRole("textbox", { name: /workout name/i });
+    expect(removedWorkoutInputTitle).not.toBeInTheDocument();
   })
 
   it("input title allows text", async () => {
