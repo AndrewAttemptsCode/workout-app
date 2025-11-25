@@ -31,5 +31,25 @@ describe("Exercises Page", () => {
     // Expect new exercise item to be present
     const exerciseItem = screen.getByRole("textbox", { name: /exercise name/i });
     expect(exerciseItem).toBeInTheDocument();
-  })
+  });
+
+  it("remove item button removes an exercise item", async () => {
+    renderComponent(<ExercisePage />);
+
+    // Target and click add new exercise button
+    const addExerciseButton = screen.getByRole("button", { name: /add new exercise/i });
+    await userEvent.click(addExerciseButton);
+
+    // Expect new exercise item to be present
+    const exerciseItem = screen.getByRole("textbox", { name: /exercise name/i });
+    expect(exerciseItem).toBeInTheDocument();
+
+    // Target and click remove exercise button
+    const removeExerciseItemButton = screen.getByRole("button", { name: /remove item from list/i });
+    await userEvent.click(removeExerciseItemButton);
+
+    // Expect exercise item not be to present
+    const removedExerciseItem = screen.queryByRole("button", { name: /exercise name/i });
+    expect(removedExerciseItem).not.toBeInTheDocument();
+  });
 })
