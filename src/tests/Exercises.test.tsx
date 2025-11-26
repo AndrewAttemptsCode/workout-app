@@ -73,4 +73,28 @@ describe("Exercises Page", () => {
     const allRows = within(tbody).getAllByRole("row");
     expect(allRows).toHaveLength(2);
   });
+
+  it("edit item mode button functions", async () => {
+    renderComponent(<ExercisePage />);
+
+    // Target and click add new exercise button
+    const addExerciseButton = screen.getByRole("button", { name: /add new exercise/i });
+    await userEvent.click(addExerciseButton);
+
+    // Expect new exercise item to be present and in edit mode
+    const exerciseItem = screen.getByRole("textbox", { name: /exercise name/i });
+    expect(exerciseItem).toBeInTheDocument();
+
+    // Target edit item mode button and disable edit item mode
+    const editModeButton = screen.getByRole("button", { name: /edit item/i });
+    await userEvent.click(editModeButton);
+
+    // Expect exercise item title input textbox not to be present
+    const removedExerciseTitle = screen.queryByRole("textbox", { name: /exercise name/i });
+    expect(removedExerciseTitle).not.toBeInTheDocument();
+
+    // Expect exercise item title heading to be present
+    const exerciseHeadingTitle = screen.getByRole("heading", { name: /^exercise#/i });
+    expect(exerciseHeadingTitle).toBeInTheDocument();
+  })
 })
