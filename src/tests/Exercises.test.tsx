@@ -118,4 +118,38 @@ describe("Exercises Page", () => {
     // Expect title to have new title
     expect(exerciseTitleInput).toHaveValue("bench press");
   });
+
+  it("exercise set input fields update", async () => {
+    renderComponent(<ExercisePage />);
+
+    // Target and click add new exercise button
+    const addExerciseButton = screen.getByRole("button", { name: /add new exercise/i });
+    await userEvent.click(addExerciseButton);
+
+    // Expect new exercise item to be present and in edit mode
+    const exerciseItem = screen.getByRole("textbox", { name: /exercise name/i });
+    expect(exerciseItem).toBeInTheDocument();
+
+    // Update exercise set fields - reps, weight and rest inputs
+    // Reps
+    const repsField = screen.getByRole("spinbutton", { name: /reps/i });
+    await userEvent.click(repsField);
+    await userEvent.clear(repsField);
+    await userEvent.type(repsField, "10");
+    // Weight
+    const weightField = screen.getByRole("spinbutton", { name: /^weight/i });
+    await userEvent.click(weightField);
+    await userEvent.clear(weightField);
+    await userEvent.type(weightField, "8.5");
+    // Rest
+    const restField = screen.getByRole("spinbutton", { name: /^rest/i });
+    await userEvent.click(restField);
+    await userEvent.clear(restField);
+    await userEvent.type(restField, "60");
+
+    // Expect exercise set fields to be updated
+    expect(repsField).toHaveValue(10);
+    expect(weightField).toHaveValue(8.5);
+    expect(restField).toHaveValue(60);
+  });
 })
