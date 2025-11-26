@@ -152,4 +152,34 @@ describe("Exercises Page", () => {
     expect(weightField).toHaveValue(8.5);
     expect(restField).toHaveValue(60);
   });
+
+  it("remove set from exercise button functions", async () => {
+    renderComponent(<ExercisePage />);
+
+    // Target and click add new exercise button
+    const addExerciseButton = screen.getByRole("button", { name: /add new exercise/i });
+    await userEvent.click(addExerciseButton);
+
+    // Expect new exercise item to be present and in edit mode
+    const exerciseItem = screen.getByRole("textbox", { name: /exercise name/i });
+    expect(exerciseItem).toBeInTheDocument();
+
+    // Add new set
+    const addSetButton = screen.getByRole("button", { name: /add new set/i });
+    await userEvent.click(addSetButton);
+
+    // Expect table to have two sets present
+    const tbody = screen.getAllByRole("rowgroup")[1];
+    const allRows = within(tbody).getAllByRole("row");
+    expect(allRows).toHaveLength(2);
+
+    // Target a set entry and remove it
+    const removeSetButton = screen.getAllByRole("button", { name: /remove set from exercise/i })[0];
+    await userEvent.click(removeSetButton);
+
+    // Expect updated sets table to have one set present
+    const updatedtbody = screen.getAllByRole("rowgroup")[1];
+    const updatedAllRows = within(updatedtbody).queryAllByRole("row");
+    expect(updatedAllRows).toHaveLength(1);
+  });
 })
