@@ -81,9 +81,9 @@ const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) =>
     <Table>
       <thead>
         <tr>
-          <th>Reps</th>
-          <th>Weight (kg)</th>
-          <th>Rest (secs)</th>
+          <th id="col-reps">Reps</th>
+          <th id="col-weight">Weight (kg)</th>
+          <th id="col-rest">Rest (secs)</th>
           {editMode && <th>Remove</th>}
         </tr>
       </thead>
@@ -99,9 +99,10 @@ const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) =>
                 min={0}
                 value={set.reps ?? ""}
                 onChange={(e) => updateSetField(exercise.id, set.id, "reps", Number.isNaN(e.target.valueAsNumber) ? null : e.target.valueAsNumber)} 
+                aria-labelledby="col-reps"
               />
               ) : (
-                <span>{set.reps}</span>
+                <span aria-labelledby="col-reps">{set.reps}</span>
               )}
             </td>
               
@@ -114,9 +115,10 @@ const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) =>
                   min={0}
                   value={set.weight ?? ""}
                   onChange={(e) => updateSetField(exercise.id, set.id, "weight", Number.isNaN(e.target.valueAsNumber) ? null : e.target.valueAsNumber)} 
+                  aria-labelledby="col-weight"
                 />
               ) : (
-                <span>{set.weight}</span>
+                <span aria-labelledby="col-weight">{set.weight}</span>
               )}
             </td>
       
@@ -129,9 +131,10 @@ const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) =>
                   min={0}
                   value={set.rest ?? ""}
                   onChange={(e) => updateSetField(exercise.id, set.id, "rest", Number.isNaN(e.target.valueAsNumber) ? null : e.target.valueAsNumber)}
+                  aria-labelledby="col-rest"
                 />
               ) : (
-                <span>{set.rest}</span>
+                <span aria-labelledby="col-rest">{set.rest}</span>
               )}
             </td>
 
