@@ -96,5 +96,26 @@ describe("Exercises Page", () => {
     // Expect exercise item title heading to be present
     const exerciseHeadingTitle = screen.getByRole("heading", { name: /^exercise#/i });
     expect(exerciseHeadingTitle).toBeInTheDocument();
-  })
+  });
+
+  it("exercise title updates", async () => {
+    renderComponent(<ExercisePage />);
+
+    // Target and click add new exercise button
+    const addExerciseButton = screen.getByRole("button", { name: /add new exercise/i });
+    await userEvent.click(addExerciseButton);
+
+    // Expect new exercise item to be present and in edit mode
+    const exerciseItem = screen.getByRole("textbox", { name: /exercise name/i });
+    expect(exerciseItem).toBeInTheDocument();
+
+    // Target exercise item input field and enter custom exercise name
+    const exerciseTitleInput = screen.getByRole("textbox", { name: /exercise name/i });
+    await userEvent.click(exerciseTitleInput);
+    await userEvent.clear(exerciseTitleInput);
+    await userEvent.type(exerciseTitleInput, "bench press");
+
+    // Expect title to have new title
+    expect(exerciseTitleInput).toHaveValue("bench press");
+  });
 })
