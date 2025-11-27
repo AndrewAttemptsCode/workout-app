@@ -1,10 +1,11 @@
 import "@testing-library/jest-dom";
-import { screen, render, within } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { describe, it, expect, beforeEach } from "vitest";
 import { DashboardProvider } from "../contexts/DashboardContext";
 import DashboardWeeklyTracker from "../components/DashboardWeeklyTracker";
+import DashboardStats from "../components/DashboardStats";
 
 const renderComponent = (children: React.ReactNode) => {
   render(
@@ -58,4 +59,33 @@ describe("Dashboard page", () => {
     expect(screen.queryByText(/monday is complete/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/tuesday is not complete/i)).toBeInTheDocument();
   });
-})
+
+  it("reset button resets quick stats back to defaults", async () => {
+    const testStats = [
+      { name: "Last worked out", value: new Date().toISOString() },
+      { name: "Last workout complete", value: "upper body" },
+      { name: "Workouts complete", value: 1 },
+      { name: "Exercises complete", value: 5 },
+      { name: "Sets complete", value: 50 },
+      { name: "Reps complete", value: 100 },
+      { name: "Heaviest weight lifted", value: 50 },
+      { name: "Total workout duration", value: 1200 },
+    ];
+
+    // Load stats with initial test values
+    localStorage.setItem("stats", JSON.stringify(testStats));
+
+    // Render the dashboard stats component
+    renderComponent(<DashboardStats />);
+
+    // Expect test stats to be present
+    expect(screen.getByText(/upper body/i)).toBeInTheDocument();
+
+    // Reset quick stats button
+    const button = screen.getByRole("button", { name: /reset stats for quick stats/i });
+    await userEvent.click(button);
+
+    // Expect stats to have been reset
+    expect(screen.queryByText(/upper body/i)).not.toBeInTheDocument();
+  });
+});
