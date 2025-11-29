@@ -133,8 +133,6 @@ export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
       exercises: timerExercises,
       complete: false,
     });
-
-    console.log(workoutTimer);
   }
 
 const handleWorkoutTimerComplete = () => {
