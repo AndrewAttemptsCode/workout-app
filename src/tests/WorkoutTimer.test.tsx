@@ -42,6 +42,12 @@ const setupWorkout = async () => {
   await userEvent.clear(exerciseTitle);
   await userEvent.type(exerciseTitle, "bench press");
 
+  // Give set a rest time of 0 seconds - avoids the delay of set complete
+  const restInput = screen.getByRole("spinbutton", { name: /rest/i });
+  await userEvent.click(restInput);
+  await userEvent.clear(restInput);
+  await userEvent.type(restInput, "0");
+
   // Lock exercise item "edit item mode", to access add to workout button
   const editButton = within(exerciseList).getByRole("button", { name: /edit item/i });
   await userEvent.click(editButton);
@@ -80,13 +86,33 @@ describe("Workout timer page", () => {
   });
 
   it("controls button starts the workout", async () => {
-    await renderComponents();
+    renderComponents();
     await setupWorkout();
 
+    // Target control button to start the workout
     const button = screen.getByRole("button", { name: /start workout/i });
     await userEvent.click(button);
 
+    // Expect control button now to display complete set
     expect(screen.getByRole("button", { name: /complete set/i })).toBeInTheDocument();
+
+  }, 20000);
+
+  it("control button completes a set", async () => {
+    renderComponents()
+    await setupWorkout();
+    
+    // Target control button to start workout
+    const startButton = screen.getByRole("button", { name: /start workout/i });
+    await userEvent.click(startButton);
+    
+    // Traget control button to complete the current exercise set
+    const completeSetButton = screen.getByRole("button", { name: /complete set/i});
+    await userEvent.click(completeSetButton);
+
+    // Expect set to be complete via workout breakdown display
+    const setComplete = screen.getByTitle(/sets complete/i);
+    expect(setComplete).toHaveTextContent("1/1");
 
   }, 20000);
 });
