@@ -115,4 +115,22 @@ describe("Workout timer page", () => {
     expect(setComplete).toHaveTextContent("1/1");
 
   }, 20000);
+
+  it("controls button has option to complete the workout", async () => {
+    renderComponents();
+    await setupWorkout();
+
+    // Target control button to start workout
+    const startButton = screen.getByRole("button", { name: /start workout/i });
+    await userEvent.click(startButton);
+    
+    // Traget control button to complete the current exercise set
+    const completeSetButton = screen.getByRole("button", { name: /complete set/i});
+    await userEvent.click(completeSetButton);
+
+    // Expect complete workout to be present
+    expect(screen.getByText(/workout complete/i)).toBeInTheDocument();
+    expect(screen.getByText(/finish workout/i)).toBeInTheDocument();
+
+  }, 20000);
 });
