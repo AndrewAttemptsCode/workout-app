@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# Workout App - Storm Lifts
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A workout app that lets you create exercises, build workouts, and run them through a built-in timer.
+It automatically tracks your current exercise so you never have to remember what comes next.
 
-Currently, two official plugins are available:
+This project was created to practise and demonstrate front-end development skills — including React, TypeScript, accessibility, testing, and responsive design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **Create custom exercises** with name, reps, sets, and rest time.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Build full workouts** by combining saved exercises.
 
-## Expanding the ESLint configuration
+- **Workout timer** that automatically steps through each exercise and rest period.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Real-time progress tracking** so you always know what’s coming next.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Accessible UI** with roles, labels, and keyboard navigation.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Fully responsive design** optimised for mobile, tablet, and desktop.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **State management** to persist exercises and workouts while you use the app.
+
+- **Comprehensive testing** using modern front-end testing tools.
+
+- **Built with React + TypeScript** following best practices and clean code principles.
+
+## Tech Stack
+
+- **Front End:** HTML, CSS, React, Styled-Components
+- **Language:** TypeScript
+- **Build / Dev Tools:** Vite, npm
+- **Other Tools / IDE:** VSCode
+
+## Screenshots
+
+## Prerequisites
+> Note: This app uses the Screen Wake Lock API to keep the device awake during workouts.
+To function correctly, the app must be served over HTTPS (or localhost for development), as the API is not available on unsecured HTTP connections.
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v16 or higher recommended)
+
+## Installation
+
+``` bash
+# Clone the repo
+git clone https://github.com/AndrewAttemptsCode/workout-app.git
+
+# Navigate into the folder
+cd project-name
+
+# Install dependencies
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Running the app
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Start the development server
+npm run dev
 ```
