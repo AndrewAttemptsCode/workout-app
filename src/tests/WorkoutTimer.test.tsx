@@ -133,4 +133,13 @@ describe("Workout timer page", () => {
     expect(screen.getByText(/finish workout/i)).toBeInTheDocument();
 
   }, 20000);
+
+  it("workout breakdown button displays and expanded", async () => {
+    renderComponents();
+    await setupWorkout();
+
+    const workoutBreakdown = screen.getByRole("region", { name: /workout breakdown/i });
+    const exercise = within(workoutBreakdown).getByText(/bench press/i);
+    expect(exercise).toBeVisible();
+  }, 20000);
 });
