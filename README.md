@@ -5,6 +5,8 @@ It automatically tracks your current exercise so you never have to remember what
 
 This project was created to practise and demonstrate front-end development skills — including React, TypeScript, accessibility, testing, and responsive design.
 
+[Storm Lifts](https://workout-app-511.pages.dev/) - website link
+
 ## Features
 
 - **Create custom exercises** with name, reps, sets, and rest time.
@@ -30,9 +32,16 @@ This project was created to practise and demonstrate front-end development skill
 - **Front End:** HTML, CSS, React, Styled-Components
 - **Language:** TypeScript
 - **Build / Dev Tools:** Vite, npm
+- **Testing:** Vitest
 - **Other Tools / IDE:** VSCode
 
 ## Screenshots
+
+![Landing page](./src/assets/homepage.webp)
+![Workouts page](./src/assets//workouts.webp)
+![Exercises page](./src/assets/exercises.webp)
+![Workout timer page](./src/assets/workouttimer.webp)
+![Dashboard page](./src/assets/dashboard.webp)
 
 ## Prerequisites
 > Note: This app uses the Screen Wake Lock API to keep the device awake during workouts.
