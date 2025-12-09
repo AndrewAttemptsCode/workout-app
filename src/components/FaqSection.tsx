@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const StylesContainer = styled.section`
   padding-bottom: 2rem;
@@ -43,19 +43,22 @@ const QuestionContainer = styled.button`
   }
 `;
 
+const fadeIn = keyframes`
+  0% {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
 const AnswerContainer = styled.div<{ $active: number; $index: number }>`
-  overflow: hidden;
+  display: ${({$active, $index}) => $active === $index ? "block" : "none"};
   user-select: none;
-  padding: ${({ $active, $index }) => (
-    $active === $index ? "1rem" : "0 1rem"
-  )};
-  max-height: ${({ $active, $index }) => (
-    $active === $index ? "500px" : 0
-  )};
-  opacity: ${({ $active, $index }) => (
-    $active === $index ? 1 : 0
-  )};
-  transition: max-height 0.4s ease, opacity 0.3s ease;
+  padding: 1rem 0.5rem;
+  animation: ${fadeIn} 0.8s ease forwards;
 
   span {
     font-size: clamp(1rem, 0.8rem + 1vw, 1.6rem);
