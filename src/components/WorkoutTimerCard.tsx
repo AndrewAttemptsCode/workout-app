@@ -1,9 +1,20 @@
 import { useState } from "react";
 import { useWorkout } from "../contexts/WorkoutContext";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { Check, ChevronDown, X } from "lucide-react";
 import ProgressBar from "./ProgressBar";
 import SrOnly from "./SrOnly";
+
+const fadeIn = keyframes`
+  0% {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
 
 const Container = styled.section`
   width: min(100%, 768px);
@@ -64,13 +75,10 @@ const ExerciseChevron = styled(ChevronDown)<{ $selectedExercise: number; $index:
     $selectedExercise === $index ? "180deg": "0deg"});
 `;
 
+
 const ExerciseList = styled.div<{ $showExercises: boolean }>`
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease;
-  max-height: ${({ $showExercises }) =>
-    ($showExercises ? "1000px" : 0)
-  };
-  opacity: ${({ $showExercises }) => ($showExercises ? 1 : 0)};
+  display: ${({$showExercises}) => $showExercises ? "block" : "none"};
+  animation: ${fadeIn} 0.3s ease forwards;
 `;
 
 const TitleStyle = css`
@@ -92,14 +100,8 @@ const CompleteTracker = styled.span`
 `;
 
 const SetsList = styled.section<{ $selectedExercise: number; $index: number }>`
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease;
-  max-height: ${({ $selectedExercise, $index }) =>
-    ($selectedExercise === $index ? "1000px" : 0)
-  };
-  opacity: ${({ $selectedExercise, $index }) =>
-    ($selectedExercise === $index ? 1 : 0)
-  };
+  display: ${({$selectedExercise, $index}) => $selectedExercise === $index ? "block" : "none"};
+  animation: ${fadeIn} 0.3s ease forwards;
   background: rgba(var(--primary-color), 0.1);
   user-select: none;
 `;
