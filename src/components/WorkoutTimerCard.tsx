@@ -78,7 +78,7 @@ const ExerciseChevron = styled(ChevronDown)<{ $selectedExercise: number; $index:
 
 const ExerciseList = styled.div<{ $showExercises: boolean }>`
   display: ${({$showExercises}) => $showExercises ? "block" : "none"};
-  animation: ${fadeIn} 0.3s ease forwards;
+  animation: ${fadeIn} 0.8s ease forwards;
 `;
 
 const TitleStyle = css`
@@ -101,7 +101,7 @@ const CompleteTracker = styled.span`
 
 const SetsList = styled.section<{ $selectedExercise: number; $index: number }>`
   display: ${({$selectedExercise, $index}) => $selectedExercise === $index ? "block" : "none"};
-  animation: ${fadeIn} 0.3s ease forwards;
+  animation: ${fadeIn} 0.8s ease forwards;
   background: rgba(var(--primary-color), 0.1);
   user-select: none;
 `;
