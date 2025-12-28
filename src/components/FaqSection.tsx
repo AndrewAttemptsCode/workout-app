@@ -36,11 +36,14 @@ const QuestionContainer = styled.button`
     font-size: clamp(1rem, 0.8rem + 1vw, 1.6rem);
   }
 
-  &:focus-visible,
-  &:hover {
-    color: rgb(var(--gold-accent));
-    background: rgba(var(--primary-color), 0.2);
+  @media (hover: hover) and (pointer: fine) {
+    &:focus-visible,
+    &:hover {
+      color: rgb(var(--gold-accent));
+      background: rgba(var(--primary-color), 0.2);
+    }
   }
+
 `;
 
 const fadeIn = keyframes`
