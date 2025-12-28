@@ -9,7 +9,6 @@ import { useDashboard } from "../contexts/DashboardContext";
 const Container = styled.section`
   width: min(100%, 768px);
   margin: 0 auto;
-
 `;
 
 const Button = styled.button<{ $workoutActive: boolean }>`
