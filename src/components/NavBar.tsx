@@ -28,14 +28,16 @@ const Nav = styled.nav`
     outline: none;
     transition: color 0.3s ease, transform 0.3s ease;
 
-    &:focus-visible {
-      color: rgb(var(--gold-accent));
-      transform: translateY(-2px);
-    }
-
-    &:hover {
-      color: rgb(var(--gold-accent));
-      transform: translateY(-2px);
+    @media (hover: hover) and (pointer: fine) {
+      &:focus-visible {
+        color: rgb(var(--gold-accent));
+        transform: translateY(-2px);
+      }
+  
+      &:hover {
+        color: rgb(var(--gold-accent));
+        transform: translateY(-2px);
+      }
     }
 
     &.active {
