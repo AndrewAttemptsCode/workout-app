@@ -22,21 +22,23 @@ const Button = styled.button`
     transition: transform 0.3s ease;
   }
 
-  &:focus-visible {
-    border: 2px dashed rgb(var(--green-accent));
-    background: rgba(var(--green-accent), 0.6);
-
-    svg {
-      transform: scale(1.1);
+  @media (hover: hover) and (pointer: fine) {
+    &:focus-visible {
+      border: 2px dashed rgb(var(--green-accent));
+      background: rgba(var(--green-accent), 0.6);
+  
+      svg {
+        transform: scale(1.1);
+      }
     }
-  }
-
-  &:hover {
-    border: 2px dashed rgb(var(--green-accent));
-    background: rgba(var(--green-accent), 0.6);
-
-    svg {
-      transform: scale(1.1);
+  
+    &:hover {
+      border: 2px dashed rgb(var(--green-accent));
+      background: rgba(var(--green-accent), 0.6);
+  
+      svg {
+        transform: scale(1.1);
+      }
     }
   }
 `;
