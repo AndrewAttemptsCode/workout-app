@@ -43,9 +43,11 @@ const WorkoutButton = styled.button`
   background: rgba(var(--gold-accent), 0.6);
   transition: box-shadow 0.3s ease;
 
-  &:focus-visible,
-  &:hover {
-    box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+  @media (hover: hover) and (pointer: fine) {
+    &:focus-visible,
+    &:hover {
+      box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+    }
   }
 `;
 
