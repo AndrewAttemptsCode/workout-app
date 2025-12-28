@@ -19,12 +19,14 @@ const Button = styled.button`
   -webkit-tap-highlight-color: transparent;
   transition: box-shadow 0.3s ease;
 
-  &:focus-visible {
-    box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
-  }
-
-  &:hover {
-    box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+  @media (hover: hover) and (pointer: fine) {
+    &:focus-visible {
+      box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+    }
+  
+    &:hover {
+      box-shadow: 0 0 4px 2px rgb(var(--gold-accent));
+    }
   }
 
   svg {
