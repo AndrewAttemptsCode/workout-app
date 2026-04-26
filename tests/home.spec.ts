@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../test-options";
+import socials from "../test-data/socials.json" with { type: "json" };
 
 test.describe("Home page functionality", () => {
   test("CTA button navigates to workouts page", async ({ pm }) => {
@@ -12,8 +13,13 @@ test.describe("Home page functionality", () => {
 
     await faqItem.click();
     await expect(faqItem).toHaveAttribute("aria-expanded", "true");
-    
+
     await faqItem.click();
     await expect(faqItem).toHaveAttribute("aria-expanded", "false");
   })
+
+  test("Footer social links are correct", async ({ pm }) => {
+    await pm.home().assertSocialLinks(socials);
+  })
+
 });
