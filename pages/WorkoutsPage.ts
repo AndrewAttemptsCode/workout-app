@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 
 class WorkoutsPage {
-  readonly page: Page;
+  private readonly page: Page;
   private readonly addWorkoutButton: Locator;
   private readonly workoutItems: Locator;
 
