@@ -150,7 +150,7 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
   const navigate = useNavigate();
 
   return (
-    <Container $editMode={editMode}>
+    <Container $editMode={editMode} data-testid="workout-item">
 
       <SrOnly>{`Current workout item: ${workout.workoutTitle}`}</SrOnly>
 
