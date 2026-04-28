@@ -41,4 +41,15 @@ test.describe("Workouts functionality", () => {
     await expect(workoutTitle).toHaveValue(/^Workout#/);
   });
 
+  test("user can rename a workout title", async ({ pm }) => {
+    await pm.nav().goToWorkouts();
+
+    await pm.workouts().addNewWorkout();
+
+    await pm.workouts().setWorkoutTitle(0, "Upper Body");
+
+    const titleInput = pm.workouts().getWorkoutTitleInputAt(0);
+    await expect(titleInput).toHaveValue("Upper Body");
+  });
+
 });
