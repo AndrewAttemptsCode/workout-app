@@ -52,4 +52,20 @@ test.describe("Workouts functionality", () => {
     await expect(titleInput).toHaveValue("Upper Body");
   });
 
+  test("displays fallback workout name when title is empty", async ({ pm }) => {
+    await pm.nav().goToWorkouts();
+
+    await pm.workouts().addNewWorkout();
+
+    await pm.workouts().setWorkoutTitle(0, "");
+
+    const titleInput = pm.workouts().getWorkoutTitleInputAt(0);
+    
+    await expect(titleInput).toBeEmpty();
+    
+    await titleInput.blur();
+    
+    await expect(titleInput).toHaveValue(/^Workout#/);
+  });
+
 });
