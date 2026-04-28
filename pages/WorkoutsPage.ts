@@ -29,9 +29,7 @@ class WorkoutsPage {
   }
 
   async setWorkoutTitle(index: number, title: string) {
-    const workoutTitle = this.getWorkoutTitleInputAt(index); 
-    await workoutTitle.fill(title);
-    await workoutTitle.blur();
+    await this.getWorkoutTitleInputAt(index).fill(title);
   }
 
 }
