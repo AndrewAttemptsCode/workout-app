@@ -31,4 +31,14 @@ test.describe("Workouts functionality", () => {
     await expect(workoutItems).toHaveCount(0);
   });
 
+  test("workout item has default title", async ({ pm }) => {
+    await pm.nav().goToWorkouts();
+
+    await pm.workouts().addNewWorkout();
+
+    const workoutTitle = pm.workouts().getWorkoutTitleInputAt(0);
+
+    await expect(workoutTitle).toHaveValue(/^Workout#/);
+  });
+
 });
