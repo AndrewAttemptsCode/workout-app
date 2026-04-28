@@ -28,6 +28,12 @@ class WorkoutsPage {
     return this.getWorkoutAt(index).getByLabel("workout name");
   }
 
+  async setWorkoutTitle(index: number, title: string) {
+    const workoutTitle = this.getWorkoutTitleInputAt(index); 
+    await workoutTitle.fill(title);
+    await workoutTitle.blur();
+  }
+
 }
 
 export default WorkoutsPage;
