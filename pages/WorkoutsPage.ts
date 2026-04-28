@@ -20,6 +20,14 @@ class WorkoutsPage {
     await workoutItem.getByRole("button", { name: /remove item/i }).click();
   }
 
+  getWorkoutAt(index: number) {
+    return this.workoutItems.nth(index);
+  }
+
+  getWorkoutTitleInputAt(index: number) {
+    return this.getWorkoutAt(index).getByLabel("workout name");
+  }
+
 }
 
 export default WorkoutsPage;
