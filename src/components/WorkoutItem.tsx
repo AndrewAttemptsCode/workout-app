@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import RemoveItemButton from "./RemoveItemButton";
 import LockButton from "./LockButton";
 import SrOnly from "./SrOnly";
+import shortUuid from "../utils/shortUuid";
 
 const Container = styled.li<ContainerProps>`
   display: flex;
@@ -149,6 +150,12 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
   const { updateWorkoutTitle, removeWorkoutItem, updateWorkoutEditMode, startWorkoutTimer } = useWorkout();
   const navigate = useNavigate();
 
+  const handleOnBlur = () => {
+    if (!workout.workoutTitle.trim()) {
+      updateWorkoutTitle(workout.id, `Workout#${shortUuid()}`);
+    }
+  }
+
   return (
     <Container $editMode={editMode} data-testid="workout-item">
 
@@ -180,6 +187,7 @@ const WorkoutItem = ({ workout }: WorkoutItemProps) => {
             placeholder="Workout Name..."
             value={workout.workoutTitle}
             onChange={(e) => updateWorkoutTitle(workout.id, e.target.value)}
+            onBlur={handleOnBlur}
           />
         </>
       ) : (
