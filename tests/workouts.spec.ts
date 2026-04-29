@@ -84,4 +84,13 @@ test.describe("Workouts functionality", () => {
     await expect(removeWorkoutButton).not.toBeVisible();
   });
 
+  test("display add exercise instructions when workout exercises list is empty", async ({ pm }) => {
+    await pm.nav().goToWorkouts();
+
+    await pm.workouts().addNewWorkout();
+
+    const workoutItem = pm.workouts().getWorkoutAt(0);
+    await expect(workoutItem).toContainText(/exercise list is currently empty/i);
+  });
+
 });
