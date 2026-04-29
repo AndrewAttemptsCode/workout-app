@@ -44,6 +44,14 @@ class WorkoutsPage {
     }
   }
 
+  getAddExerciseLink(workoutItem: Locator) {
+    return workoutItem.getByRole("link", { name: /add/i });
+  }
+
+  async clickAddExercise(workoutItem: Locator) {
+    await this.getAddExerciseLink(workoutItem).click();
+  }
+
 }
 
 export default WorkoutsPage;
