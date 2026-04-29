@@ -68,4 +68,20 @@ test.describe("Workouts functionality", () => {
     await expect(titleInput).toHaveValue(/^Workout#/);
   });
 
+  test("remove workout item button only available in edit mode", async ({ pm }) => {
+    await pm.nav().goToWorkouts();
+
+    await pm.workouts().addNewWorkout();
+
+    const workoutItem = pm.workouts().getWorkoutAt(0);
+    const removeWorkoutButton = workoutItem.getByRole("button", { name: /remove item/i });
+
+    await pm.workouts().setItemLock(workoutItem, "unlock");
+    await expect(removeWorkoutButton).toBeVisible();
+
+    await pm.workouts().setItemLock(workoutItem, "lock");
+
+    await expect(removeWorkoutButton).not.toBeVisible();
+  });
+
 });
