@@ -17,6 +17,7 @@ class WorkoutsPage {
 
   async removeWorkoutAt(index: number) {
     const workoutItem = this.workoutItems.nth(index);
+    await this.setItemLock(workoutItem, "unlock");
     await workoutItem.getByRole("button", { name: /remove item/i }).click();
   }
 
@@ -30,6 +31,17 @@ class WorkoutsPage {
 
   async setWorkoutTitle(index: number, title: string) {
     await this.getWorkoutTitleInputAt(index).fill(title);
+  }
+
+  private async setItemLock(item: Locator, status: "lock" | "unlock") {
+    const lockButton = item.getByRole("button", { name: /edit item/i });
+    const buttonStatus = await lockButton.getAttribute("aria-pressed");
+    if (buttonStatus && status === "lock") {
+      await lockButton.click();
+    }
+    if (!buttonStatus && status === "unlock") {
+      await lockButton.click();
+    }
   }
 
 }
