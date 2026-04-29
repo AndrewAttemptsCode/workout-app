@@ -93,4 +93,15 @@ test.describe("Workouts functionality", () => {
     await expect(workoutItem).toContainText(/exercise list is currently empty/i);
   });
 
+  test("Add exercises link navigates to exercises page", async ({ pm }) => {
+    await pm.nav().goToWorkouts();
+
+    await pm.workouts().addNewWorkout();
+
+    const workoutItem = pm.workouts().getWorkoutAt(0);
+    await pm.workouts().clickAddExercise(workoutItem);
+    
+    await expect(pm.page.getByRole("button", { name: /add new exercise/i })).toBeVisible();
+  });
+
 });
