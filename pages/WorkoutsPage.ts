@@ -33,7 +33,7 @@ class WorkoutsPage {
     await this.getWorkoutTitleInputAt(index).fill(title);
   }
 
-  private async setItemLock(item: Locator, status: "lock" | "unlock") {
+  async setItemLock(item: Locator, status: "lock" | "unlock") {
     const lockButton = item.getByRole("button", { name: /edit item/i });
     const buttonStatus = await lockButton.getAttribute("aria-pressed");
     if (buttonStatus && status === "lock") {
