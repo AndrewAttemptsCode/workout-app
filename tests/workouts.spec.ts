@@ -91,6 +91,9 @@ test.describe("Workouts functionality", () => {
 
     const workoutItem = pm.workouts().getWorkoutAt(0);
     await expect(workoutItem).toContainText(/exercise list is currently empty/i);
+    // TODO: when exercises pom set up:
+    // when exercises added to workout item default message disappears
+    // replaces with list of exercises/or add another test for this
   });
 
   test("Add exercises link navigates to exercises page", async ({ pm }) => {
@@ -100,8 +103,23 @@ test.describe("Workouts functionality", () => {
 
     const workoutItem = pm.workouts().getWorkoutAt(0);
     await pm.workouts().clickAddExercise(workoutItem);
-    
+
     await expect(pm.page.getByRole("button", { name: /add new exercise/i })).toBeVisible();
+  });
+
+  test("total workout exercises count updates", async ({ pm }) => {
+    await pm.nav().goToWorkouts();
+
+    await pm.workouts().addNewWorkout();
+
+    const workoutItem = pm.workouts().getWorkoutAt(0);
+
+    await expect(workoutItem).toContainText(/total exercises: 0/i);
+    // TODO: when exercise pom set up:
+    // update test to check this counter increases/decreases
+    // when the exercises in the workout list changes
+    // when edit mode locked - count is hidden, replaced with load workout button
+    // count is displayed when edit mode unlocked
   });
 
 });
