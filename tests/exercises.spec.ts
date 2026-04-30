@@ -37,8 +37,20 @@ test.describe("Exercises functionality", () => {
     await pm.exercises().addNewExercise();
 
     const exerciseTitle = pm.exercises().getExerciseTitleInputAt(0);
-    
+
     await expect(exerciseTitle).toHaveValue(/^Exercise#/);
+  });
+
+  test("user can rename an exercise item", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const exerciseTitle = pm.exercises().getExerciseTitleInputAt(0);
+    await expect(exerciseTitle).toHaveValue(/^Exercise#/);
+
+    await pm.exercises().setExerciseTitle(0, "Overhead press");
+    await expect(exerciseTitle).toHaveValue("Overhead press");
   });
 
 });
