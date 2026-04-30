@@ -136,7 +136,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
   const { addSet, removeExercise, updateExerciseTitle, updateExerciseEditMode, addExerciseToWorkout } = useWorkout();
 
   return (
-    <Container $editMode={editMode}>
+    <Container $editMode={editMode} data-testid="exercise-item">
 
       {announcement && (
         <SrOnly ariaLive>
