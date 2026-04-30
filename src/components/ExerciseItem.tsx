@@ -7,6 +7,7 @@ import LockButton from "./LockButton";
 import RemoveItemButton from "./RemoveItemButton";
 import AddSetButton from "./AddSetButton";
 import SrOnly from "./SrOnly";
+import shortUuid from "../utils/shortUuid";
 
 const Container = styled.li<ContainerProps>`
   display: flex;
@@ -135,6 +136,12 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
   const [announcement, setAnnouncement] = useState<string | null>(null);
   const { addSet, removeExercise, updateExerciseTitle, updateExerciseEditMode, addExerciseToWorkout } = useWorkout();
 
+  const handleBlur = () => {
+    if (!exercise.title.trim()) {
+      updateExerciseTitle(exercise.id, `Exercise#${shortUuid()}`);
+    }
+  }
+
   return (
     <Container $editMode={editMode} data-testid="exercise-item">
 
@@ -188,6 +195,7 @@ const ExerciseItem = ({ exercise }: ExerciseItemProps) => {
             placeholder="Exercise Name..."
             value={exercise.title}
             onChange={(e) => updateExerciseTitle(exercise.id, e.target.value)}
+            onBlur={handleBlur}
           />
         </>
       ) : (
