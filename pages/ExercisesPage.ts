@@ -39,6 +39,10 @@ class ExercisesPage {
   getExerciseTitleInputAt(index: number) {
     return this.getExerciseAt(index).getByLabel("exercise name");
   }
+
+  async setExerciseTitle(index: number, title: string) {
+    await this.getExerciseTitleInputAt(index).fill(title);
+  }
 }
 
 export default ExercisesPage;
