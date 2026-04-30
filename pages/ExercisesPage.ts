@@ -31,6 +31,14 @@ class ExercisesPage {
       await lockButton.click();
     }
   }
+
+  getExerciseAt(index: number) {
+    return this.exerciseItems.nth(index);
+  }
+
+  getExerciseTitleInputAt(index: number) {
+    return this.getExerciseAt(index).getByLabel("exercise name");
+  }
 }
 
 export default ExercisesPage;
