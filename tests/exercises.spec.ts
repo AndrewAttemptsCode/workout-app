@@ -53,4 +53,21 @@ test.describe("Exercises functionality", () => {
     await expect(exerciseTitle).toHaveValue("Overhead press");
   });
 
+  test("displays fallback exercise name when title is empty", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const exerciseTitle = pm.exercises().getExerciseTitleInputAt(0);
+    await expect(exerciseTitle).toHaveValue(/^Exercise#/);
+
+    await pm.exercises().setExerciseTitle(0, "");
+
+    await expect(exerciseTitle).toBeEmpty();
+
+    await exerciseTitle.blur();
+
+    await expect(exerciseTitle).toHaveValue(/^Exercise#/);
+  });
+
 });
