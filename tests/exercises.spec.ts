@@ -17,4 +17,18 @@ test.describe("Exercises functionality", () => {
     await expect(exerciseItems).toHaveCount(3);
   });
 
+  test("user can remove exercise from list", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    const exerciseItems = pm.page.getByTestId("exercise-item");
+
+    await expect(exerciseItems).toHaveCount(0);
+
+    await pm.exercises().addNewExercise();
+    await expect(exerciseItems).toHaveCount(1);
+
+    await pm.exercises().removeExerciseAt(0);
+    await expect(exerciseItems).toHaveCount(0);
+  });
+
 });
