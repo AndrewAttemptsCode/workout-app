@@ -43,6 +43,12 @@ class ExercisesPage {
   async setExerciseTitle(index: number, title: string) {
     await this.getExerciseTitleInputAt(index).fill(title);
   }
+
+  async addSetAt(index: number) {
+    const exerciseItem = this.getExerciseAt(index);
+    await this.setItemLock(exerciseItem, "unlock");
+    await exerciseItem.getByRole("button", { name: /add new set/i }).click();
+  }
 }
 
 export default ExercisesPage;
