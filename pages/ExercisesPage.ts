@@ -53,6 +53,11 @@ class ExercisesPage {
   totalSetsDisplayCount(item: Locator) {
     return item.getByRole("heading").filter({ hasText: /total sets/i });
   }
+
+  getExerciseSetsAt(index: number) {
+    const exerciseItem = this.getExerciseAt(index);
+    return exerciseItem.getByTestId("exercise-set");
+  }
 }
 
 export default ExercisesPage;
