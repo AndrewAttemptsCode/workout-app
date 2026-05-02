@@ -115,4 +115,21 @@ test.describe("Exercises functionality", () => {
     await expect(removeSetButton).not.toBeVisible();
   });
 
+  test("display total exercise sets in edit mode", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const exerciseItem = pm.exercises().getExerciseAt(0);
+    const setsDisplayCount = pm.exercises().totalSetsDisplayCount(exerciseItem);
+
+    await expect(setsDisplayCount).toContainText("1");
+
+    await pm.exercises().setItemLock(exerciseItem, "unlock");
+    await expect(setsDisplayCount).toBeVisible();
+
+    await pm.exercises().setItemLock(exerciseItem, "lock");
+    await expect(setsDisplayCount).not.toBeVisible();
+  });
+
 });
