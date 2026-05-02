@@ -70,4 +70,19 @@ test.describe("Exercises functionality", () => {
     await expect(exerciseTitle).toHaveValue(/^Exercise#/);
   });
 
+  test("remove exercise item button only available in edit mode", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const exerciseItem = pm.exercises().getExerciseAt(0);
+    const removeExerciseButton = exerciseItem.getByRole("button", { name: /remove item/i });
+
+    await pm.exercises().setItemLock(exerciseItem, "unlock");
+    await expect(removeExerciseButton).toBeVisible();
+
+    await pm.exercises().setItemLock(exerciseItem, "lock");
+    await expect(removeExerciseButton).not.toBeVisible();
+  });
+
 });
