@@ -85,4 +85,19 @@ test.describe("Exercises functionality", () => {
     await expect(removeExerciseButton).not.toBeVisible();
   });
 
+  test("add additional exercise set button only available in edit mode", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const exerciseItem = pm.exercises().getExerciseAt(0);
+    const addSetButton = exerciseItem.getByRole("button", { name: /add new set/i });
+
+    await pm.exercises().setItemLock(exerciseItem, "unlock");
+    await expect(addSetButton).toBeVisible();
+
+    await pm.exercises().setItemLock(exerciseItem, "lock");
+    await expect(addSetButton).not.toBeVisible();
+  });
+
 });
