@@ -89,7 +89,7 @@ const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) =>
       </thead>
       <tbody>
         {exercise.sets.map((set) => (
-          <tr key={set.id}>
+          <tr key={set.id} data-testid="exercise-set">
             <td>
               {editMode ? (
                 <input
