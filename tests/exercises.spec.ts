@@ -156,7 +156,7 @@ test.describe("Exercises functionality", () => {
     await expect(setCount).toHaveCount(1);
   });
 
-  test("user can increase exercise item set count", async ({ pm }) => {
+  test("user can add multiple sets to an exercise item", async ({ pm }) => {
     await pm.nav().goToExercises();
 
     await pm.exercises().addNewExercise();
@@ -165,9 +165,13 @@ test.describe("Exercises functionality", () => {
     
     await expect(setCount).toHaveCount(1);
 
-    await pm.exercises().addSetAt(0);
-    
-    await expect(setCount).toHaveCount(2);
+    const numberOfSets = 4;
+
+    for (let i = 0; i< numberOfSets; i++) {
+      await pm.exercises().addSetAt(0);
+    }
+
+    await expect(setCount).toHaveCount(5);
   });
 
 });
