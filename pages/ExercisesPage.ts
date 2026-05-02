@@ -49,6 +49,10 @@ class ExercisesPage {
     await this.setItemLock(exerciseItem, "unlock");
     await exerciseItem.getByRole("button", { name: /add new set/i }).click();
   }
+
+  totalSetsDisplayCount(item: Locator) {
+    return item.getByRole("heading").filter({ hasText: /total sets/i });
+  }
 }
 
 export default ExercisesPage;
