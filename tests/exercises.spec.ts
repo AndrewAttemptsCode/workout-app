@@ -132,4 +132,18 @@ test.describe("Exercises functionality", () => {
     await expect(setsDisplayCount).not.toBeVisible();
   });
 
+  test("exercise item total sets display updates on new set added", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const exerciseItem = pm.exercises().getExerciseAt(0);
+    const setsDisplayCount = pm.exercises().totalSetsDisplayCount(exerciseItem);
+
+    await expect(setsDisplayCount).toContainText("1");
+
+    await pm.exercises().addSetAt(0);
+    await expect(setsDisplayCount).toContainText("2");
+  });
+
 });
