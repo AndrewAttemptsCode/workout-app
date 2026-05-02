@@ -146,4 +146,14 @@ test.describe("Exercises functionality", () => {
     await expect(setsDisplayCount).toContainText("2");
   });
 
+  test("exercise item has an initial default exercise set", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const setCount = pm.exercises().getExerciseSetsAt(0);
+    
+    await expect(setCount).toHaveCount(1);
+  });
+
 });
