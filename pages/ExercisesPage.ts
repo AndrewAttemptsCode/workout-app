@@ -69,6 +69,17 @@ class ExercisesPage {
     
     await removeSetButton.click();
   }
+
+  async getExerciseSetValues(exerciseIndex: number, setIndex: number) {
+    const exerciseSets = this.getExerciseSetsAt(exerciseIndex);
+    const exerciseSet = exerciseSets.nth(setIndex);
+
+    const reps = await exerciseSet.getByRole("spinbutton", { name: /reps/i }).inputValue();
+    const weight = await exerciseSet.getByRole("spinbutton", { name: /weight/i }).inputValue();
+    const rest = await exerciseSet.getByRole("spinbutton", { name: /rest/i }).inputValue();
+
+    return { reps, weight, rest };
+  }
 }
 
 export default ExercisesPage;
