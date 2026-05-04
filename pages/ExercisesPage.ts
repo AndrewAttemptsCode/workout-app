@@ -58,6 +58,12 @@ class ExercisesPage {
     const exerciseItem = this.getExerciseAt(index);
     return exerciseItem.getByTestId("exercise-set");
   }
+
+  async removeSetAt(exerciseIndex: number, setIndex: number) {
+    const exerciseSets = this.getExerciseSetsAt(exerciseIndex);
+    const exerciseSet = exerciseSets.nth(setIndex);
+    await exerciseSet.getByRole("button", { name: /remove set from exercise/i }).click();
+  }
 }
 
 export default ExercisesPage;
