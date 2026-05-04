@@ -208,4 +208,16 @@ test.describe("Exercises functionality", () => {
     await expect(setCount).toHaveCount(1);
   });
 
+  test("exercise item default set has default values", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const setValues = await pm.exercises().getExerciseSetValues(0, 0);
+
+    expect(setValues.reps).toBe("5");
+    expect(setValues.weight).toBe("5");
+    expect(setValues.rest).toBe("30");
+  });
+
 });
