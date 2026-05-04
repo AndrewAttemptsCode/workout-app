@@ -194,4 +194,18 @@ test.describe("Exercises functionality", () => {
     await expect(setCount).toHaveCount(4);
   });
 
+  test("prevents removing last remaining set of an exercise item", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const setCount = pm.exercises().getExerciseSetsAt(0);
+
+    await expect(setCount).toHaveCount(1);
+
+    await pm.exercises().removeSetAt(0, 0);
+
+    await expect(setCount).toHaveCount(1);
+  });
+
 });
