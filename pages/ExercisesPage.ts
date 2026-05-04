@@ -62,7 +62,12 @@ class ExercisesPage {
   async removeSetAt(exerciseIndex: number, setIndex: number) {
     const exerciseSets = this.getExerciseSetsAt(exerciseIndex);
     const exerciseSet = exerciseSets.nth(setIndex);
-    await exerciseSet.getByRole("button", { name: /remove set from exercise/i }).click();
+    
+    const removeSetButton = exerciseSet.getByRole("button", { name: /remove set from exercise/i });
+    
+    if (await removeSetButton.isDisabled()) return;
+    
+    await removeSetButton.click();
   }
 }
 
