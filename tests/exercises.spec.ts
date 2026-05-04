@@ -167,11 +167,31 @@ test.describe("Exercises functionality", () => {
 
     const numberOfSets = 4;
 
-    for (let i = 0; i< numberOfSets; i++) {
+    for (let i = 0; i < numberOfSets; i++) {
       await pm.exercises().addSetAt(0);
     }
 
     await expect(setCount).toHaveCount(5);
+  });
+
+  test("sets can be removed from an exercise item", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    const setCount = pm.exercises().getExerciseSetsAt(0);
+
+    await pm.exercises().addNewExercise();
+    
+    await expect(setCount).toHaveCount(1);
+
+    const numberOfSets = 4;
+
+    for (let i = 0; i < numberOfSets; i++) {
+      await pm.exercises().addSetAt(0);
+    }
+
+    await pm.exercises().removeSetAt(0, 1);
+
+    await expect(setCount).toHaveCount(4);
   });
 
 });
