@@ -220,4 +220,16 @@ test.describe("Exercises functionality", () => {
     await expect(rest).toHaveValue("30");
   });
 
+  test("exercise item set values can be updated", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const { reps, weight, rest } = await pm.exercises().updateSetValues(0, 0, 10, 10, 120);
+
+    await expect(reps).toHaveValue("10");
+    await expect(weight).toHaveValue("10");
+    await expect(rest).toHaveValue("120");
+  });
+
 });
