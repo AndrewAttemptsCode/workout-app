@@ -232,4 +232,27 @@ test.describe("Exercises functionality", () => {
     await expect(rest).toHaveValue("120");
   });
 
+  test("exercise item set values fallback to defaults if values are empty", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const { reps, weight, rest } = await pm.exercises().getExerciseSetValues(0, 0);
+
+    await reps.fill("");
+    await expect(reps).toBeEmpty();
+    await reps.blur();
+    await expect(reps).toHaveValue("5");
+
+    await weight.fill("");
+    await expect(weight).toBeEmpty();
+    await weight.blur();
+    await expect(weight).toHaveValue("5");
+
+    await rest.fill("");
+    await expect(rest).toBeEmpty();
+    await rest.blur();
+    await expect(rest).toHaveValue("30");
+  });
+
 });
