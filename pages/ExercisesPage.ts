@@ -81,7 +81,7 @@ class ExercisesPage {
     return { reps, weight, rest };
   }
 
-  async updateSetValues(exerciseIndex: number, setIndex: number, repsValue: number, weightValue: number, restValue: number) {
+  async updateSetValues(exerciseIndex: number, setIndex: number, repsValue: number | string, weightValue: number | string, restValue: number | string) {
     const { reps, weight, rest } = await this.getExerciseSetValues(exerciseIndex, setIndex);
     await reps.fill(String(repsValue));
     await weight.fill(String(weightValue));
