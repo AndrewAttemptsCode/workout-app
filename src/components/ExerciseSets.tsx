@@ -74,8 +74,16 @@ type ExerciseSetsProps = {
   onRemoveSet: () => void;
 }
 
+type SetFields = "reps" | "weight" | "rest";
+
 const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) => {
   const { updateSetField, removeSet } = useWorkout();
+
+  const handleOnBlur = (exerciseId: string, setId: string, field: SetFields, setValue: number | null, defaultValue: number) => {
+    if (setValue === undefined || Number.isNaN(setValue) || setValue === null) {
+      updateSetField(exerciseId, setId, field, defaultValue);
+    }
+  }
 
   return (
     <Table>
@@ -99,6 +107,7 @@ const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) =>
                 min={0}
                 value={set.reps ?? ""}
                 onChange={(e) => updateSetField(exercise.id, set.id, "reps", Number.isNaN(e.target.valueAsNumber) ? null : e.target.valueAsNumber)} 
+                onBlur={() => handleOnBlur(exercise.id, set.id, "reps", set.reps, 5)}
                 aria-labelledby="col-reps"
               />
               ) : (
@@ -115,6 +124,7 @@ const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) =>
                   min={0}
                   value={set.weight ?? ""}
                   onChange={(e) => updateSetField(exercise.id, set.id, "weight", Number.isNaN(e.target.valueAsNumber) ? null : e.target.valueAsNumber)} 
+                  onBlur={() => handleOnBlur(exercise.id, set.id, "weight", set.weight, 5)}
                   aria-labelledby="col-weight"
                 />
               ) : (
@@ -131,6 +141,7 @@ const ExerciseSets = ({ exercise, editMode, onRemoveSet }: ExerciseSetsProps) =>
                   min={0}
                   value={set.rest ?? ""}
                   onChange={(e) => updateSetField(exercise.id, set.id, "rest", Number.isNaN(e.target.valueAsNumber) ? null : e.target.valueAsNumber)}
+                  onBlur={() => handleOnBlur(exercise.id, set.id, "rest", set.rest, 30)}
                   aria-labelledby="col-rest"
                 />
               ) : (
