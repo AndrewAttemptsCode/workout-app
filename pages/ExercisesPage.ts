@@ -74,9 +74,18 @@ class ExercisesPage {
     const exerciseSets = this.getExerciseSetsAt(exerciseIndex);
     const exerciseSet = exerciseSets.nth(setIndex);
 
-    const reps = await exerciseSet.getByRole("spinbutton", { name: /reps/i }).inputValue();
-    const weight = await exerciseSet.getByRole("spinbutton", { name: /weight/i }).inputValue();
-    const rest = await exerciseSet.getByRole("spinbutton", { name: /rest/i }).inputValue();
+    const reps = exerciseSet.getByRole("spinbutton", { name: /reps/i });
+    const weight = exerciseSet.getByRole("spinbutton", { name: /weight/i });
+    const rest = exerciseSet.getByRole("spinbutton", { name: /rest/i });
+
+    return { reps, weight, rest };
+  }
+
+  async updateSetValues(exerciseIndex: number, setIndex: number, repsValue: number, weightValue: number, restValue: number) {
+    const { reps, weight, rest } = await this.getExerciseSetValues(exerciseIndex, setIndex);
+    await reps.fill(String(repsValue));
+    await weight.fill(String(weightValue));
+    await rest.fill(String(restValue));
 
     return { reps, weight, rest };
   }
