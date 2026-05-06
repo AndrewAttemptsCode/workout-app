@@ -89,6 +89,15 @@ class ExercisesPage {
 
     return { reps, weight, rest };
   }
+
+  async openAddToWorkoutMenu(index: number) {
+    const exerciseItem = this.getExerciseAt(index);
+    await this.setItemLock(exerciseItem, "lock");
+    await exerciseItem.getByRole("button", { name: /add to workout/i }).click();
+    const workoutMenu = exerciseItem.getByRole("region", { name: /select workout/i });
+    return workoutMenu;
+  }
+
 }
 
 export default ExercisesPage;
