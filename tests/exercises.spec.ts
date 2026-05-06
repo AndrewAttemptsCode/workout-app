@@ -277,4 +277,14 @@ test.describe("Exercises functionality", () => {
     await expect(workoutMenu).toContainText(/no workouts available/i);
   });
 
+  test("empty workout list create link navigates to workouts page", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    await pm.exercises().clickCreateWorkoutFromMenu(0);
+
+    await expect(pm.page.getByRole("button", { name: /add new workout/i })).toBeVisible();
+  });
+
 });
