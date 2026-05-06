@@ -267,4 +267,14 @@ test.describe("Exercises functionality", () => {
     await expect(workoutMenu).toBeVisible();
   });
 
+  test("empty select workout list shows instructions", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const workoutMenu = await pm.exercises().openAddToWorkoutMenu(0);
+
+    await expect(workoutMenu).toContainText(/no workouts available/i);
+  });
+
 });
