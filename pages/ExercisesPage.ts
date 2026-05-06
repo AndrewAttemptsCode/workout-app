@@ -98,6 +98,11 @@ class ExercisesPage {
     return workoutMenu;
   }
 
+  async clickCreateWorkoutFromMenu(index: number) {
+    const workoutMenu = await this.openAddToWorkoutMenu(index);
+    await workoutMenu.getByRole("link", { name: /create/i }).click();
+  }
+
 }
 
 export default ExercisesPage;
