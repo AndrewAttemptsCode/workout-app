@@ -255,4 +255,16 @@ test.describe("Exercises functionality", () => {
     await expect(rest).toHaveValue("30");
   });
 
+  test("add exercise to workout button displays select workout menu", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    await pm.exercises().addSetAt(0);
+
+    const workoutMenu = await pm.exercises().openAddToWorkoutMenu(0);
+
+    await expect(workoutMenu).toBeVisible();
+  });
+
 });
