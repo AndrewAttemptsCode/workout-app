@@ -287,4 +287,22 @@ test.describe("Exercises functionality", () => {
     await expect(pm.page.getByRole("button", { name: /add new workout/i })).toBeVisible();
   });
 
+  test("back button closes workout menu and restores sets", async ({ pm }) => {
+    await pm.nav().goToExercises();
+
+    await pm.exercises().addNewExercise();
+
+    const exerciseSets = pm.exercises().getExerciseSetsAt(0); 
+
+    await expect(exerciseSets).toBeVisible();
+
+    await pm.exercises().openAddToWorkoutMenu(0);
+
+    await expect(exerciseSets).not.toBeVisible();
+
+    await pm.exercises().closeAddToWorkoutMenu(0);
+
+    await expect(exerciseSets).toBeVisible();
+  });
+
 });
