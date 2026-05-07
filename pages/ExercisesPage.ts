@@ -27,7 +27,7 @@ class ExercisesPage {
     if (buttonStatus && status === "lock") {
       await lockButton.click();
     }
-    if (!buttonStatus && status === "unlock") {
+    if (buttonStatus && status === "unlock") {
       await lockButton.click();
     }
   }
@@ -96,6 +96,14 @@ class ExercisesPage {
     await exerciseItem.getByRole("button", { name: /add to workout/i }).click();
     const workoutMenu = exerciseItem.getByRole("region", { name: /select workout/i });
     return workoutMenu;
+  }
+
+  async closeAddToWorkoutMenu(index: number) {
+    const exerciseItem = this.getExerciseAt(index);
+
+    await this.setItemLock(exerciseItem, "lock");
+
+    await exerciseItem.getByRole("button", { name: /back/i }).click();
   }
 
   async clickCreateWorkoutFromMenu(index: number) {
