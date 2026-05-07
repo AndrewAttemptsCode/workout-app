@@ -24,10 +24,10 @@ class ExercisesPage {
   async setItemLock(item: Locator, status: "lock" | "unlock") {
     const lockButton = item.getByRole("button", { name: /edit item/i });
     const buttonStatus = await lockButton.getAttribute("aria-pressed");
-    if (buttonStatus && status === "lock") {
+    if (buttonStatus === "true" && status === "lock") {
       await lockButton.click();
     }
-    if (buttonStatus && status === "unlock") {
+    if (buttonStatus === "false" && status === "unlock") {
       await lockButton.click();
     }
   }
