@@ -111,6 +111,12 @@ class ExercisesPage {
     await workoutMenu.getByRole("link", { name: /create/i }).click();
   }
 
+  async addExerciseToWorkout(exerciseIndex: number, workoutIndex: number) {
+    const workoutMenu = await this.openAddToWorkoutMenu(exerciseIndex);
+    const workoutItems = workoutMenu.getByRole("listitem");
+    await workoutItems.nth(workoutIndex).click();
+  }
+
 }
 
 export default ExercisesPage;
