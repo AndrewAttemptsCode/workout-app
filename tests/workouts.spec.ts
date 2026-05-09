@@ -110,19 +110,17 @@ test.describe("Workouts functionality", () => {
     await expect(pm.page.getByRole("button", { name: /add new exercise/i })).toBeVisible();
   });
 
-  test("total workout exercises count updates", async ({ pm }) => {
+  test("total workout exercises count updates", async ({ pm, workoutWithExercise }) => {
+    const { workoutIndex, exerciseIndex } = workoutWithExercise;
+
+    const workoutItem = pm.workouts().getWorkoutAt(workoutIndex);
+    await expect(workoutItem).toContainText(/total exercises: 1/i);
+
+    await pm.nav().goToExercises();
+    await pm.exercises().addExerciseToWorkout(exerciseIndex, workoutIndex);
+
     await pm.nav().goToWorkouts();
-
-    await pm.workouts().addNewWorkout();
-
-    const workoutItem = pm.workouts().getWorkoutAt(0);
-
-    await expect(workoutItem).toContainText(/total exercises: 0/i);
-    // TODO: when exercise pom set up:
-    // update test to check this counter increases/decreases
-    // when the exercises in the workout list changes
-    // when edit mode locked - count is hidden, replaced with load workout button
-    // count is displayed when edit mode unlocked
+    await expect(workoutItem).toContainText(/total exercises: 2/i);
   });
 
 });
