@@ -91,9 +91,12 @@ test.describe("Workouts functionality", () => {
 
     const workoutItem = pm.workouts().getWorkoutAt(0);
     await expect(workoutItem).toContainText(/exercise list is currently empty/i);
-    // TODO: when exercises pom set up:
-    // when exercises added to workout item default message disappears
-    // replaces with list of exercises/or add another test for this
+  });
+
+  test("workout exercise list contains an exercise item", async ({ pm, workoutWithExercise }) => {
+    const { workoutIndex } = workoutWithExercise;
+    const workoutExerciseList = pm.workouts().getExerciseList(workoutIndex);
+    await expect(workoutExerciseList).toHaveCount(1);
   });
 
   test("Add exercises link navigates to exercises page", async ({ pm }) => {
