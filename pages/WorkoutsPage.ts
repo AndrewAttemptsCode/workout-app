@@ -52,6 +52,11 @@ class WorkoutsPage {
     await this.getAddExerciseLink(workoutItem).click();
   }
 
+  getExerciseList(index: number) {
+    const workoutItem = this.getWorkoutAt(index);
+    return workoutItem.locator("tbody tr");
+  }
+
 }
 
 export default WorkoutsPage;
