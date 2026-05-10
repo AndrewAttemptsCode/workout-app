@@ -58,6 +58,8 @@ class WorkoutsPage {
   }
 
   async removeExerciseFromWorkout(workoutIndex: number, exerciseIndex: number) {
+    const workoutItem = await this.getWorkoutAt(workoutIndex);
+    await this.setItemLock(workoutItem, "unlock");
     const exerciseList = this.getExerciseList(workoutIndex);
     await exerciseList.nth(exerciseIndex).getByRole("button", { name: /remove.*workout/i }).click();
   }
