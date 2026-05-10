@@ -123,4 +123,16 @@ test.describe("Workouts functionality", () => {
     await expect(workoutItem).toContainText(/total exercises: 2/i);
   });
 
+  test("remove button, removes exercise from workout item", async ({ workoutWithExercise, pm }) => {
+    const { workoutIndex } = workoutWithExercise;
+
+    const exerciseList = pm.workouts().getExerciseList(workoutIndex);
+
+    await expect(exerciseList).toHaveCount(1);
+
+    await pm.workouts().removeExerciseFromWorkout(workoutIndex, 0);
+
+    await expect(exerciseList).toHaveCount(0);
+  });
+
 });
