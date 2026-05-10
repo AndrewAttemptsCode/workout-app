@@ -153,9 +153,12 @@ test.describe("Workouts functionality", () => {
     const { workoutIndex } = workoutWithExercise;
 
     const workoutItem = pm.workouts().getWorkoutAt(workoutIndex);
+    const removeExerciseButton = workoutItem.getByRole("button", { name: /remove.*workout/i });
+
+    await expect(removeExerciseButton).toBeVisible();
+
     await pm.workouts().setItemLock(workoutItem, "lock");
 
-    const removeExerciseButton = workoutItem.getByRole("button", { name: /remove.*workout/i });
     await expect(removeExerciseButton).not.toBeVisible();
   });
 
