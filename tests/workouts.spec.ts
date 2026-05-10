@@ -135,4 +135,19 @@ test.describe("Workouts functionality", () => {
     await expect(exerciseList).toHaveCount(0);
   });
 
+  test("deleting an exercise item, removes from a workout exercise list", async ({ workoutWithExercise, pm }) => {
+    const { workoutIndex, exerciseIndex } = workoutWithExercise;
+
+    const exerciseList = pm.workouts().getExerciseList(workoutIndex);
+    await expect(exerciseList).toHaveCount(1);
+
+    await pm.nav().goToExercises();
+    await pm.exercises().removeExerciseAt(exerciseIndex);
+
+    await pm.nav().goToWorkouts();
+    const workoutItem = pm.workouts().getWorkoutAt(workoutIndex);
+    await expect(workoutItem).toContainText(/exercise list is currently empty/i);
+
+  });
+
 });
