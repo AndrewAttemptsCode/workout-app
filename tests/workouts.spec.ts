@@ -147,7 +147,16 @@ test.describe("Workouts functionality", () => {
     await pm.nav().goToWorkouts();
     const workoutItem = pm.workouts().getWorkoutAt(workoutIndex);
     await expect(workoutItem).toContainText(/exercise list is currently empty/i);
+  });
 
+  test("remove exercise button hidden when workout item is locked", async ({ workoutWithExercise, pm }) => {
+    const { workoutIndex } = workoutWithExercise;
+
+    const workoutItem = pm.workouts().getWorkoutAt(workoutIndex);
+    await pm.workouts().setItemLock(workoutItem, "lock");
+
+    const removeExerciseButton = workoutItem.getByRole("button", { name: /remove.*workout/i });
+    await expect(removeExerciseButton).not.toBeVisible();
   });
 
 });
