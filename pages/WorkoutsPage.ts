@@ -57,6 +57,11 @@ class WorkoutsPage {
     return workoutItem.locator("tbody tr");
   }
 
+  async removeExerciseFromWorkout(workoutIndex: number, exerciseIndex: number) {
+    const exerciseList = this.getExerciseList(workoutIndex);
+    await exerciseList.nth(exerciseIndex).getByRole("button", { name: /remove.*workout/i }).click();
+  }
+
 }
 
 export default WorkoutsPage;
