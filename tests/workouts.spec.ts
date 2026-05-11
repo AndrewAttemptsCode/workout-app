@@ -162,4 +162,11 @@ test.describe("Workouts functionality", () => {
     await expect(removeExerciseButton).not.toBeVisible();
   });
 
+  test("selecting load workout button navigates to timer page", async ({ workoutWithExercise, pm }) => {
+    const { workoutIndex } = workoutWithExercise;
+
+    await pm.workouts().loadWorkout(workoutIndex);
+
+    await expect(pm.page).toHaveURL(/\/timer$/);
+  });
 });
