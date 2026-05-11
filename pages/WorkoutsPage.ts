@@ -64,6 +64,13 @@ class WorkoutsPage {
     await exerciseList.nth(exerciseIndex).getByRole("button", { name: /remove.*workout/i }).click();
   }
 
+  async loadWorkout(workoutIndex: number) {
+    const workoutItem = this.getWorkoutAt(workoutIndex);
+    await this.setItemLock(workoutItem, "lock");
+    const loadWorkoutButton = workoutItem.getByRole("button", { name: /load workout/i });
+    await loadWorkoutButton.click();
+  }
+
 }
 
 export default WorkoutsPage;
