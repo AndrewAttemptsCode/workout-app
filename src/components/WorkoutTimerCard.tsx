@@ -175,6 +175,7 @@ const WorkoutTimerCard = () => {
                   setSelectedExercise((prev) => (prev === index ? -1 : index))
                 }
                 aria-expanded={selectedExercise === index}
+                aria-label="exercise item"
               >
                 <ProgressBar progress={totalSets > 0 ? exerciseComplete / totalSets : 0} />
                 <ExerciseTitle>{exercise?.title}</ExerciseTitle>
