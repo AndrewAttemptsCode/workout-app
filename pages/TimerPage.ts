@@ -18,6 +18,25 @@ class TimerPage {
   breakdown() {
     return this.page.getByRole("region", { name: /workout breakdown/i });
   }
+
+  getWorkoutMenu() {
+    return this.breakdown().getByRole("button", { name: /upper body/i });
+  }
+
+  getExerciseList() {
+    return this.breakdown().getByRole("button", { name: /exercise item/i });
+  }
+
+  async toggleExerciseList(state: "collapse" | "expand") {
+    const listExpanded = await this.getWorkoutMenu().getAttribute("aria-expanded");
+    if (listExpanded === "true" && state === "collapse") {
+      await this.getWorkoutMenu().click();
+    }
+
+    if (listExpanded === "false" && state === "expand") {
+      await this.getWorkoutMenu().click();
+    }
+  }
 }
 
 export default TimerPage;
