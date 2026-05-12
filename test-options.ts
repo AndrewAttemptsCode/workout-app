@@ -1,10 +1,12 @@
 import { test as base } from "@playwright/test";
 import PageManager from "./pages/PageManager";
 import { workoutWithExercise } from "./setups/workouts.setup";
+import { loadWorkout } from "./setups/timer.setup";
 
 type TestOptions = {
   pm: PageManager;
   workoutWithExercise: Awaited<ReturnType<typeof workoutWithExercise>>;
+  loadWorkout: void;
 }
 
 export const test = base.extend<TestOptions>({
@@ -20,6 +22,11 @@ export const test = base.extend<TestOptions>({
   workoutWithExercise: async({ pm }, run) => {
     const data = await workoutWithExercise(pm);
     await run(data);
+  },
+
+  loadWorkout: async ({ pm, workoutWithExercise }, run) => {
+    await loadWorkout(pm, workoutWithExercise);
+    await run();
   },
   
 });
