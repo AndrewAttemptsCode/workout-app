@@ -9,4 +9,17 @@ test.describe("Timer page functionality", () => {
     await expect(timerDisplay).toContainText(/reps: 5/i);
     await expect(timerDisplay).toContainText(/weight: 5/i);
   });
+
+  test("workout menu expands/collapses exercise list", async ({ loadWorkout: _, pm }) => {
+    const workoutMenu = pm.timer().getWorkoutMenu();
+    const exerciseList = pm.timer().getExerciseList();
+
+    await expect(workoutMenu).toHaveAttribute("aria-expanded", "true");
+    await expect(exerciseList).toBeVisible();
+
+    await pm.timer().toggleExerciseList("collapse");
+
+    await expect(workoutMenu).toHaveAttribute("aria-expanded", "false");
+    await expect(exerciseList).not.toBeVisible();
+  });
 });
