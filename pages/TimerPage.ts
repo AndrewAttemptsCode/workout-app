@@ -60,6 +60,11 @@ class TimerPage {
       await this.getWorkoutMenu().click();
     }
   }
+
+  async startWorkout() {
+    const controls = this.controls();
+    await controls.getByRole("button", { name: /start workout/i }).click();
+  }
 }
 
 export default TimerPage;
