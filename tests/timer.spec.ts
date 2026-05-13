@@ -32,4 +32,14 @@ test.describe("Timer page functionality", () => {
 
     await expect(exerciseDetails).not.toBeVisible();
   });
+
+  test("start workout button initiates workout", async ({ loadWorkout: _, pm }) => {
+    const controls = pm.timer().controls();
+    
+    await expect(controls).toContainText(/start workout/i);
+    
+    await pm.timer().startWorkout();
+
+    await expect(controls).toContainText(/complete set/i);
+  });
 });
