@@ -22,4 +22,14 @@ test.describe("Timer page functionality", () => {
     await expect(workoutMenu).toHaveAttribute("aria-expanded", "false");
     await expect(exerciseList).not.toBeVisible();
   });
+
+  test("toggling exercise button expands/collapses exercise set details", async ({ loadWorkout: _, pm }) => {
+    const exerciseDetails = await pm.timer().toggleExerciseDetails(0, "expand");
+
+    await expect(exerciseDetails).toBeVisible();
+
+    await pm.timer().toggleExerciseDetails(0, "collapse");
+
+    await expect(exerciseDetails).not.toBeVisible();
+  });
 });
