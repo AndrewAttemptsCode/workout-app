@@ -24,7 +24,30 @@ class TimerPage {
   }
 
   getExerciseList() {
-    return this.breakdown().getByRole("button", { name: /exercise item/i });
+    return this.breakdown().getByLabel(/^exercise item$/i);
+  }
+
+  async toggleExerciseDetails(exerciseIndex: number, state: "collapse" | "expand") {
+    const workoutMenuExpanded = await this.getWorkoutMenu().getAttribute("aria-expaned");
+    
+    if (workoutMenuExpanded === "false") {
+      await this.getWorkoutMenu().click();
+    }
+
+    const exerciseList = this.getExerciseList();
+    const exercise = exerciseList.nth(exerciseIndex);
+    const exerciseButton = exercise.getByRole("button", { name: /toggle exercise/i });
+    const exerciseExpanded = await exerciseButton.getAttribute("aria-expanded");
+    
+    if (exerciseExpanded === "true" && state === "collapse") {
+      await exerciseButton.click();  
+    }
+
+    if (exerciseExpanded === "false" && state === "expand") {
+      await exerciseButton.click();
+    }
+
+    return exercise.getByLabel(/^exercise breakdown$/i);
   }
 
   async toggleExerciseList(state: "collapse" | "expand") {
