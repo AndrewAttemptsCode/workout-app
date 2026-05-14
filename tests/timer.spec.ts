@@ -42,4 +42,16 @@ test.describe("Timer page functionality", () => {
 
     await expect(controls).toContainText(/complete set/i);
   });
+
+  test("completing current set, updates exercise set display", async ({ loadWorkout: _, pm }) => {
+    await pm.timer().startWorkout();
+
+    const exerciseSet = await pm.timer().toggleExerciseDetails(0, "expand");
+
+    await expect(exerciseSet).toContainText(/set not complete/i);
+
+    await pm.timer().completeSet();
+
+    await expect(exerciseSet).toContainText(/set complete/i);
+  });
 });
