@@ -66,4 +66,16 @@ test.describe("Timer page functionality", () => {
 
     await expect(exercise).toContainText(/1\/1/i);
   });
+
+  test("completing exercise increments workout complete count", async ({ loadWorkout: _, pm }) => {
+    await pm.timer().startWorkout();
+
+    const workout = pm.timer().getWorkoutMenu();
+
+    await expect(workout).toContainText(/0\/1/i);
+
+    await pm.timer().completeSet();
+
+    await expect(workout).toContainText(/1\/1/i);
+  });
 });
