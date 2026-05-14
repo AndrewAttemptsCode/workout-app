@@ -54,4 +54,16 @@ test.describe("Timer page functionality", () => {
 
     await expect(exerciseSet).toContainText(/set complete/i);
   });
+
+  test("completing set increments exercise sets complete count", async ({ loadWorkout: _, pm }) => {
+    await pm.timer().startWorkout();
+
+    const exercise = pm.timer().getExercise(0);
+
+    await expect(exercise).toContainText(/0\/1/i);
+
+    await pm.timer().completeSet();
+
+    await expect(exercise).toContainText(/1\/1/i);
+  });
 });
