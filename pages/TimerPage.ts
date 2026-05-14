@@ -27,6 +27,11 @@ class TimerPage {
     return this.breakdown().getByLabel(/^exercise item$/i);
   }
 
+  getExercise(exerciseIndex: number) {
+    const exerciseList = this.getExerciseList();
+    return exerciseList.nth(exerciseIndex);
+  }
+
   async toggleExerciseDetails(exerciseIndex: number, state: "collapse" | "expand") {
     const workoutMenuExpanded = await this.getWorkoutMenu().getAttribute("aria-expaned");
     
@@ -34,8 +39,7 @@ class TimerPage {
       await this.getWorkoutMenu().click();
     }
 
-    const exerciseList = this.getExerciseList();
-    const exercise = exerciseList.nth(exerciseIndex);
+    const exercise = this.getExercise(exerciseIndex);
     const exerciseButton = exercise.getByRole("button", { name: /toggle exercise/i });
     const exerciseExpanded = await exerciseButton.getAttribute("aria-expanded");
     
