@@ -8,6 +8,7 @@ export const workoutWithExercise = async (pm: PageManager) => {
   await pm.nav().goToExercises();
   await pm.exercises().addNewExercise();
   await pm.exercises().setExerciseTitle(0, "shoulder press");
+  await pm.exercises().updateSetValues(0, 0, 5, 5, 2);
 
   await pm.exercises().addExerciseToWorkout(0, 0);
 
