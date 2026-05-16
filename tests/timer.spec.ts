@@ -78,4 +78,14 @@ test.describe("Timer page functionality", () => {
 
     await expect(workout).toContainText(/1\/1/i);
   });
+
+  test("completing current set initiates rest display", async ({ loadWorkout: _, pm }) => {
+    await pm.timer().startWorkout();
+
+    await pm.timer().completeSet();
+
+    const display = pm.timer().display();
+
+    await expect(display).toContainText(/rest/i);
+  });
 });
