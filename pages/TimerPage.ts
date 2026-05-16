@@ -71,8 +71,9 @@ class TimerPage {
   }
 
   async completeSet() {
-    const controls = this.controls();
-    await controls.getByRole("button", { name: /complete set/i }).click();
+    const completeSetButton = this.controls().getByRole("button", { name: /complete set/i });
+    await completeSetButton.click();
+    return completeSetButton;
   }
 }
 
