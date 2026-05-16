@@ -88,4 +88,12 @@ test.describe("Timer page functionality", () => {
 
     await expect(display).toContainText(/rest/i);
   });
+
+  test("completing current set disables complete set button whilst rest countdown is active", async ({ loadWorkout: _, pm }) => {
+    await pm.timer().startWorkout();
+
+    const completeSetButton = await pm.timer().completeSet();
+
+    await expect(completeSetButton).toHaveAttribute("disabled");
+  });
 });
