@@ -106,4 +106,14 @@ test.describe("Timer page functionality", () => {
 
     await expect(controls).toContainText(/finish workout/i);
   });
+
+  test("completing workout updates display with completion notification", async ({ loadWorkout: _, pm }) => {
+    await pm.timer().startWorkout();
+
+    await pm.timer().completeSet();
+
+    const display = pm.timer().display();
+
+    await expect(display).toContainText(/workout complete/i);
+  });
 });
