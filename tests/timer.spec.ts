@@ -116,4 +116,12 @@ test.describe("Timer page functionality", () => {
 
     await expect(display).toContainText(/workout complete/i);
   });
+
+  test("finishing workout navigates to dashboard page", async ({ loadWorkout: _, pm }) => {
+    await pm.timer().startWorkout();
+    await pm.timer().completeSet();
+    await pm.timer().finishWorkout();
+
+    await expect(pm.page.getByRole("heading", { name: /weekly tracker/i })).toBeVisible();
+  })
 });
