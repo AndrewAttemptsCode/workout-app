@@ -75,6 +75,11 @@ class TimerPage {
     await completeSetButton.click();
     return completeSetButton;
   }
+
+  async finishWorkout() {
+    const finishWorkoutButton = this.controls().getByRole("button", { name: /finish workout/i });
+    await finishWorkoutButton.click();
+  }
 }
 
 export default TimerPage;
