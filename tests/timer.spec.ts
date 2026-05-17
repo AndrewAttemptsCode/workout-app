@@ -96,4 +96,14 @@ test.describe("Timer page functionality", () => {
 
     await expect(completeSetButton).toHaveAttribute("disabled");
   });
+
+  test("completing workout displays finish workout option", async ({ loadWorkout: _, pm }) => {
+    await pm.timer().startWorkout();
+
+    await pm.timer().completeSet();
+
+    const controls = pm.timer().controls();
+
+    await expect(controls).toContainText(/finish workout/i);
+  });
 });
