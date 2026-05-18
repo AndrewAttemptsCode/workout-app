@@ -11,6 +11,14 @@ class DashboardPage {
     return this.page.getByRole("region", { name: /weekly tracker/i });
   }
 
+  quickStats() {
+    return this.page.getByRole("region", { name: /quick stats/i });
+  }
+
+  workoutsPerMonth() {
+    return this.page.getByRole("region", { name: /workouts per month/i });
+  }
+
   getWeeklyTrackerDays() {
     return this.weeklyTracker().getByRole("listitem");
   }
@@ -39,6 +47,20 @@ class DashboardPage {
         await expect(day).toContainText(/is not complete$/i);
       }
     }
+  }
+
+  async assertAllDaysIncomplete() {
+    const days = this.getWeeklyTrackerDays();
+
+    for (const day of await days.all()) {
+      await expect(day).toContainText("is not complete");
+    }
+  }
+
+  async resetStats(stat: "weekly tracker" | "quick stats" | "workouts per month") {
+    const region = this.page.getByRole("region", { name: new RegExp(`^${stat}$`, "i") });
+    const resetButton = region.getByRole("button", { name: /^reset stats/i });
+    await resetButton.click();
   }
 }
 
