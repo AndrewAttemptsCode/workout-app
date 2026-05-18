@@ -4,6 +4,7 @@ import HomePage from "./HomePage";
 import WorkoutsPage from "./WorkoutsPage";
 import ExercisesPage from "./ExercisesPage";
 import TimerPage from "./TimerPage";
+import DashboardPage from "./DashboardPage";
 
 class PageManager {
   readonly page: Page;
@@ -12,6 +13,7 @@ class PageManager {
   private readonly workoutspage: WorkoutsPage;
   private readonly exercisespage: ExercisesPage;
   private readonly timerpage: TimerPage;
+  private readonly dashboardpage: DashboardPage;
 
   constructor(page: Page) {
     this.page = page;
@@ -20,6 +22,7 @@ class PageManager {
     this.workoutspage = new WorkoutsPage(this.page);
     this.exercisespage = new ExercisesPage(this.page);
     this.timerpage = new TimerPage(this.page);
+    this.dashboardpage = new DashboardPage(this.page);
   }
 
   nav() {
@@ -40,6 +43,10 @@ class PageManager {
 
   timer() {
     return this.timerpage;
+  }
+
+  dashboard() {
+    return this.dashboardpage;
   }
 }
 
