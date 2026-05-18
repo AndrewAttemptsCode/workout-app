@@ -10,3 +10,9 @@ export const loadWorkout = async (pm: PageManager, workoutWithExercise: workoutD
 
   await pm.workouts().loadWorkout(workoutIndex);
 };
+
+export const completeWorkout = async (pm: PageManager) => {
+  await pm.timer().startWorkout();
+  await pm.timer().completeSet();
+  await pm.timer().finishWorkout();
+};
