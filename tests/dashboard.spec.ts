@@ -30,4 +30,12 @@ test.describe("Dashboard functionality", () => {
     await pm.dashboard().assertQuickStatValue("sets complete", "1");
     await pm.dashboard().assertQuickStatValue("exercises complete", "1");
   });
+
+  test("quick stats reset stats button clears stored values", async ({ pm, completeWorkout: _ }) => {
+    await pm.dashboard().resetStats("quick stats");
+
+    await pm.dashboard().assertQuickStatValue("last workout complete", "none yet");
+    await pm.dashboard().assertQuickStatValue("sets complete", "0");
+    await pm.dashboard().assertQuickStatValue("exercises complete", "0");
+  });
 });
