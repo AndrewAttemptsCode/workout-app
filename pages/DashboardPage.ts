@@ -69,6 +69,11 @@ class DashboardPage {
     const quickStats = this.quickStats();
     return quickStats.getByRole("listitem").filter({ has: this.page.getByRole("heading", { name: new RegExp(`^${quickStat}$`, "i") }) });
   }
+
+  async assertQuickStatValue(quickStat: QuickStats, value: string) {
+    const stat = this.quickStat(quickStat);
+    await expect(stat).toContainText(value);
+  }
 }
 
 export default DashboardPage;
