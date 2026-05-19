@@ -1,5 +1,7 @@
 import { expect, Page } from "@playwright/test";
 
+type QuickStats = "last worked out" | "last workout complete"| "workouts complete" | "exercises complete" | "sets complete" | "reps complete" | "heaviest weight lifted" | "total workout duration";
+
 class DashboardPage {
   private readonly page: Page;
 
@@ -61,6 +63,11 @@ class DashboardPage {
     const region = this.page.getByRole("region", { name: new RegExp(`^${stat}$`, "i") });
     const resetButton = region.getByRole("button", { name: /^reset stats/i });
     await resetButton.click();
+  }
+
+  quickStat(quickStat: QuickStats) {
+    const quickStats = this.quickStats();
+    return quickStats.getByRole("listitem").filter({ has: this.page.getByRole("heading", { name: new RegExp(`^${quickStat}$`, "i") }) });
   }
 }
 
