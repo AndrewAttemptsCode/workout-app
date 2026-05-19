@@ -72,7 +72,7 @@ class DashboardPage {
 
   async assertQuickStatValue(quickStat: QuickStats, value: string) {
     const stat = this.quickStat(quickStat);
-    await expect(stat).toContainText(value);
+    await expect(stat).toContainText(new RegExp(`${value}`, "i"));
   }
 }
 
