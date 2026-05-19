@@ -24,4 +24,10 @@ test.describe("Dashboard functionality", () => {
     await expect(pm.dashboard().quickStat("total workout duration")).toBeVisible();
     await expect(pm.dashboard().quickStat("workouts complete")).toBeVisible();
   });
+
+  test("quick stats update after workout complete", async ({ pm, completeWorkout: _ }) => {
+    await pm.dashboard().assertQuickStatValue("last workout complete", "upper body");
+    await pm.dashboard().assertQuickStatValue("sets complete", "1");
+    await pm.dashboard().assertQuickStatValue("exercises complete", "1");
+  });
 });
