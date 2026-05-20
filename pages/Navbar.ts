@@ -30,6 +30,10 @@ class NavBar {
   async goToDashboard() {
     await this.dashboardLink.click();
   }
+
+  async goToInvalidRoute() {
+    await this.page.goto("/invalid");
+  }
 };
 
 export default NavBar;
