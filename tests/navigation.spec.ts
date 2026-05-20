@@ -27,4 +27,10 @@ test.describe("Navbar functionality", () => {
     await pm.notFoundPage().assertPageVisible();
   });
 
+  test("invalid route fallback button navigates back to home page", async ({ pm }) => {
+    await pm.nav().goToInvalidRoute();
+    await pm.notFoundPage().clickSafetyButton();
+    await expect(pm.page.getByRole("heading", { name: /track. train. transform./i })).toBeVisible();
+  });
+
 });
