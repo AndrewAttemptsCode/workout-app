@@ -22,4 +22,9 @@ test.describe("Navbar functionality", () => {
     await expect(pm.page.getByRole("heading", { name: /weekly tracker/i })).toBeVisible();
   });
 
+  test("shows fallback page for invalid route", async ({ pm }) => {
+    await pm.nav().goToInvalidRoute();
+    await pm.notFoundPage().assertPageVisible();
+  });
+
 });
