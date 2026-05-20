@@ -3,7 +3,7 @@
 A workout app that lets you create exercises, build workouts, and run them through a built-in timer.
 It automatically tracks your current exercise so you never have to remember what comes next.
 
-This project was created to practise and demonstrate front-end development skills — including React, TypeScript, accessibility, testing, and responsive design.
+This project was created to practise and demonstrate front-end development skills — including React, TypeScript, accessibility, testing, responsive design and end to end QA automation testing with Playwright.
 
 [Storm Lifts](https://workout-app-511.pages.dev/) - website link
 
@@ -32,7 +32,7 @@ This project was created to practise and demonstrate front-end development skill
 - **Front End:** HTML, CSS, React, Styled-Components
 - **Language:** TypeScript
 - **Build / Dev Tools:** Vite, npm
-- **Testing:** Vitest
+- **Testing:** Vitest, Playwright
 - **Other Tools / IDE:** VSCode
 
 ## Screenshots
@@ -70,3 +70,11 @@ npm install
 # Start the development server
 npm run dev
 ```
+
+## Running Playwright Tests
+
+> Ensure the development server is running before executing tests.
+
+```bash
+# Runs all 186 Playwright tests
+npx playwright test
