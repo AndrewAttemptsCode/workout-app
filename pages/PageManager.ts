@@ -5,6 +5,7 @@ import WorkoutsPage from "./WorkoutsPage";
 import ExercisesPage from "./ExercisesPage";
 import TimerPage from "./TimerPage";
 import DashboardPage from "./DashboardPage";
+import NotFoundPage from "./NotFoundPage";
 
 class PageManager {
   readonly page: Page;
@@ -14,6 +15,7 @@ class PageManager {
   private readonly exercisespage: ExercisesPage;
   private readonly timerpage: TimerPage;
   private readonly dashboardpage: DashboardPage;
+  private readonly notfoundpage: NotFoundPage;
 
   constructor(page: Page) {
     this.page = page;
@@ -23,6 +25,7 @@ class PageManager {
     this.exercisespage = new ExercisesPage(this.page);
     this.timerpage = new TimerPage(this.page);
     this.dashboardpage = new DashboardPage(this.page);
+    this.notfoundpage = new NotFoundPage(this.page);
   }
 
   nav() {
@@ -47,6 +50,10 @@ class PageManager {
 
   dashboard() {
     return this.dashboardpage;
+  }
+
+  notFoundPage() {
+    return this.notfoundpage;
   }
 }
 
